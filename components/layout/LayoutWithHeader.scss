@@ -1,0 +1,36 @@
+@import '../../static/colors.scss';
+
+.LayoutWithHeader 
+{
+	width: 100%;
+	height: 100%;
+	display:flex;
+	flex-direction: column;
+	align-items: stretch;
+	position: relative;
+
+	.LayoutHeaderBar
+	{
+		display:flex;
+		flex-direction: row;
+		align-items: stretch;
+		background-color: $magnolia;
+		min-height: 100px;
+		padding-left: 140px;
+	}
+
+	.LayoutContext
+	{
+		flex-grow:1;
+	}
+
+	img.LayoutAvatar
+	{
+		width:128px;
+		height:128px;
+		border-radius: 64px;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+}
