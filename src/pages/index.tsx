@@ -21,8 +21,10 @@ export default function Home(props:PageProps) {
         </div>
 
         <div className='below'>
-          <h3>Managing Director &#11044; Solution Architect</h3>
-          <h5>Skyward App Company &#11044; Columbia, Maryland</h5>
+          <div className='bullets'>
+            <h3 className='left'>Managing Director</h3> <h3 className='middle'>&#11044;</h3> <h3 className='right'>Solution Architect</h3>
+            <h5 className='left'>Skyward App Company</h5> <h5 className='middle'>&#11044;</h5> <h5 className='right'>Columbia, Maryland</h5>
+          </div>
           <div className='social'>
             <a href='https://twitter.com/lightsidenick'><FontAwesomeIcon icon={icons.faTwitter}/></a>
             <a href='https://www.linkedin.com/in/nicholasmtelliott/'><FontAwesomeIcon icon={icons.faLinkedin}/></a>
