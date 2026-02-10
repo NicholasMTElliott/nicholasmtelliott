@@ -36,7 +36,7 @@ const nav = [
             <p>Managing Director · Solution Architect · Columbia, MD</p>
           </div>
         </a>
-        <nav>
+        <nav class="site-nav" aria-label="Primary navigation">
           {
             nav.map(link => (
               <a class={currentPath === link.href ? 'active' : ''} href={link.href}>
@@ -47,7 +47,7 @@ const nav = [
         </nav>
       </div>
     </header>
-    <main>
+    <main class="site-main">
       <slot />
     </main>
   </body>
