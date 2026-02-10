@@ -20,8 +20,78 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Start Date", name: "startdate", widget: "datetime"}
-      - {label: "End Date", name: "enddate", widget: "datetime"}
+      - {label: "Key", name: "key", widget: "string", hint: "Stable unique id used for anchors and project linking"}
+      - {label: "Start Date", name: "startDate", widget: "datetime"}
+      - {label: "End Date", name: "endDate", widget: "datetime", required: false, hint: "Leave empty for current company"}
       - {label: "Featured Image", name: "thumbnail", widget: "image"}
-      - {label: "Key", name: "key", widget: "string"}
+      - {label: "Location", name: "location", widget: "string", required: false}
+      - {label: "Website", name: "website", widget: "string", required: false}
+      - {label: "Sort Order", name: "sortOrder", widget: "number", required: false, value_type: "int"}
       - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "project"
+    label: "Project"
+    folder: "content/project"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Project Name", name: "name", widget: "string"}
+      - {label: "Key", name: "key", widget: "string", hint: "Stable unique id"}
+      - {label: "Company Key", name: "companyKey", widget: "string", hint: "Must match an existing company key"}
+      - {label: "Role", name: "role", widget: "string", required: false}
+      - {label: "Start Date", name: "startDate", widget: "datetime", required: false}
+      - {label: "End Date", name: "endDate", widget: "datetime", required: false, hint: "Leave empty for current project"}
+      - {label: "Repository URL", name: "repoUrl", widget: "string", required: false}
+      - {label: "Live URL", name: "liveUrl", widget: "string", required: false}
+      - {label: "Skills", name: "skills", widget: "list", required: false, field: {label: "Skill", name: "skill", widget: "string"}}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false, required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "site-content"
+    label: "Site Content"
+    files:
+      - label: "Profile"
+        name: "profile"
+        file: "content/profile/profile.md"
+        fields:
+          - {label: "Full Name", name: "fullName", widget: "string"}
+          - {label: "Headline", name: "headline", widget: "string"}
+          - {label: "Location", name: "location", widget: "string"}
+          - {label: "Organization", name: "organization", widget: "string", required: false}
+          - {label: "Avatar URL", name: "avatarUrl", widget: "string", required: false}
+          - {label: "LinkedIn", name: "linkedin", widget: "string"}
+          - {label: "GitHub", name: "github", widget: "string"}
+          - {label: "X", name: "x", widget: "string", required: false}
+          - {label: "Summary", name: "body", widget: "markdown"}
+
+      - label: "About"
+        name: "about"
+        file: "content/about/about.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Updated At", name: "updatedAt", widget: "datetime", required: false}
+          - {label: "Body", name: "body", widget: "markdown"}
+
+      - label: "Skills"
+        name: "skills"
+        file: "content/skills/skills.md"
+        fields:
+          - label: "Groups"
+            name: "groups"
+            widget: "list"
+            fields:
+              - {label: "Group", name: "name", widget: "string"}
+              - {label: "Items", name: "items", widget: "list", field: {label: "Skill", name: "skill", widget: "string"}}
+          - {label: "Body", name: "body", widget: "markdown", required: false}
+
+      - label: "Contact"
+        name: "contact"
+        file: "content/contact/contact.md"
+        fields:
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "LinkedIn", name: "linkedin", widget: "string"}
+          - {label: "GitHub", name: "github", widget: "string"}
+          - {label: "Location", name: "location", widget: "string", required: false}
+          - {label: "Resume URL", name: "resumeUrl", widget: "string", required: false}
+          - {label: "Availability Note", name: "availabilityNote", widget: "string", required: false}
+          - {label: "Body", name: "body", widget: "markdown", required: false}

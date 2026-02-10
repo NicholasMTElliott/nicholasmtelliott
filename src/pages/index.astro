@@ -1,25 +1,80 @@
 ---
+import { getCollection, render } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
+
+const profileEntry = (await getCollection('profile'))[0]
+const skillsEntry = (await getCollection('skills'))[0]
+const defaultAvatarUrl = 'https://gravatar.com/avatar/468788fd550c4128b0c250566ea8729f?s=160'
+
+const featuredProjects = (await getCollection('project'))
+  .filter(project => project.data.featured)
+  .sort((a, b) => {
+    const aTime = a.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
+    const bTime = b.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
+
+    return bTime - aTime
+  })
+
+if (!profileEntry || !skillsEntry) {
+  throw new Error('Required profile or skills content is missing.')
+}
+
+const { Content: ProfileSummary } = await render(profileEntry)
 ---
 
 <BaseLayout title="Nicholas M. T. Elliott | Home">
   <section class="hero card">
-    <img
-      class="hero__avatar"
-      src="https://gravatar.com/avatar/468788fd550c4128b0c250566ea8729f?s=160"
-      alt="Nicholas Elliott"
-    />
-    <h2>Nicholas M.T. Elliott</h2>
-    <p class="hero__role">Managing Director · Solution Architect</p>
-    <p class="hero__org">Skyward App Company · Columbia, Maryland</p>
+    <img class="hero__avatar" src={profileEntry.data.avatarUrl ?? defaultAvatarUrl} alt={profileEntry.data.fullName} />
+    <h2>{profileEntry.data.fullName}</h2>
+    <p class="hero__role">{profileEntry.data.headline}</p>
+    <p class="hero__org">{profileEntry.data.organization} · {profileEntry.data.location}</p>
+    <div class="hero__summary">
+      <ProfileSummary />
+    </div>
     <p class="hero__links">
-      <a href="https://www.linkedin.com/in/nicholasmtelliott/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href={profileEntry.data.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
       <span>·</span>
-      <a href="https://github.com/NicholasMTElliott" target="_blank" rel="noreferrer">GitHub</a>
-      <span>·</span>
-      <a href="https://twitter.com/lightsidenick" target="_blank" rel="noreferrer">Twitter</a>
+      <a href={profileEntry.data.github} target="_blank" rel="noreferrer">GitHub</a>
+      {profileEntry.data.x && (
+        <>
+          <span>·</span>
+          <a href={profileEntry.data.x} target="_blank" rel="noreferrer">X</a>
+        </>
+      )}
     </p>
   </section>
+
+  <section class="skills card">
+    <h3>Core Skills</h3>
+    <div class="skills__groups">
+      {
+        skillsEntry.data.groups.map(group => (
+          <article>
+            <h4>{group.name}</h4>
+            <ul>
+              {group.items.map(item => <li>{item}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  {featuredProjects.length > 0 && (
+    <section class="projects card">
+      <h3>Featured Projects</h3>
+      <ul>
+        {
+          featuredProjects.map(project => (
+            <li>
+              <strong>{project.data.name}</strong>
+              {project.data.role && <span> · {project.data.role}</span>}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  )}
 </BaseLayout>
 
 <style lang="scss">
@@ -67,5 +122,32 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
   .hero__links a {
     text-decoration: none;
+  }
+
+  .hero__summary :global(p) {
+    margin: 0.25rem 0 0;
+  }
+
+  .skills,
+  .projects {
+    margin-top: 1rem;
+  }
+
+  .skills__groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .skills h3,
+  .projects h3,
+  .skills h4 {
+    margin-top: 0;
+  }
+
+  .projects ul,
+  .skills ul {
+    margin: 0;
+    padding-left: 1.1rem;
   }
 </style>

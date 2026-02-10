@@ -3,22 +3,77 @@ import { getCollection, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
 const companyEntries = (await getCollection('company')).sort(
-  (a, b) => b.data.startdate.getTime() - a.data.startdate.getTime(),
+  (a, b) => {
+    const aEnd = a.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
+    const bEnd = b.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
+
+    if (aEnd !== bEnd) {
+      return bEnd - aEnd
+    }
+
+    return b.data.startDate.getTime() - a.data.startDate.getTime()
+  },
 )
+
+const projectEntries = await getCollection('project')
+
+const projectsByCompanyKey = projectEntries.reduce<Record<string, typeof projectEntries>>((acc, project) => {
+  const current = acc[project.data.companyKey] ?? []
+  current.push(project)
+  acc[project.data.companyKey] = current
+
+  return acc
+}, {})
+
+Object.values(projectsByCompanyKey).forEach(projects => {
+  projects.sort((a, b) => {
+    const aEnd = a.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
+    const bEnd = b.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
+
+    if (aEnd !== bEnd) {
+      return bEnd - aEnd
+    }
+
+    const aStart = a.data.startDate?.getTime() ?? Number.NEGATIVE_INFINITY
+    const bStart = b.data.startDate?.getTime() ?? Number.NEGATIVE_INFINITY
+
+    return bStart - aStart
+  })
+})
 
 const renderedCompanyEntries = await Promise.all(
   companyEntries.map(async company => {
     const { Content } = await render(company)
+    const companyProjects = projectsByCompanyKey[company.data.key] ?? []
+
+    const renderedProjects = await Promise.all(
+      companyProjects.map(async project => {
+        const { Content: ProjectContent } = await render(project)
+
+        return {
+          project,
+          ProjectContent,
+        }
+      }),
+    )
 
     return {
       company,
       Content,
+      renderedProjects,
     }
   }),
 )
 
 const formatMonthYear = (date: Date) =>
   `${date.toLocaleString('en-US', { month: 'short' })} ${date.getFullYear()}`
+
+const formatPeriod = (startDate: Date, endDate?: Date) => {
+  const start = formatMonthYear(startDate)
+  const end = endDate ? formatMonthYear(endDate) : 'Present'
+
+  return `${start} - ${end}`
+}
 ---
 
 <BaseLayout title="Nicholas M. T. Elliott | Portfolio">
@@ -31,9 +86,7 @@ const formatMonthYear = (date: Date) =>
             <li>
               <a href={`#${company.data.key}`}>
                 <strong>{company.data.title}</strong>
-                <span>
-                  {formatMonthYear(company.data.startdate)} - {formatMonthYear(company.data.enddate)}
-                </span>
+                <span>{formatPeriod(company.data.startDate, company.data.endDate)}</span>
               </a>
             </li>
           ))
@@ -43,15 +96,35 @@ const formatMonthYear = (date: Date) =>
 
     <div class="entries">
       {
-        renderedCompanyEntries.map(({ company, Content }) => (
+        renderedCompanyEntries.map(({ company, Content, renderedProjects }) => (
           <article class="card" id={company.data.key}>
             <h3>{company.data.title}</h3>
-            <p class="period">
-              {formatMonthYear(company.data.startdate)} - {formatMonthYear(company.data.enddate)}
-            </p>
+            <p class="period">{formatPeriod(company.data.startDate, company.data.endDate)}</p>
             <div class="entry-body">
               <Content />
             </div>
+
+            {renderedProjects.length > 0 && (
+              <section class="projects">
+                <h4>Projects</h4>
+                <div class="project-list">
+                  {
+                    renderedProjects.map(({ project, ProjectContent }) => (
+                      <article class="project-item">
+                        <h5>{project.data.name}</h5>
+                        {project.data.role && <p class="project-role">{project.data.role}</p>}
+                        {project.data.startDate && (
+                          <p class="project-period">{formatPeriod(project.data.startDate, project.data.endDate)}</p>
+                        )}
+                        <div class="project-body">
+                          <ProjectContent />
+                        </div>
+                      </article>
+                    ))
+                  }
+                </div>
+              </section>
+            )}
           </article>
         ))
       }
@@ -116,6 +189,45 @@ const formatMonthYear = (date: Date) =>
   }
 
   .entry-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .projects {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .projects h4,
+  .project-item h5 {
+    margin: 0;
+  }
+
+  .project-list {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .project-item {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 0.6rem;
+    padding: 0.75rem;
+  }
+
+  .project-role,
+  .project-period {
+    margin: 0.25rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .project-body :global(p:first-child) {
+    margin-top: 0.6rem;
+  }
+
+  .project-body :global(p:last-child) {
     margin-bottom: 0;
   }
 
