@@ -2,6 +2,7 @@ backend:
   name: github
   repo: NicholasMTElliott/nicholasmtelliott
   branch: main
+  site_domain: nicholasmtelliott.netlify.app
 
 # For local editing with `npx decap-server`.
 local_backend: true
