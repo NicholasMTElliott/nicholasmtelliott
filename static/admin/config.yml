@@ -1,19 +1,24 @@
 backend:
-  name: git-gateway
-  branch: main 
+  name: github
+  repo: NicholasMTElliott/nicholasmtelliott
+  branch: main
+
+# For local editing with `npx decap-server`.
+local_backend: true
+
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "company" # Used in routes, e.g., /admin/collections/blog
-    label: "Company" # Used in the UI
-    folder: "content/company" # The path to the folder where the documents are stored
-    create: true # Allow users to create new documents in this collection
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
-    fields: # The fields for each document, usually in front matter
+  - name: "company"
+    label: "Company"
+    folder: "content/company"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Start Date", name: "startdate", widget: "datetime"}
       - {label: "End Date", name: "enddate", widget: "datetime"}
       - {label: "Featured Image", name: "thumbnail", widget: "image"}
-      - {label: "Body", name: "body", widget: "markdown"}
       - {label: "Key", name: "key", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}

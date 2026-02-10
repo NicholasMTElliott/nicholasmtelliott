@@ -85,6 +85,49 @@ Standard flow:
 2. Netlify picks up the change and runs the build
 3. Built site is published from `dist`
 
+## CMS (Decap) Setup
+
+The admin UI is available at `/admin` and is configured in:
+
+- `static/admin/index.html`
+- `static/admin/config.yml`
+
+This project uses the Decap **GitHub backend** (`backend.name: github`) to stay compatible with Netlify free-tier hosting.
+
+### Required one-time GitHub OAuth setup
+
+To enable login in `/admin`, you must configure an OAuth app + auth endpoint for Decap GitHub backend.
+
+Minimum requirements:
+
+1. Create a GitHub OAuth App (or GitHub App-compatible auth flow) for the site.
+2. Provide a callback URL that returns auth tokens to Decap.
+3. Configure the auth endpoint/credentials in your hosting/auth layer.
+4. Ensure the authenticated user has push rights to `NicholasMTElliott/nicholasmtelliott`.
+
+Without OAuth setup, `/admin` will load but login/commit flow will not complete.
+
+### Local CMS editing UX
+
+For local authoring, this repo has `local_backend: true` in Decap config.
+
+Run Astro and Decap local backend in separate terminals:
+
+```bash
+pnpm dev
+```
+
+```bash
+npx decap-server
+```
+
+Then open:
+
+- Site: `http://localhost:4321`
+- Admin: `http://localhost:4321/admin`
+
+You can create/edit entries in the **Company** collection and Decap will write markdown files under `content/company`.
+
 ## Current Status
 
 - Migration foundation from Gatsby to Astro is complete.
