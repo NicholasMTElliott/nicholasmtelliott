@@ -107,6 +107,23 @@ Minimum requirements:
 
 Without OAuth setup, `/admin` will load but login/commit flow will not complete.
 
+### Operational prerequisites and verification
+
+Because this repo uses `backend.name: github`, authentication is operationally dependent on external OAuth/auth infrastructure. Keep these values aligned before troubleshooting code:
+
+1. OAuth app callback URL points to the deployed auth callback route used by your auth provider/service.
+2. Auth service is configured with GitHub client credentials for this repo.
+3. Authenticated user or bot has write access to `NicholasMTElliott/nicholasmtelliott` on `main`.
+4. Netlify site URL, OAuth app settings, and auth service redirect URLs all match.
+
+Verification checklist:
+
+1. Open deployed `/admin` and complete GitHub login.
+2. Confirm CMS loads collections without auth errors.
+3. Create or edit a Company entry and save.
+4. Confirm a commit is created on `main`.
+5. Confirm Netlify builds and publishes the content change.
+
 ### Local CMS editing UX
 
 For local authoring, this repo has `local_backend: true` in Decap config.

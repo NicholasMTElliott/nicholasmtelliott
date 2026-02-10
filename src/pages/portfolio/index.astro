@@ -1,9 +1,20 @@
 ---
-import { getCollection } from 'astro:content'
+import { getCollection, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
 const companyEntries = (await getCollection('company')).sort(
   (a, b) => b.data.startdate.getTime() - a.data.startdate.getTime(),
+)
+
+const renderedCompanyEntries = await Promise.all(
+  companyEntries.map(async company => {
+    const { Content } = await render(company)
+
+    return {
+      company,
+      Content,
+    }
+  }),
 )
 
 const formatMonthYear = (date: Date) =>
@@ -32,13 +43,15 @@ const formatMonthYear = (date: Date) =>
 
     <div class="entries">
       {
-        companyEntries.map(company => (
+        renderedCompanyEntries.map(({ company, Content }) => (
           <article class="card" id={company.data.key}>
             <h3>{company.data.title}</h3>
             <p class="period">
               {formatMonthYear(company.data.startdate)} - {formatMonthYear(company.data.enddate)}
             </p>
-            <p>{company.body}</p>
+            <div class="entry-body">
+              <Content />
+            </div>
           </article>
         ))
       }
@@ -96,6 +109,14 @@ const formatMonthYear = (date: Date) =>
   .period {
     margin-top: 0.35rem;
     color: var(--muted);
+  }
+
+  .entry-body :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  .entry-body :global(p:last-child) {
+    margin-bottom: 0;
   }
 
   @media (max-width: 900px) {
