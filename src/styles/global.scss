@@ -109,6 +109,9 @@ li {
   color: var(--text);
   text-decoration: none;
   padding: 0.42rem 0.72rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   border-radius: 999px;
   border: 1px solid transparent;
   transition: background-color 120ms ease, border-color 120ms ease;
@@ -176,7 +179,7 @@ li {
   }
 
   .site-nav a {
-    padding: 0.38rem 0.62rem;
+    padding: 0.44rem 0.7rem;
     font-size: 0.9rem;
   }
 }
