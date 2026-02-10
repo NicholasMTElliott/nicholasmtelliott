@@ -1,13 +1,6 @@
 {
-	"compilerOptions": {
-		"module": "commonjs",
-		"target": "es2016",
-		"jsx": "preserve",
-		"sourceMap": true,
-		"experimentalDecorators": true
-	},
-	"exclude": [
-		"node_modules",
-		"**/node_modules/*"
-	]
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": "."
+  }
 }

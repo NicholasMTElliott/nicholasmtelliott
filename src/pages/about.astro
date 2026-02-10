@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout title="Nicholas M. T. Elliott | About">
+  <section class="card prose">
+    <h2>About this site</h2>
+    <p>
+      This site is a content-first portfolio built to present experience, projects, and technical leadership in a
+      clean format.
+    </p>
+    <p>
+      The stack is currently being modernized to Astro + TypeScript + Decap CMS with Netlify configuration fully
+      codified in source.
+    </p>
+    <p>
+      The goal is practical clarity: professional storytelling backed by credible technical execution.
+    </p>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .prose {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+</style>

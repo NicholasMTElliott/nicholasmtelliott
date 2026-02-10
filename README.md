@@ -1,5 +1,91 @@
-Nicholas Elliott is the CTO and Solutions Architect for Skyward Apps. 
+# Nicholas M. T. Elliott — Resume / Portfolio Site
 
-Nick’s career has led him from ZedX, a cutting edge AgTech innovator, to software development for Microsoft, before turning entrepreneur to found Skyward.  A believer that good software is bred from good relationships, Nick attaches great importance to collaboration with his team, his clients and partners. 
+Public portfolio and resume site for [nicholasmtelliott.com](https://nicholasmtelliott.com), currently running on Astro and deployed with Netlify.
 
-Nick spends his time away from work developing personal software and enjoying time with his family.
+## Stack
+
+- Astro
+- TypeScript
+- SCSS
+- pnpm
+- Netlify
+
+## Prerequisites
+
+- Node.js 20+
+- pnpm 9+
+
+## Getting Started
+
+Install dependencies:
+
+```bash
+pnpm install
+```
+
+Start local development server:
+
+```bash
+pnpm dev
+```
+
+Astro will print the local URL (typically `http://localhost:4321`).
+
+## Scripts
+
+- Run locally:
+
+  ```bash
+  pnpm dev
+  ```
+
+- Build production output:
+
+  ```bash
+  pnpm build
+  ```
+
+- Preview production build locally:
+
+  ```bash
+  pnpm preview
+  ```
+
+- Run tests (placeholder currently):
+
+  ```bash
+  pnpm test
+  ```
+
+- Format files:
+
+  ```bash
+  pnpm format
+  ```
+
+## Content
+
+- Company/experience markdown content lives under:
+  - `content/company/`
+- Astro content collections are configured in:
+  - `src/content.config.ts`
+
+## Deploy (Netlify)
+
+Deployment is configured in `netlify.toml`:
+
+- Build command: `pnpm build`
+- Publish directory: `dist`
+- Node version: `20`
+- Redirect: `/admin/*` → `/admin/index.html`
+
+Standard flow:
+
+1. Push commits to GitHub
+2. Netlify picks up the change and runs the build
+3. Built site is published from `dist`
+
+## Current Status
+
+- Migration foundation from Gatsby to Astro is complete.
+- Ongoing work includes Decap CMS integration, content expansion, and further responsive visual refinement.

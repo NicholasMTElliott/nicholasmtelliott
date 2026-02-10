@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout title="Nicholas M. T. Elliott | Home">
+  <section class="hero card">
+    <img
+      class="hero__avatar"
+      src="https://gravatar.com/avatar/468788fd550c4128b0c250566ea8729f?s=160"
+      alt="Nicholas Elliott"
+    />
+    <h2>Nicholas M.T. Elliott</h2>
+    <p class="hero__role">Managing Director · Solution Architect</p>
+    <p class="hero__org">Skyward App Company · Columbia, Maryland</p>
+    <p class="hero__links">
+      <a href="https://www.linkedin.com/in/nicholasmtelliott/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <span>·</span>
+      <a href="https://github.com/NicholasMTElliott" target="_blank" rel="noreferrer">GitHub</a>
+      <span>·</span>
+      <a href="https://twitter.com/lightsidenick" target="_blank" rel="noreferrer">Twitter</a>
+    </p>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .hero {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.5rem;
+    background-image: linear-gradient(rgba(13, 16, 23, 0.55), rgba(13, 16, 23, 0.9)),
+      url('/images/tianyi-ma-WiONHd_zYI4-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero__avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.75rem, 4vw, 2.4rem);
+  }
+
+  .hero__role {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .hero__org {
+    margin: 0;
+  }
+
+  .hero__links {
+    margin: 0.5rem 0 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero__links a {
+    text-decoration: none;
+  }
+</style>
