@@ -3,6 +3,8 @@ backend:
   repo: NicholasMTElliott/nicholasmtelliott
   branch: main
   site_domain: nicholasmtelliott.netlify.app
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 
 # For local editing with `npx decap-server`.
 local_backend: true

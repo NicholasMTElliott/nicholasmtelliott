@@ -92,29 +92,31 @@ The admin UI is available at `/admin` and is configured in:
 - `static/admin/index.html`
 - `static/admin/config.yml`
 
-This project uses the Decap **GitHub backend** (`backend.name: github`) to stay compatible with Netlify free-tier hosting.
+This project uses the Decap **GitHub backend** (`backend.name: github`) with Netlify-hosted auth endpoint settings:
 
-### Required one-time GitHub OAuth setup
+- `site_domain: nicholasmtelliott.netlify.app`
+- `base_url: https://api.netlify.com`
+- `auth_endpoint: auth`
 
-To enable login in `/admin`, you must configure an OAuth app + auth endpoint for Decap GitHub backend.
+### Required one-time auth setup (Netlify hosted flow)
 
-Minimum requirements:
+This configuration uses Netlify's hosted auth flow for Decap GitHub backend.
 
-1. Create a GitHub OAuth App (or GitHub App-compatible auth flow) for the site.
-2. Provide a callback URL that returns auth tokens to Decap.
-3. Configure the auth endpoint/credentials in your hosting/auth layer.
-4. Ensure the authenticated user has push rights to `NicholasMTElliott/nicholasmtelliott`.
+1. Confirm Netlify site is connected to `NicholasMTElliott/nicholasmtelliott`.
+2. Ensure the deploy-connected GitHub account/app has write access to `main`.
+3. Re-authorize Netlify GitHub access if prompted in Netlify/GitHub integrations.
+4. Test login first at `https://nicholasmtelliott.netlify.app/admin`.
 
-Without OAuth setup, `/admin` will load but login/commit flow will not complete.
+Without a valid Netlify↔GitHub authorization state, `/admin` will load but login/publish flow will fail.
 
 ### Operational prerequisites and verification
 
-Because this repo uses `backend.name: github`, authentication is operationally dependent on external OAuth/auth infrastructure. Keep these values aligned before troubleshooting code:
+Keep these values aligned before troubleshooting code:
 
-1. OAuth app callback URL points to the deployed auth callback route used by your auth provider/service.
-2. Auth service is configured with GitHub client credentials for this repo.
-3. Authenticated user or bot has write access to `NicholasMTElliott/nicholasmtelliott` on `main`.
-4. Netlify site URL, OAuth app settings, and auth service redirect URLs all match.
+1. `site_domain` in Decap config matches the active Netlify subdomain.
+2. Decap config uses Netlify hosted auth endpoint (`base_url` + `auth_endpoint`).
+3. Netlify site is linked to the same GitHub repo/branch used in Decap config.
+4. Authenticated GitHub identity has push access to `NicholasMTElliott/nicholasmtelliott`.
 
 Verification checklist:
 
