@@ -1,0 +1,198 @@
+---
+interface Props {
+  displayEmail: string
+  aliasTag?: string
+}
+
+const { displayEmail, aliasTag = 'bot' } = Astro.props
+
+const [localPart, domainPart] = displayEmail.split('@')
+
+if (!localPart || !domainPart) {
+  throw new Error('displayEmail must be a valid email address.')
+}
+
+const aliasEmail = `${localPart}+${aliasTag}@${domainPart}`
+---
+
+<div class="email-obfuscated" data-email-obfuscated>
+  <a
+    class="email-obfuscated__link"
+    href="#"
+    aria-label={`Email ${displayEmail}`}
+    data-obfuscated-email-link
+    data-alias-email={aliasEmail}
+    data-plain-email={displayEmail}
+  >
+    <span>{localPart}</span><span class="email-obfuscated__selection-only">+{aliasTag}</span><span>@{domainPart}</span>
+  </a>
+  <button class="email-obfuscated__copy" type="button" data-copy-email-button data-copy-email={displayEmail}>
+    Copy email
+  </button>
+  <span class="email-obfuscated__status" data-copy-status aria-live="polite"></span>
+</div>
+
+<script is:inline>
+  if (!window.__emailCopyHandlerAttached) {
+    window.__emailCopyHandlerAttached = true
+
+    const fallbackCopy = value => {
+      const input = document.createElement('textarea')
+      input.value = value
+      input.setAttribute('readonly', '')
+      input.style.position = 'fixed'
+      input.style.opacity = '0'
+      document.body.appendChild(input)
+      input.select()
+      document.execCommand('copy')
+      document.body.removeChild(input)
+    }
+
+    const setCopyStatus = (button, message) => {
+      const root = button.closest('[data-email-obfuscated]')
+      if (!root) {
+        return
+      }
+
+      const status = root.querySelector('[data-copy-status]')
+      if (!status) {
+        return
+      }
+
+      status.textContent = message
+      window.setTimeout(() => {
+        if (status.textContent === message) {
+          status.textContent = ''
+        }
+      }, 1400)
+    }
+
+    document.addEventListener('click', async event => {
+      const target = event.target
+      if (!(target instanceof Element)) {
+        return
+      }
+
+      const emailLink = target.closest('[data-obfuscated-email-link]')
+      if (emailLink instanceof HTMLAnchorElement) {
+        event.preventDefault()
+
+        const plainEmail = emailLink.getAttribute('data-plain-email')
+        if (!plainEmail) {
+          return
+        }
+
+        window.location.href = `mailto:${plainEmail}`
+
+        return
+      }
+
+      const button = target.closest('[data-copy-email-button]')
+      if (!(button instanceof HTMLButtonElement)) {
+        return
+      }
+
+      const email = button.getAttribute('data-copy-email')
+      if (!email) {
+        return
+      }
+
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(email)
+        } else {
+          fallbackCopy(email)
+        }
+
+        setCopyStatus(button, 'Copied')
+      } catch {
+        setCopyStatus(button, 'Copy failed')
+      }
+    })
+
+    document.addEventListener('copy', event => {
+      const selection = document.getSelection()
+      const selectedText = selection?.toString().trim()
+
+      if (!selectedText) {
+        return
+      }
+
+      const anchorNode = selection.anchorNode
+      if (!(anchorNode instanceof Node)) {
+        return
+      }
+
+      const link = anchorNode.parentElement?.closest('[data-obfuscated-email-link]')
+      if (!(link instanceof HTMLAnchorElement)) {
+        return
+      }
+
+      const aliasEmail = link.getAttribute('data-alias-email')
+      if (!aliasEmail) {
+        return
+      }
+
+      event.preventDefault()
+      event.clipboardData?.setData('text/plain', aliasEmail)
+    })
+  }
+</script>
+
+<style lang="scss">
+  .email-obfuscated {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .email-obfuscated__link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .email-obfuscated__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .email-obfuscated__copy {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface-alt);
+    color: var(--text);
+    padding: 0.25rem 0.65rem;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.82rem;
+  }
+
+  .email-obfuscated__copy:hover {
+    border-color: color-mix(in srgb, var(--border) 65%, var(--accent) 35%);
+  }
+
+  .email-obfuscated__copy:focus-visible {
+    outline: 2px solid var(--accent-strong);
+    outline-offset: 2px;
+  }
+
+  .email-obfuscated__selection-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .email-obfuscated__status {
+    min-width: 4.2ch;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+</style>

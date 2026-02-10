@@ -1,5 +1,6 @@
 ---
-email: nicholasmtelliott [at] gmail [dot] com
+emailLocal: nicholasmtelliott
+emailDomain: gmail.com
 linkedin: https://www.linkedin.com/in/nicholasmtelliott/
 github: https://github.com/NicholasMTElliott
 location: Columbia, Maryland

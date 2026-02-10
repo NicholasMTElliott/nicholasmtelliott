@@ -1,10 +1,13 @@
 ---
 import { getCollection, render } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
+import EmailObfuscated from '../components/EmailObfuscated.astro'
 
 const profileEntry = (await getCollection('profile'))[0]
 const skillsEntry = (await getCollection('skills'))[0]
+const contactEntry = (await getCollection('contact'))[0]
 const defaultAvatarUrl = 'https://gravatar.com/avatar/468788fd550c4128b0c250566ea8729f?s=160'
+const displayEmail = contactEntry ? `${contactEntry.data.emailLocal}@${contactEntry.data.emailDomain}` : null
 
 const featuredProjects = (await getCollection('project'))
   .filter(project => project.data.featured)
@@ -42,6 +45,11 @@ const { Content: ProfileSummary } = await render(profileEntry)
         </>
       )}
     </p>
+    {displayEmail && (
+      <p class="hero__email">
+        <EmailObfuscated displayEmail={displayEmail} aliasTag="bot" />
+      </p>
+    )}
   </section>
 
   <section class="skills card">
@@ -134,6 +142,10 @@ const { Content: ProfileSummary } = await render(profileEntry)
     margin: 0.25rem 0 0;
   }
 
+  .hero__email {
+    margin: 0.2rem 0 0;
+  }
+
   .skills,
   .projects {
     margin-top: clamp(0.9rem, 1.8vw, 1.3rem);
@@ -173,6 +185,10 @@ const { Content: ProfileSummary } = await render(profileEntry)
 
     .hero__links span {
       display: none;
+    }
+
+    .hero__email {
+      align-self: stretch;
     }
   }
 </style>

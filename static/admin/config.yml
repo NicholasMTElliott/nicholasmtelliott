@@ -88,7 +88,8 @@ collections:
         name: "contact"
         file: "content/contact/contact.md"
         fields:
-          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Email Local Part", name: "emailLocal", widget: "string", hint: "Example: nicholasmtelliott"}
+          - {label: "Email Domain", name: "emailDomain", widget: "string", hint: "Example: gmail.com"}
           - {label: "LinkedIn", name: "linkedin", widget: "string"}
           - {label: "GitHub", name: "github", widget: "string"}
           - {label: "Location", name: "location", widget: "string", required: false}

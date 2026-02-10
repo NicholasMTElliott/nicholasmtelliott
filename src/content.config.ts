@@ -68,7 +68,8 @@ const skills = defineCollection({
 const contact = defineCollection({
   loader: glob({ pattern: 'contact.md', base: './content/contact' }),
   schema: z.object({
-    email: z.string(),
+    emailLocal: z.string(),
+    emailDomain: z.string(),
     linkedin: z.string().url(),
     github: z.string().url(),
     location: z.string().optional(),
