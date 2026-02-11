@@ -1,8 +1,7 @@
 ---
 name: Microsoft Visio Core Features
 key: microsoft-visio-core-features
-companyKey: microsoft
-role: Software Development Engineer (SDE)
+roleKey: microsoft-sde
 startDate: 2003-01-01T00:00:00.000Z
 endDate: 2006-12-01T00:00:00.000Z
 skills:

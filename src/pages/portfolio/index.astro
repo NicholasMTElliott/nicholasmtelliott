@@ -15,17 +15,39 @@ const companyEntries = (await getCollection('company')).sort(
   },
 )
 
+const roleEntries = await getCollection('role')
 const projectEntries = await getCollection('project')
 
-const projectsByCompanyKey = projectEntries.reduce<Record<string, typeof projectEntries>>((acc, project) => {
-  const current = acc[project.data.companyKey] ?? []
-  current.push(project)
-  acc[project.data.companyKey] = current
+const rolesByCompanyKey = roleEntries.reduce<Record<string, typeof roleEntries>>((acc, role) => {
+  const current = acc[role.data.companyKey] ?? []
+  current.push(role)
+  acc[role.data.companyKey] = current
 
   return acc
 }, {})
 
-Object.values(projectsByCompanyKey).forEach(projects => {
+Object.values(rolesByCompanyKey).forEach(roles => {
+  roles.sort((a, b) => {
+    const aEnd = a.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
+    const bEnd = b.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
+
+    if (aEnd !== bEnd) {
+      return bEnd - aEnd
+    }
+
+    return b.data.startDate.getTime() - a.data.startDate.getTime()
+  })
+})
+
+const projectsByRoleKey = projectEntries.reduce<Record<string, typeof projectEntries>>((acc, project) => {
+  const current = acc[project.data.roleKey] ?? []
+  current.push(project)
+  acc[project.data.roleKey] = current
+
+  return acc
+}, {})
+
+Object.values(projectsByRoleKey).forEach(projects => {
   projects.sort((a, b) => {
     const aEnd = a.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
     const bEnd = b.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
@@ -44,15 +66,28 @@ Object.values(projectsByCompanyKey).forEach(projects => {
 const renderedCompanyEntries = await Promise.all(
   companyEntries.map(async company => {
     const { Content } = await render(company)
-    const companyProjects = projectsByCompanyKey[company.data.key] ?? []
+    const companyRoles = rolesByCompanyKey[company.data.key] ?? []
 
-    const renderedProjects = await Promise.all(
-      companyProjects.map(async project => {
-        const { Content: ProjectContent } = await render(project)
+    const renderedRoles = await Promise.all(
+      companyRoles.map(async role => {
+        const { Content: RoleContent } = await render(role)
+        const roleProjects = projectsByRoleKey[role.data.key] ?? []
+
+        const renderedProjects = await Promise.all(
+          roleProjects.map(async project => {
+            const { Content: ProjectContent } = await render(project)
+
+            return {
+              project,
+              ProjectContent,
+            }
+          }),
+        )
 
         return {
-          project,
-          ProjectContent,
+          role,
+          RoleContent,
+          renderedProjects,
         }
       }),
     )
@@ -60,7 +95,7 @@ const renderedCompanyEntries = await Promise.all(
     return {
       company,
       Content,
-      renderedProjects,
+      renderedRoles,
     }
   }),
 )
@@ -96,7 +131,7 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
 
     <div class="entries">
       {
-        renderedCompanyEntries.map(({ company, Content, renderedProjects }) => (
+        renderedCompanyEntries.map(({ company, Content, renderedRoles }) => (
           <article class="card" id={company.data.key}>
             <h3>{company.data.title}</h3>
             <p class="period">{formatPeriod(company.data.startDate, company.data.endDate)}</p>
@@ -104,22 +139,37 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
               <Content />
             </div>
 
-            {renderedProjects.length > 0 && (
-              <section class="projects">
-                <h4>Projects</h4>
-                <div class="project-list">
+            {renderedRoles.length > 0 && (
+              <section class="roles">
+                <div class="role-list">
                   {
-                    renderedProjects.map(({ project, ProjectContent }) => (
-                      <article class="project-item">
-                        <h5>{project.data.name}</h5>
-                        {project.data.role && <p class="project-role">{project.data.role}</p>}
-                        {project.data.startDate && (
-                          <p class="project-period">{formatPeriod(project.data.startDate, project.data.endDate)}</p>
+                    renderedRoles.map(({ role, RoleContent, renderedProjects }) => (
+                      <>
+                      
+                        <h4>{role.data.title}</h4>
+                      <article class="role-item">
+                        {renderedProjects.length > 0 && (
+                          <section class="projects">
+                            <h5>Projects</h5>
+                            <div class="project-list">
+                              {
+                                renderedProjects.map(({ project, ProjectContent }) => (
+                                  <article class="project-item">
+                                    <p class="project-name">{project.data.name}</p>
+                                    {project.data.startDate && (
+                                      <p class="project-period">{formatPeriod(project.data.startDate, project.data.endDate)}</p>
+                                    )}
+                                    <div class="project-body">
+                                      <ProjectContent />
+                                    </div>
+                                  </article>
+                                ))
+                              }
+                            </div>
+                          </section>
                         )}
-                        <div class="project-body">
-                          <ProjectContent />
-                        </div>
                       </article>
+                      </>
                     ))
                   }
                 </div>
@@ -163,7 +213,7 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
     text-decoration: none;
     display: grid;
     gap: 0.2rem;
-    border-radius: 0.55rem;
+    border-radius:0;
     padding: 0.38rem 0.42rem;
     border: 1px solid transparent;
     transition: background-color 120ms ease, border-color 120ms ease;
@@ -201,15 +251,51 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
     margin-bottom: 0;
   }
 
-  .projects {
+  .roles {
     margin-top: 1.1rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border);
   }
 
-  .projects h4,
-  .project-item h5 {
+  .roles h4,
+  .role-item h5,
+  .projects h6 {
     margin: 0;
+  }
+
+  .project-name {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .role-list {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  .role-item {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    padding: 0.85rem;
+  }
+
+  .role-period {
+    margin: 0.25rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .role-body :global(p:first-child) {
+    margin-top: 0.6rem;
+  }
+
+  .role-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .projects {
   }
 
   .project-list {
@@ -219,13 +305,10 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
   }
 
   .project-item {
-    background: var(--surface-alt);
-    border: 1px solid var(--border);
-    border-radius: 0.6rem;
     padding: 0.85rem;
+    padding-left: 0;
   }
 
-  .project-role,
   .project-period {
     margin: 0.25rem 0 0;
     color: var(--muted);

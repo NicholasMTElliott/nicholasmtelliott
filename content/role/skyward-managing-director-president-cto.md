@@ -1,0 +1,10 @@
+---
+title: Managing Director / President / CTO
+key: skyward-managing-director-president-cto
+companyKey: skyward-app-company
+startDate: 2010-01-01T00:00:00.000Z
+location: Columbia, Maryland
+employmentType: Full-time
+---
+
+Led strategy and execution for enterprise software consulting and product engineering delivery.

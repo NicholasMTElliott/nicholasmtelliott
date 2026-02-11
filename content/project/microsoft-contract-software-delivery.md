@@ -1,8 +1,7 @@
 ---
 name: Microsoft Contract Software Delivery
 key: microsoft-contract-software-delivery
-companyKey: prophetic-sky
-role: Founder & CTO
+roleKey: prophetic-sky-founder-cto
 startDate: 2008-01-01T00:00:00.000Z
 endDate: 2010-12-01T00:00:00.000Z
 skills:

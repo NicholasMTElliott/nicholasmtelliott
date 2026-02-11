@@ -1,8 +1,7 @@
 ---
 name: Sirrus — SST Software Mobile Modernization
 key: sirrus-sst-mobile-modernization
-companyKey: skyward-app-company
-role: Managing Director / President / CTO
+roleKey: skyward-managing-director-president-cto
 startDate: 2012-01-01T00:00:00.000Z
 endDate: 2014-12-01T00:00:00.000Z
 skills:

@@ -29,6 +29,21 @@ collections:
       - {label: "Sort Order", name: "sortOrder", widget: "number", required: false, value_type: "int"}
       - {label: "Body", name: "body", widget: "markdown"}
 
+  - name: "role"
+    label: "Role"
+    folder: "content/role"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Key", name: "key", widget: "string", hint: "Stable unique id used for project linking"}
+      - {label: "Company Key", name: "companyKey", widget: "string", hint: "Must match an existing company key"}
+      - {label: "Start Date", name: "startDate", widget: "datetime"}
+      - {label: "End Date", name: "endDate", widget: "datetime", required: false, hint: "Leave empty for current role"}
+      - {label: "Location", name: "location", widget: "string", required: false}
+      - {label: "Employment Type", name: "employmentType", widget: "string", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+
   - name: "project"
     label: "Project"
     folder: "content/project"
@@ -37,8 +52,7 @@ collections:
     fields:
       - {label: "Project Name", name: "name", widget: "string"}
       - {label: "Key", name: "key", widget: "string", hint: "Stable unique id"}
-      - {label: "Company Key", name: "companyKey", widget: "string", hint: "Must match an existing company key"}
-      - {label: "Role", name: "role", widget: "string", required: false}
+      - {label: "Role Key", name: "roleKey", widget: "string", hint: "Must match an existing role key"}
       - {label: "Start Date", name: "startDate", widget: "datetime", required: false}
       - {label: "End Date", name: "endDate", widget: "datetime", required: false, hint: "Leave empty for current project"}
       - {label: "Repository URL", name: "repoUrl", widget: "string", required: false}

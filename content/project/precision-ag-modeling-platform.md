@@ -1,8 +1,7 @@
 ---
 name: Precision Ag Modeling Platform
 key: precision-ag-modeling-platform
-companyKey: zedx
-role: Software Engineer
+roleKey: zedx-software-engineer
 startDate: 2000-02-01T00:00:00.000Z
 endDate: 2002-12-01T00:00:00.000Z
 skills:

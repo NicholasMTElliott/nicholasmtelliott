@@ -1,8 +1,7 @@
 ---
 name: Townrs (iOS)
 key: townrs-ios
-companyKey: prophetic-sky
-role: Founder & CTO
+roleKey: prophetic-sky-founder-cto
 startDate: 2007-01-01T00:00:00.000Z
 endDate: 2008-12-01T00:00:00.000Z
 skills:

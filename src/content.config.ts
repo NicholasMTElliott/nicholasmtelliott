@@ -15,13 +15,25 @@ const company = defineCollection({
   }),
 })
 
+const role = defineCollection({
+  loader: glob({ pattern: '*.md', base: './content/role' }),
+  schema: z.object({
+    key: z.string(),
+    companyKey: z.string(),
+    title: z.string(),
+    startDate: z.coerce.date(),
+    endDate: z.coerce.date().optional(),
+    location: z.string().optional(),
+    employmentType: z.string().optional(),
+  }),
+})
+
 const project = defineCollection({
   loader: glob({ pattern: '*.md', base: './content/project' }),
   schema: z.object({
     key: z.string(),
-    companyKey: z.string(),
+    roleKey: z.string(),
     name: z.string(),
-    role: z.string().optional(),
     startDate: z.coerce.date().optional(),
     endDate: z.coerce.date().optional(),
     repoUrl: z.string().url().optional(),
@@ -80,6 +92,7 @@ const contact = defineCollection({
 
 export const collections = {
   company,
+  role,
   project,
   profile,
   about,

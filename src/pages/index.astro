@@ -6,6 +6,11 @@ import EmailObfuscated from '../components/EmailObfuscated.astro'
 const profileEntry = (await getCollection('profile'))[0]
 const skillsEntry = (await getCollection('skills'))[0]
 const contactEntry = (await getCollection('contact'))[0]
+const roleEntries = await getCollection('role')
+const roleTitleByKey = roleEntries.reduce<Record<string, string>>((acc, role) => {
+  acc[role.data.key] = role.data.title
+  return acc
+}, {})
 const defaultAvatarUrl = 'https://gravatar.com/avatar/468788fd550c4128b0c250566ea8729f?s=160'
 const displayEmail = contactEntry ? `${contactEntry.data.emailLocal}@${contactEntry.data.emailDomain}` : null
 
@@ -76,7 +81,7 @@ const { Content: ProfileSummary } = await render(profileEntry)
           featuredProjects.map(project => (
             <li>
               <strong>{project.data.name}</strong>
-              {project.data.role && <span> · {project.data.role}</span>}
+              {roleTitleByKey[project.data.roleKey] && <span> · {roleTitleByKey[project.data.roleKey]}</span>}
             </li>
           ))
         }

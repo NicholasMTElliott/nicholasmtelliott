@@ -1,8 +1,7 @@
 ---
 name: Advanced Agilytics Mobile Visualization
 key: advanced-agilytics-mobile-visualization
-companyKey: skyward-app-company
-role: Managing Director / President / CTO
+roleKey: skyward-managing-director-president-cto
 startDate: 2014-01-01T00:00:00.000Z
 endDate: 2015-12-01T00:00:00.000Z
 skills:

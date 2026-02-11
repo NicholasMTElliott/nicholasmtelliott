@@ -1,8 +1,7 @@
 ---
 name: BouMatic Platform Modernization
 key: boumatic-platform-modernization
-companyKey: skyward-app-company
-role: Managing Director / President / CTO
+roleKey: skyward-managing-director-president-cto
 startDate: 2015-01-01T00:00:00.000Z
 endDate: 2016-12-01T00:00:00.000Z
 skills:

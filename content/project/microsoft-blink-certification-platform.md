@@ -1,8 +1,7 @@
 ---
 name: Blink Certification Platform
 key: microsoft-blink-certification-platform
-companyKey: microsoft
-role: Software Development Engineer in Test (SDET)
+roleKey: microsoft-sdet
 startDate: 2002-01-01T00:00:00.000Z
 endDate: 2003-12-01T00:00:00.000Z
 skills:

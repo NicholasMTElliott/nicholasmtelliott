@@ -1,8 +1,7 @@
 ---
 name: Knights vs Aliens (iOS)
 key: knights-vs-aliens-ios
-companyKey: prophetic-sky
-role: Founder & CTO
+roleKey: prophetic-sky-founder-cto
 startDate: 2010-01-01T00:00:00.000Z
 endDate: 2010-04-01T00:00:00.000Z
 skills:
