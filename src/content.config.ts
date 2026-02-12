@@ -53,7 +53,6 @@ const profile = defineCollection({
     avatarUrl: z.string().optional(),
     linkedin: z.string().url(),
     github: z.string().url(),
-    x: z.string().url().optional(),
   }),
 })
 

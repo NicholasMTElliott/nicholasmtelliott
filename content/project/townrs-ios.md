@@ -11,3 +11,5 @@ skills:
 ---
 
 Townrs was a strategy game released commercially during the early iOS ecosystem and received a Silver Award from Pocket Gamer Magazine.
+
+Development on first-generation iPhone hardware required aggressive optimization choices around rendering behavior and memory usage while preserving gameplay quality within a small-team execution model.

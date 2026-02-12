@@ -12,4 +12,6 @@ skills:
 
 Knights vs Aliens was intentionally scoped for rapid delivery and shipped in approximately three months.
 
-The project reached profitability through disciplined MVP boundaries and execution speed.
+The game was engineered for constrained mobile hardware, with practical tradeoffs in rendering complexity, thread utilization, and memory pressure to preserve stable frame behavior during fast iteration.
+
+The project reached profitability through disciplined MVP boundaries and execution speed, reinforcing a repeatable product lesson from Prophetic Sky: self-funded work succeeds when technical ambition is matched to strict operational constraints.

@@ -12,4 +12,6 @@ skills:
 
 Spires was a large-scale strategy game developed over roughly two years, reaching several thousand paid users.
 
-The release provided practical lessons in distribution economics, piracy impact, and sustainable product strategy.
+Building for early iPhone hardware required careful performance optimization across rendering paths, multithreaded work scheduling, and memory layout decisions to keep gameplay responsive on constrained devices.
+
+Because the product was self-funded, architecture and scope decisions were tied directly to operational discipline. The release provided practical lessons in distribution economics, piracy impact, and the limits of long-cycle MVP strategy in consumer mobile markets.

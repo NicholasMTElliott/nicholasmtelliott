@@ -12,4 +12,6 @@ skills:
 
 Directed a multi-year modernization initiative to evolve dairy management systems into an open, pluggable platform.
 
-Delivered an MVP featuring hybrid cloud/offline capability, plugin modules for third-party integrations, and hardware abstraction for PCs, IoT, and CANBUS-linked equipment.
+Delivered an MVP with a hybrid, offline-first architecture that allowed field operations to continue during intermittent connectivity while synchronizing reliably with centralized cloud services.
+
+The platform introduced plugin modules for third-party integrations and a hardware-abstraction layer spanning desktop systems, IoT endpoints, and CANBUS-linked equipment, reducing coupling and creating a more extensible long-term product foundation.

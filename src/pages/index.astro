@@ -43,12 +43,6 @@ const { Content: ProfileSummary } = await render(profileEntry)
       <a href={profileEntry.data.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
       <span>·</span>
       <a href={profileEntry.data.github} target="_blank" rel="noreferrer">GitHub</a>
-      {profileEntry.data.x && (
-        <>
-          <span>·</span>
-          <a href={profileEntry.data.x} target="_blank" rel="noreferrer">X</a>
-        </>
-      )}
     </p>
     {displayEmail && (
       <p class="hero__email">

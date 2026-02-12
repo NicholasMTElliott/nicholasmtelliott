@@ -9,3 +9,5 @@ employmentType: Full-time
 ---
 
 Delivered geospatial and mobile-oriented software systems for precision agriculture products.
+
+Owned implementation work across field mobility, data pipeline performance, and hardware-integration edge cases where reliability depended on low-level troubleshooting and pragmatic system design.

@@ -75,7 +75,6 @@ collections:
           - {label: "Avatar URL", name: "avatarUrl", widget: "string", required: false}
           - {label: "LinkedIn", name: "linkedin", widget: "string"}
           - {label: "GitHub", name: "github", widget: "string"}
-          - {label: "X", name: "x", widget: "string", required: false}
           - {label: "Summary", name: "body", widget: "markdown"}
 
       - label: "About"

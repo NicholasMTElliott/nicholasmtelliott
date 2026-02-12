@@ -9,3 +9,5 @@ employmentType: Full-time
 ---
 
 Built and shipped core product features in Microsoft Visio, owning design-through-release delivery.
+
+Managed design, implementation, and cross-team integration for core desktop capabilities, reinforcing end-to-end ownership practices across estimation, quality collaboration, and release execution.

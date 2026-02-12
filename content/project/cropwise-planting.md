@@ -10,3 +10,5 @@ skills:
 ---
 
 Bootstrapped the Cropwise Planting product and transitioned delivery ownership to internal teams.
+
+I led the early platform and delivery phase to establish architecture, implementation cadence, and operating practices, then executed a planned handoff model so internal engineering teams could own the long-term roadmap and production operations.

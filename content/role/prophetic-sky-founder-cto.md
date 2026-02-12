@@ -8,3 +8,5 @@ employmentType: Full-time
 ---
 
 Founded and led product and client engineering delivery across early iOS and cross-platform initiatives.
+
+Owned technical direction, architecture choices, and execution prioritization across self-funded product development and client engagements, with sustained focus on performance under constrained devices, delivery discipline, and viable MVP scope.

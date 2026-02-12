@@ -8,3 +8,5 @@ employmentType: Full-time
 ---
 
 Led strategy and execution for enterprise software consulting and product engineering delivery.
+
+Directed distributed engineering delivery, platform modernization, and organizational scaling from founder-led execution to multi-team operations, with emphasis on Infrastructure-as-Code, cloud migration strategy, reliability practices, and planned transitions of mature systems to internal client teams.

@@ -1,153 +1,116 @@
-# Nicholas M. T. Elliott — Resume / Portfolio Site
+# Nicholas Elliott
 
-Public portfolio and resume site for [nicholasmtelliott.com](https://nicholasmtelliott.com), currently running on Astro and deployed with Netlify.
+Technology & Product Executive  
+Engineering Leadership • Platform Strategy • Cloud Architecture
 
-## Stack
+---
 
-- Astro
-- TypeScript
-- SCSS
-- pnpm
-- Netlify
+## About Me
 
-## Prerequisites
+I’m a mission-driven technology leader with 15+ years of experience building, modernizing, and scaling mission-critical software platforms. I’ve led engineering organizations from early inception to 30+ employees, delivered long-lived enterprise systems across global teams, and defined multi-year product and technology roadmaps aligned with business strategy.
 
-- Node.js 20+
-- pnpm 9+
+My background spans early-stage startups, enterprise product development at Microsoft, and building and leading a profitable software organization delivering complex platform systems in regulated and data-intensive domains.
 
-## Getting Started
+More details:  
+👉 LinkedIn: https://www.linkedin.com/in/nicholasmtelliott
 
-Install dependencies:
+---
 
-```bash
-pnpm install
-```
+## What I Build
 
-Start local development server:
+I specialize in durable systems and scalable platforms:
 
-```bash
-pnpm dev
-```
+• Cloud-native architectures (AWS, IaC, containers, microservices)  
+• Enterprise integrations (SAP, Salesforce, distributed systems)  
+• Platform abstraction layers for multi-product ecosystems  
+• Observability and reliability systems (OpenTelemetry, metrics, tracing)  
+• Long-lived systems that evolve without rewrite  
 
-Astro will print the local URL (typically `http://localhost:4321`).
+I care about systems that survive years — not demos that survive days.
 
-## Scripts
+---
 
-- Run locally:
+## Selected Platform Experience
 
-  ```bash
-  pnpm dev
-  ```
+### Global Agricultural Platform Modernization
+Led the evolution of a regional sustainability tool into a globally deployed digital recommendation platform.
 
-- Build production output:
+• Migrated legacy .NET Framework/Azure systems to AWS cloud-native architecture  
+• Implemented Infrastructure-as-Code (AWS CDK) to replace click-ops  
+• Designed microservice and event-driven architectures  
+• Integrated SAP, Salesforce, and multiple enterprise systems  
+• Established production observability (metrics, logs, traces)  
+• Completed SOC2 audit with minimal remediation  
 
-  ```bash
-  pnpm build
-  ```
+---
 
-- Preview production build locally:
+### Distributed Platform Engineering
+Built and mentored globally distributed teams across the US, India, Brazil, Egypt, and Europe.
 
-  ```bash
-  pnpm preview
-  ```
+• Defined shared services and abstraction layers to eliminate duplication  
+• Coordinated cross-product platform alignment  
+• Transitioned mature systems to internal ownership for sustainability  
 
-- Run tests (placeholder currently):
+---
 
-  ```bash
-  pnpm test
-  ```
+### Early Mobile & Data Systems
+Before cloud-native was common, I worked on:
 
-- Format files:
+• Terabyte-scale weather data processing systems (early 2000s)  
+• Custom database performance optimizations  
+• Early mobile (Pocket PC) GPS-based geospatial applications  
+• Streaming web data before modern AJAX frameworks  
 
-  ```bash
-  pnpm format
-  ```
+---
 
-## Content
+## Engineering Leadership Philosophy
 
-- Company/experience markdown content lives under:
-  - `content/company/`
-- Astro content collections are configured in:
-  - `src/content.config.ts`
+I believe strong engineering organizations balance:
 
-## Deploy (Netlify)
+• Clear metrics with healthy culture  
+• Accountability with psychological safety  
+• Modern tooling with operational discipline  
+• Innovation with long-term sustainability  
 
-Deployment is configured in `netlify.toml`:
+I build teams that ship — and systems that last.
 
-- Build command: `pnpm build`
-- Publish directory: `dist`
-- Node version: `20`
-- Redirect: `/admin/*` → `/admin/index.html`
+---
 
-Standard flow:
+## Technical Depth
 
-1. Push commits to GitHub
-2. Netlify picks up the change and runs the build
-3. Built site is published from `dist`
+Cloud & DevOps  
+• AWS (CDK, Fargate, Lambda, API Gateway, VPC)  
+• Docker & CI/CD pipelines  
+• Infrastructure as Code  
+• Distributed systems design  
 
-## CMS (Decap) Setup
+Backend & Systems  
+• .NET / .NET Core  
+• Node.js  
+• RESTful APIs  
+• Event-driven architectures  
 
-The admin UI is available at `/admin` and is configured in:
+Data & Messaging  
+• SQL Server  
+• Redis  
+• RabbitMQ  
+• Temporal.io  
 
-- `static/admin/index.html`
-- `static/admin/config.yml`
+Observability & Reliability  
+• OpenTelemetry  
+• Prometheus / Mimir  
+• Grafana  
+• Loki / Tempo  
 
-This project uses the Decap **GitHub backend** (`backend.name: github`) with Netlify-hosted auth endpoint settings:
+---
 
-- `site_domain: nicholasmtelliott.netlify.app`
-- `base_url: https://api.netlify.com`
-- `auth_endpoint: auth`
+## Currently Exploring
 
-### Required one-time auth setup (Netlify hosted flow)
+Director of Engineering  
+Head of Engineering  
+Platform Engineering Leadership  
+Chief Technology / Product roles in mission-driven or platform-focused organizations
 
-This configuration uses Netlify's hosted auth flow for Decap GitHub backend.
+---
 
-1. Confirm Netlify site is connected to `NicholasMTElliott/nicholasmtelliott`.
-2. Ensure the deploy-connected GitHub account/app has write access to `main`.
-3. Re-authorize Netlify GitHub access if prompted in Netlify/GitHub integrations.
-4. Test login first at `https://nicholasmtelliott.netlify.app/admin`.
-
-Without a valid Netlify↔GitHub authorization state, `/admin` will load but login/publish flow will fail.
-
-### Operational prerequisites and verification
-
-Keep these values aligned before troubleshooting code:
-
-1. `site_domain` in Decap config matches the active Netlify subdomain.
-2. Decap config uses Netlify hosted auth endpoint (`base_url` + `auth_endpoint`).
-3. Netlify site is linked to the same GitHub repo/branch used in Decap config.
-4. Authenticated GitHub identity has push access to `NicholasMTElliott/nicholasmtelliott`.
-
-Verification checklist:
-
-1. Open deployed `/admin` and complete GitHub login.
-2. Confirm CMS loads collections without auth errors.
-3. Create or edit a Company entry and save.
-4. Confirm a commit is created on `main`.
-5. Confirm Netlify builds and publishes the content change.
-
-### Local CMS editing UX
-
-For local authoring, this repo has `local_backend: true` in Decap config.
-
-Run Astro and Decap local backend in separate terminals:
-
-```bash
-pnpm dev
-```
-
-```bash
-npx decap-server
-```
-
-Then open:
-
-- Site: `http://localhost:4321`
-- Admin: `http://localhost:4321/admin`
-
-You can create/edit entries in the **Company** collection and Decap will write markdown files under `content/company`.
-
-## Current Status
-
-- Migration foundation from Gatsby to Astro is complete.
-- Ongoing work includes Decap CMS integration, content expansion, and further responsive visual refinement.
+If you're interested in discussing engineering leadership, platform architecture, or scalable system design — feel free to connect.
