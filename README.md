@@ -44,12 +44,41 @@ Led the evolution of a regional sustainability tool into a globally deployed dig
 
 ---
 
+## AI & Intelligent Systems
+
+I’ve been actively integrating AI into both product capabilities and engineering workflows:
+
+- Led development of AI-driven product features (e.g. proactive agronomic analysis and recommendation systems)
+- Built AI-powered report generation pipelines for production systems
+- Integrated LLM APIs (OpenAI, Anthropic, etc.) into enterprise applications
+- Introduced AI-assisted development workflows across engineering teams
+- Prototyped local model execution using tools like vLLM and Ollama
+- Explored agentic workflows and automation patterns for internal platforms
+
+I’m particularly interested in practical, production-ready uses of AI that enhance decision-making and developer productivity without sacrificing reliability or security.
+
+--- 
+
 ### Distributed Platform Engineering
 Built and mentored globally distributed teams across the US, India, Brazil, Egypt, and Europe.
 
 • Defined shared services and abstraction layers to eliminate duplication  
 • Coordinated cross-product platform alignment  
 • Transitioned mature systems to internal ownership for sustainability  
+
+---
+
+### Observability & Systems Thinking
+
+I’ve worked extensively with modern observability stacks:
+
+- OpenTelemetry instrumentation
+- Distributed tracing (Tempo)
+- Log aggregation (Loki)
+- Metrics systems (Prometheus / Mimir)
+- Visualization (Grafana)
+
+I care deeply about making systems understandable, debuggable, and operable at scale—not just building them.
 
 ---
 
@@ -73,6 +102,21 @@ I believe strong engineering organizations balance:
 • Innovation with long-term sustainability  
 
 I build teams that ship — and systems that last.
+
+--- 
+
+# Platform & Architecture Experience
+
+- Cloud-native systems (AWS, Azure)
+- Infrastructure as Code (AWS CDK)
+- Containerized services (Docker, Fargate)
+- Distributed workflows (Temporal)
+- Event-driven architectures
+- Observability (OpenTelemetry, Grafana, Loki, Tempo, Prometheus)
+- API design and enterprise integrations (Salesforce, SAP, internal systems)
+- High-scale data processing and caching (Redis)
+
+I’ve spent most of my career translating complex, real-world operational systems into scalable software platforms.
 
 ---
 
@@ -106,11 +150,15 @@ Observability & Reliability
 
 ## Currently Exploring
 
-Director of Engineering  
-Head of Engineering  
-Platform Engineering Leadership  
-Chief Technology / Product roles in mission-driven or platform-focused organizations
+- AI-native internal platforms and developer tooling
+- Agentic workflows and automation
+- Practical applications of local vs hosted LLMs
+- Improving engineering velocity with AI-assisted development
 
 ---
 
 If you're interested in discussing engineering leadership, platform architecture, or scalable system design — feel free to connect.
+
+## Links
+
+- LinkedIn: https://www.linkedin.com/in/nicholasmtelliott
