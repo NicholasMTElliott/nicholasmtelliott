@@ -44,14 +44,14 @@ export const openSourceRepos = [
   {
     name: 'task-board',
     href: 'https://github.com/NicholasMTElliott/task-board',
-    summary: 'AI-assisted task board and workflow surface for managing agentic work.',
+    summary: 'AI Kanban harness for managing agentic work, integrating with your existing workflow and tools.',
     signal: 'Product thinking for AI control surfaces',
   },
   {
-    name: 'codex-task',
-    href: 'https://github.com/NicholasMTElliott/codex-task',
-    summary: 'Delegates coding-agent tasks to OpenAI Codex CLI and returns structured JSON.',
-    signal: 'AI developer workflow automation',
+    name: 'codex-image-gen',
+    href: 'https://github.com/NicholasMTElliott/codex-image-gen',
+    summary: 'Portable Node CLI and skill wrapper around Codex image-generation workflows.',
+    signal: 'Practical AI toolchain integration',
   },
   {
     name: 'local-llm',
@@ -60,10 +60,10 @@ export const openSourceRepos = [
     signal: 'Hosted vs local AI tradeoff exploration',
   },
   {
-    name: 'codex-image-gen',
-    href: 'https://github.com/NicholasMTElliott/codex-image-gen',
-    summary: 'Portable Node CLI and skill wrapper around Codex image-generation workflows.',
-    signal: 'Practical AI toolchain integration',
+    name: 'popcorn',
+    href: 'https://github.com/SkywardApps/popcorn',
+    summary: 'REST API middleware for response shaping, reducing endpoint sprawl while giving clients precise payload control.',
+    signal: 'API/platform engineering depth',
   },
 ]
 
