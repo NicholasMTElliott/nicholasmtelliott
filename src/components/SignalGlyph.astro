@@ -1,0 +1,106 @@
+---
+interface Props {
+  type: 'teams' | 'platforms' | 'ai' | 'trust'
+  label: string
+}
+
+const { type, label } = Astro.props
+---
+
+<svg class={`signal-glyph signal-glyph--${type}`} viewBox="0 0 64 64" role="img" aria-label={label}>
+  {
+    type === 'teams' && (
+      <>
+        <path d="M18 22h14l13 12" />
+        <path d="M18 42h15l12-8" />
+        <path d="M32 22v20" />
+        <circle cx="18" cy="22" r="4" />
+        <circle cx="18" cy="42" r="4" />
+        <circle cx="32" cy="22" r="4" />
+        <circle cx="32" cy="42" r="4" />
+        <circle cx="46" cy="34" r="5" />
+      </>
+    )
+  }
+  {
+    type === 'platforms' && (
+      <>
+        <path d="M12 20h40" />
+        <path d="M12 32h40" />
+        <path d="M12 44h40" />
+        <path d="M22 20v24" />
+        <path d="M42 20v24" />
+        <rect x="12" y="15" width="40" height="10" rx="2" />
+        <rect x="12" y="27" width="40" height="10" rx="2" />
+        <rect x="12" y="39" width="40" height="10" rx="2" />
+      </>
+    )
+  }
+  {
+    type === 'ai' && (
+      <>
+        <path d="M20 18h24v24H20z" />
+        <path d="M26 42v8" />
+        <path d="M38 42v8" />
+        <path d="M14 26h6" />
+        <path d="M14 34h6" />
+        <path d="M44 26h6" />
+        <path d="M44 34h6" />
+        <path d="M28 31l4-5 4 10 4-5" />
+        <circle cx="48" cy="48" r="5" />
+        <path d="M40 40l5 5" />
+      </>
+    )
+  }
+  {
+    type === 'trust' && (
+      <>
+        <path d="M32 12l18 7v12c0 12-7.5 19-18 23-10.5-4-18-11-18-23V19l18-7z" />
+        <path d="M23 33l6 6 13-15" />
+        <path d="M14 50h9" />
+        <path d="M41 50h9" />
+        <path d="M10 54h44" />
+      </>
+    )
+  }
+</svg>
+
+<style lang="scss">
+  .signal-glyph {
+    width: 54px;
+    height: 54px;
+    display: block;
+    color: var(--accent);
+    filter: drop-shadow(0 0 12px color-mix(in srgb, currentColor 22%, transparent));
+  }
+
+  .signal-glyph :global(path),
+  .signal-glyph :global(circle),
+  .signal-glyph :global(rect) {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .signal-glyph :global(circle) {
+    fill: color-mix(in srgb, currentColor 16%, transparent);
+  }
+
+  .signal-glyph--teams {
+    color: var(--accent-soft);
+  }
+
+  .signal-glyph--platforms {
+    color: var(--accent);
+  }
+
+  .signal-glyph--ai {
+    color: #9bc5ff;
+  }
+
+  .signal-glyph--trust {
+    color: var(--accent-warm);
+  }
+</style>

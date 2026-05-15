@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Technical Field Notes - Portfolio Mockup</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #101214;
+        --paper: #e8e2d5;
+        --ink: #f3efe7;
+        --muted: #b8b0a2;
+        --panel: #181b1f;
+        --panel-2: #22262b;
+        --line: #3a3f46;
+        --cyan: #73d6d1;
+        --red: #ff776b;
+        --yellow: #f7c85f;
+        --max: 1200px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.5;
+      }
+
+      a {
+        color: var(--cyan);
+        text-decoration: none;
+      }
+
+      .shell {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 24px;
+        align-items: center;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 18px;
+      }
+
+      .name {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .name img {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+      }
+
+      .name strong {
+        display: block;
+        font-size: 1.1rem;
+      }
+
+      .name span,
+      .nav a,
+      .muted {
+        color: var(--muted);
+      }
+
+      .nav {
+        display: flex;
+        gap: 18px;
+      }
+
+      .hero {
+        padding: 42px 0;
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+        gap: 32px;
+      }
+
+      h1 {
+        font-size: clamp(2.2rem, 5vw, 4.7rem);
+        line-height: 1;
+        margin: 0 0 20px;
+      }
+
+      .summary {
+        font-size: 1.12rem;
+        color: var(--muted);
+        max-width: 650px;
+      }
+
+      .terminal {
+        border: 1px solid var(--line);
+        background: #0b0d0f;
+        min-height: 420px;
+        padding: 20px;
+        font-family: "Cascadia Code", Consolas, monospace;
+        font-size: 0.92rem;
+      }
+
+      .terminal-line {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 16px;
+        padding: 10px 0;
+        border-bottom: 1px solid #23272d;
+      }
+
+      .key {
+        color: var(--yellow);
+      }
+
+      .value {
+        color: var(--paper);
+      }
+
+      .section {
+        padding: 36px 0 0;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: 1.7rem;
+      }
+
+      .section-title span {
+        color: var(--red);
+        font-family: "Cascadia Code", Consolas, monospace;
+      }
+
+      .case-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 18px;
+      }
+
+      .case,
+      .tech,
+      .repo,
+      .story {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        padding: 20px;
+      }
+
+      .case h3,
+      .repo h3,
+      .story h3 {
+        margin: 0 0 8px;
+      }
+
+      .case p,
+      .repo p,
+      .story p {
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .tag {
+        border: 1px solid var(--line);
+        background: var(--panel-2);
+        padding: 5px 8px;
+        color: var(--paper);
+        font-size: 0.8rem;
+      }
+
+      .tech-map {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      .tech b {
+        display: block;
+        color: var(--cyan);
+        margin-bottom: 8px;
+      }
+
+      .repo-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      .story-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+
+      @media (max-width: 920px) {
+        .header,
+        .hero,
+        .case-grid,
+        .tech-map,
+        .repo-grid,
+        .story-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="header">
+        <div class="name">
+          <img src="https://gravatar.com/avatar/468788fd550c4128b0c250566ea8729f?s=128" alt="" />
+          <div>
+            <strong>Nick Elliott</strong>
+            <span>Engineering director with staff-level technical range</span>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Primary">
+          <a href="#">Cases</a>
+          <a href="#">Technologies</a>
+          <a href="#">AI Work</a>
+          <a href="#">Repos</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div>
+          <h1>Field notes from production platform work.</h1>
+          <p class="summary">
+            A portfolio for technical leaders who want the details: enterprise delivery, team leadership,
+            AI product work, cloud modernization, and the low-level engineering judgment underneath it.
+          </p>
+        </div>
+        <aside class="terminal">
+          <div class="terminal-line"><span class="key">role_target</span><span class="value">Director / Head of Engineering</span></div>
+          <div class="terminal-line"><span class="key">enterprise_signal</span><span class="value">Syngenta Global Fortune 500 platform delivery</span></div>
+          <div class="terminal-line"><span class="key">org_scale</span><span class="value">Skyward from solo founder to 30 employees</span></div>
+          <div class="terminal-line"><span class="key">ai_signal</span><span class="value">Root Cause, report generation, AI-assisted engineering</span></div>
+          <div class="terminal-line"><span class="key">systems_depth</span><span class="value">AWS, .NET, Node, TypeScript, observability, integrations</span></div>
+          <div class="terminal-line"><span class="key">old_school_depth</span><span class="value">database internals, Pocket PC, GPS, rendering, geospatial math</span></div>
+        </aside>
+      </section>
+
+      <section class="section">
+        <div class="section-title"><span>01</span><h2>Case studies first</h2></div>
+        <div class="case-grid">
+          <article class="case">
+            <h3>Syngenta - E-Luminate / GHX Fields / Cropwise</h3>
+            <p>
+              The anchor case study. Shows Global Fortune 500-scale enterprise delivery, AI in production,
+              cloud modernization, global coordination, and long-term platform stewardship.
+            </p>
+            <div class="tags">
+              <span class="tag">Root Cause AI</span>
+              <span class="tag">AWS CDK</span>
+              <span class="tag">React</span>
+              <span class="tag">.NET Core</span>
+              <span class="tag">Salesforce</span>
+              <span class="tag">SAP</span>
+              <span class="tag">OpenTelemetry</span>
+            </div>
+          </article>
+          <article class="case">
+            <h3>Skyward as operating system</h3>
+            <p>
+              Founder/operator story framed around leadership systems: hiring, mentorship, delivery,
+              financial stewardship, culture, and distributed team management.
+            </p>
+            <div class="tags">
+              <span class="tag">30 employees</span>
+              <span class="tag">$3.4M revenue</span>
+              <span class="tag">low turnover</span>
+              <span class="tag">controlled wind-down</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title"><span>02</span><h2>Technology evidence map</h2></div>
+        <div class="tech-map">
+          <div class="tech"><b>Cloud</b><span class="muted">AWS CDK, Fargate, Lambda, API Gateway, VPC, Azure migration</span></div>
+          <div class="tech"><b>AI</b><span class="muted">LLM APIs, Root Cause, report generation, vLLM, Ollama</span></div>
+          <div class="tech"><b>Observability</b><span class="muted">OpenTelemetry, Grafana, Loki, Tempo, Prometheus, Mimir, Datadog</span></div>
+          <div class="tech"><b>Enterprise</b><span class="muted">Salesforce, SAP, sales hierarchy abstraction, SOC 2 practices</span></div>
+          <div class="tech"><b>Backend</b><span class="muted">.NET, .NET Core, Node.js, REST APIs, RabbitMQ, Temporal, Redis</span></div>
+          <div class="tech"><b>Frontend</b><span class="muted">TypeScript, React, Knockout migration, Decap/Astro portfolio</span></div>
+          <div class="tech"><b>Mobile</b><span class="muted">iOS, Android, React Native, Pocket PC, offline sync</span></div>
+          <div class="tech"><b>Deep systems</b><span class="muted">MySQL table handler, GPS hardware, geospatial math, rendering performance</span></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title"><span>03</span><h2>Open-source and tooling</h2></div>
+        <div class="repo-grid">
+          <article class="repo"><h3>codex-task</h3><p>AI coding-agent task delegation with structured JSON.</p></article>
+          <article class="repo"><h3>local-llm</h3><p>Local LLM exploration and operational tradeoffs.</p></article>
+          <article class="repo"><h3>codex-image-gen</h3><p>Image generation workflow wrapper for Codex use.</p></article>
+          <article class="repo"><h3>task-board</h3><p>AI-assisted task board interface for agentic workflow management.</p></article>
+          <article class="repo"><h3>pdf-render-service</h3><p>Reusable document rendering service from SkywardApps.</p></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title"><span>04</span><h2>Interview story bank</h2></div>
+        <div class="story-grid">
+          <article class="story"><h3>MySQL internals</h3><p>Reduced retrieval from seconds to milliseconds with a custom table handler.</p></article>
+          <article class="story"><h3>GPS hardware fix</h3><p>Debugged serial GPS carrier signal issue on Dell Axim devices.</p></article>
+          <article class="story"><h3>BouMatic risk</h3><p>Managed a revenue shock after a major industrial platform was canceled.</p></article>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

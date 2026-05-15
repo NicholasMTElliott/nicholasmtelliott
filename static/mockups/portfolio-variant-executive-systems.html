@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Executive Systems - Portfolio Mockup</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0b0d12;
+        --panel: #131720;
+        --panel-2: #1b212d;
+        --text: #edf2f8;
+        --muted: #a8b3c4;
+        --line: #313a4a;
+        --blue: #6da8ff;
+        --green: #69d2a1;
+        --gold: #f1c65b;
+        --max: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+
+      .topbar {
+        border-bottom: 1px solid var(--line);
+        background: rgba(11, 13, 18, 0.92);
+        position: sticky;
+        top: 0;
+        z-index: 5;
+      }
+
+      .topbar-inner,
+      main {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding-inline: 24px;
+      }
+
+      .topbar-inner {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+      }
+
+      .brand strong {
+        display: block;
+        font-size: 1rem;
+      }
+
+      .brand span,
+      .nav a {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .nav {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+      }
+
+      .nav a.primary {
+        color: var(--text);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 9px 12px;
+      }
+
+      .hero {
+        padding: 64px 0 36px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);
+        gap: 42px;
+        align-items: end;
+      }
+
+      .eyebrow {
+        color: var(--green);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        line-height: 0.95;
+        margin: 12px 0 24px;
+        max-width: 820px;
+      }
+
+      .lead {
+        font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+        color: var(--muted);
+        max-width: 760px;
+      }
+
+      .proof-card {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        padding: 24px;
+      }
+
+      .proof-card h2 {
+        margin: 0 0 14px;
+        font-size: 1.05rem;
+      }
+
+      .proof-card ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 12px;
+      }
+
+      .proof-card li {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: 16px;
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+      }
+
+      .metric {
+        color: var(--gold);
+        font-weight: 800;
+      }
+
+      .band {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: #0f131b;
+        margin-top: 32px;
+      }
+
+      .stats {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 22px 24px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 16px;
+      }
+
+      .stats strong {
+        display: block;
+        font-size: 1.35rem;
+      }
+
+      .stats span {
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .section {
+        padding: 54px 0 0;
+      }
+
+      .section h2 {
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        margin: 0 0 22px;
+      }
+
+      .value-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      .value {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        padding: 20px;
+        min-height: 220px;
+      }
+
+      .value b {
+        display: block;
+        font-size: 1.05rem;
+        margin-bottom: 10px;
+      }
+
+      .value p,
+      .case p,
+      .repo p {
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .case {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .case-side {
+        background:
+          linear-gradient(rgba(11, 13, 18, 0.12), rgba(11, 13, 18, 0.88)),
+          url("../static/images/tianyi-ma-WiONHd_zYI4-unsplash.jpg") center / cover;
+        min-height: 420px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .case-body {
+        padding: 26px;
+      }
+
+      .case-body h3 {
+        margin: 0 0 12px;
+        font-size: 1.7rem;
+      }
+
+      .bullets {
+        display: grid;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .bullet {
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+      }
+
+      .label {
+        color: var(--green);
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .repo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .repo {
+        border: 1px solid var(--line);
+        background: var(--panel-2);
+        padding: 18px;
+      }
+
+      .repo h3 {
+        margin: 0 0 8px;
+      }
+
+      @media (max-width: 900px) {
+        .hero,
+        .case,
+        .value-grid,
+        .repo-grid,
+        .stats {
+          grid-template-columns: 1fr;
+        }
+
+        .nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <img src="https://gravatar.com/avatar/468788fd550c4128b0c250566ea8729f?s=128" alt="" />
+          <div>
+            <strong>Nicholas M.T. Elliott</strong>
+            <span>Director of Engineering | Platform Architecture | AI in Production</span>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Primary">
+          <a href="#">Impact</a>
+          <a href="#">Case Studies</a>
+          <a href="#">AI</a>
+          <a href="#">Open Source</a>
+          <a class="primary" href="#">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Enterprise platform leadership</div>
+          <h1>I build engineering organizations and production platforms that survive scale.</h1>
+          <p class="lead">
+            Director-level engineering leader, founder, architect, and hands-on technical partner for
+            Global Fortune 500-scale enterprise delivery. Deep experience across cloud modernization, AI-enabled
+            products, observability, integrations, and distributed teams.
+          </p>
+        </div>
+        <aside class="proof-card">
+          <h2>Why this matters</h2>
+          <ul>
+            <li><span class="metric">30</span><span>person engineering organization built from inception</span></li>
+            <li><span class="metric">$3.4M</span><span>peak annual revenue at Skyward App Company</span></li>
+            <li><span class="metric">15+</span><span>years delivering mission-critical platforms</span></li>
+            <li><span class="metric">AI</span><span>production Root Cause feature for Syngenta North America</span></li>
+          </ul>
+        </aside>
+      </section>
+    </main>
+
+    <section class="band">
+      <div class="stats">
+        <div><strong>Syngenta</strong><span>Global Fortune 500 platform engagement</span></div>
+        <div><strong>AWS</strong><span>CDK, Fargate, Lambda, VPC, API Gateway</span></div>
+        <div><strong>Global</strong><span>US, India, Brazil, Egypt, Europe</span></div>
+        <div><strong>AI</strong><span>product features and engineering workflows</span></div>
+        <div><strong>SOC 2</strong><span>audit-ready operational practices</span></div>
+      </div>
+    </section>
+
+    <main>
+      <section class="section">
+        <h2>Four ways I create value</h2>
+        <div class="value-grid">
+          <article class="value">
+            <b>Lead teams</b>
+            <p>Hire, mentor, structure, and retain teams that can handle ambiguous enterprise delivery without burning out.</p>
+          </article>
+          <article class="value">
+            <b>Modernize platforms</b>
+            <p>Move legacy systems toward cloud-native, observable, secure, service-oriented foundations.</p>
+          </article>
+          <article class="value">
+            <b>Ship AI responsibly</b>
+            <p>Apply LLMs and AI analysis to real product workflows, with attention to privacy, ergonomics, and reliability.</p>
+          </article>
+          <article class="value">
+            <b>Earn technical trust</b>
+            <p>Go deep with senior engineers across data, distributed systems, mobile, geospatial, and platform internals.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="case">
+          <div class="case-side">
+            <div class="eyebrow">Featured case study</div>
+            <h2>Syngenta E-Luminate / GHX Fields / Cropwise</h2>
+          </div>
+          <div class="case-body">
+            <h3>Global enterprise platform modernization with production AI.</h3>
+            <p>
+              Led the technical partnership behind revenue-supporting seed recommendation and sales workflows
+              across global markets. Helped evolve the platform from Knockout, .NET Framework, SQL Server,
+              and Azure into TypeScript, React, .NET Core, Node.js services, AWS infrastructure, and
+              observability-backed operations.
+            </p>
+            <div class="bullets">
+              <div class="bullet"><span class="label">AI</span><br />Root Cause proactively analyzed agronomic and environmental patterns to surface concerns and mitigations.</div>
+              <div class="bullet"><span class="label">Architecture</span><br />AWS CDK, Fargate, Lambda, API Gateway, VPC segmentation, Redis, Temporal, RabbitMQ.</div>
+              <div class="bullet"><span class="label">Enterprise</span><br />Salesforce, SAP, regional sales hierarchies, global product and territory variation.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Open-source proof points</h2>
+        <div class="repo-grid">
+          <article class="repo">
+            <h3>codex-task</h3>
+            <p>Structured coding-agent delegation with JSON output. Signals AI workflow design and developer tooling.</p>
+          </article>
+          <article class="repo">
+            <h3>local-llm</h3>
+            <p>Local model investigation space. Signals hosted vs local AI tradeoff exploration.</p>
+          </article>
+          <article class="repo">
+            <h3>codex-image-gen</h3>
+            <p>Portable CLI and skill wrapper around Codex image generation workflows.</p>
+          </article>
+          <article class="repo">
+            <h3>task-board</h3>
+            <p>AI-assisted task board tooling. Signals practical product thinking around agentic workflow control surfaces.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

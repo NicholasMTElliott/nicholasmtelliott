@@ -71,3 +71,5 @@ pnpm-debug.log*
 
 # Local planning/docs
 memory-bank/
+AGENTS.md
+CLAUDE.md

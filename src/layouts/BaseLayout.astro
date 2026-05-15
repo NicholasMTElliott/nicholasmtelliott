@@ -8,9 +8,19 @@ const currentPath = Astro.url.pathname
 
 const nav = [
   { href: '/', label: 'Home' },
+  { href: '/case-studies/global-ag-platform', label: 'Case Study' },
+  { href: '/ai', label: 'AI' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/about', label: 'About' },
 ]
+
+const isActive = (href: string) => {
+  if (href === '/') {
+    return currentPath === '/'
+  }
+
+  return currentPath.startsWith(href)
+}
 ---
 
 <!doctype html>
@@ -33,13 +43,13 @@ const nav = [
           />
           <div>
             <h1>Nicholas M.T. Elliott</h1>
-            <p>Managing Director · Solution Architect · Columbia, MD</p>
+            <p>Director of Engineering · Platform Architecture · AI in Production</p>
           </div>
         </a>
         <nav class="site-nav" aria-label="Primary navigation">
           {
             nav.map(link => (
-              <a class={currentPath === link.href ? 'active' : ''} href={link.href}>
+              <a class={isActive(link.href) ? 'active' : ''} href={link.href}>
                 {link.label}
               </a>
             ))

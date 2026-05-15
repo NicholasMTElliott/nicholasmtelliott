@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Platform Lab - Portfolio Mockup</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #080a0f;
+        --panel: #10151f;
+        --panel-2: #161e2b;
+        --text: #f6f8fb;
+        --muted: #9da9bc;
+        --line: #293246;
+        --blue: #78a8ff;
+        --teal: #64e0c2;
+        --pink: #ff7ab6;
+        --max: 1160px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at 18% 12%, rgba(100, 224, 194, 0.16), transparent 30%),
+          radial-gradient(circle at 78% 6%, rgba(120, 168, 255, 0.18), transparent 28%),
+          var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      a {
+        color: var(--teal);
+        text-decoration: none;
+      }
+
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 28px;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding-bottom: 30px;
+      }
+
+      .identity {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .identity img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+      }
+
+      .identity strong {
+        display: block;
+      }
+
+      .identity span,
+      .links a,
+      .muted {
+        color: var(--muted);
+      }
+
+      .links {
+        display: flex;
+        gap: 18px;
+      }
+
+      .hero {
+        min-height: 620px;
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 34px;
+        align-items: center;
+      }
+
+      .pill {
+        display: inline-flex;
+        border: 1px solid var(--line);
+        background: rgba(16, 21, 31, 0.72);
+        padding: 7px 10px;
+        border-radius: 999px;
+        color: var(--teal);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 6vw, 5.6rem);
+        line-height: 0.95;
+        margin: 18px 0 24px;
+        max-width: 820px;
+      }
+
+      .hero-text p {
+        color: var(--muted);
+        font-size: 1.16rem;
+        max-width: 760px;
+      }
+
+      .console {
+        border: 1px solid var(--line);
+        background: rgba(16, 21, 31, 0.86);
+        padding: 20px;
+        min-height: 500px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+      }
+
+      .console-header {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--pink);
+      }
+
+      .dot:nth-child(2) {
+        background: var(--teal);
+      }
+
+      .dot:nth-child(3) {
+        background: var(--blue);
+      }
+
+      .node {
+        border: 1px solid var(--line);
+        background: var(--panel-2);
+        padding: 14px;
+        margin-bottom: 12px;
+      }
+
+      .node b {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .node span {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .section {
+        padding-top: 48px;
+      }
+
+      .section h2 {
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        margin: 0 0 18px;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        background: rgba(16, 21, 31, 0.82);
+        padding: 20px;
+      }
+
+      .card h3 {
+        margin: 0 0 10px;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .case {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .case .card:first-child {
+        background:
+          linear-gradient(rgba(8, 10, 15, 0.18), rgba(8, 10, 15, 0.9)),
+          url("../static/images/tianyi-ma-WiONHd_zYI4-unsplash.jpg") center / cover;
+        min-height: 380px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .repo-row {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+      }
+
+      .repo {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        padding: 14px;
+        min-height: 130px;
+      }
+
+      .repo b {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .repo span {
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      @media (max-width: 960px) {
+        .hero,
+        .grid-3,
+        .case,
+        .repo-row {
+          grid-template-columns: 1fr;
+        }
+
+        .links {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="nav">
+        <div class="identity">
+          <img src="https://gravatar.com/avatar/468788fd550c4128b0c250566ea8729f?s=128" alt="" />
+          <div>
+            <strong>Nicholas M.T. Elliott</strong>
+            <span>AI-enabled platform leadership</span>
+          </div>
+        </div>
+        <nav class="links" aria-label="Primary">
+          <a href="#">Production AI</a>
+          <a href="#">Platform Work</a>
+          <a href="#">Open Source</a>
+          <a href="#">Leadership</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="hero-text">
+          <span class="pill">Director / Head of Engineering candidate</span>
+          <h1>AI is useful when it reaches production.</h1>
+          <p>
+            I lead teams that turn complex operational data into reliable software platforms.
+            My current edge is the combination of enterprise delivery, production AI features,
+            and hands-on tooling for AI-assisted engineering.
+          </p>
+        </div>
+        <aside class="console">
+          <div class="console-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="node"><b>Product AI</b><span>Root Cause for GHX Fields and E-Luminate at Syngenta North America.</span></div>
+          <div class="node"><b>Report generation</b><span>LLM-backed report workflows for production client releases.</span></div>
+          <div class="node"><b>Developer AI</b><span>AI-assisted coding rules, senior developer workflows, hosted and local model experiments.</span></div>
+          <div class="node"><b>Open source</b><span>task-board, codex-task, local-llm, and codex-image-gen.</span></div>
+          <div class="node"><b>Platform foundation</b><span>AWS, observability, enterprise integrations, data pipelines, distributed systems.</span></div>
+        </aside>
+      </section>
+
+      <section class="section">
+        <h2>AI work, grounded in platform reality</h2>
+        <div class="grid-3">
+          <article class="card"><h3>Production product features</h3><p>AI analysis applied to agronomic and environmental data, surfacing concerns and mitigation paths for crop fields.</p></article>
+          <article class="card"><h3>Engineering workflow design</h3><p>Introduced AI-assisted development practices with rules, review expectations, and attention to team ergonomics.</p></article>
+          <article class="card"><h3>Local model investigation</h3><p>Explored Ollama, vLLM, privacy, cost, latency, and developer experience tradeoffs.</p></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Anchor case study</h2>
+        <div class="case">
+          <article class="card">
+            <span class="pill">Syngenta</span>
+            <h3>GHX Fields / E-Luminate / Cropwise</h3>
+            <p>Global seed recommendation, catalog, sales hierarchy, and field analysis systems.</p>
+          </article>
+          <article class="card">
+            <h3>What it proves</h3>
+            <p>
+              Global Fortune 500 scale, multi-region delivery, SAP and Salesforce integrations, AWS modernization,
+              observability, SOC 2 practices, and AI features in a real commercial platform.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Open-source signal</h2>
+        <div class="repo-row">
+          <div class="repo"><b>codex-task</b><span>AI coding-agent task delegation.</span></div>
+          <div class="repo"><b>local-llm</b><span>Local model exploration.</span></div>
+          <div class="repo"><b>codex-image-gen</b><span>Image generation workflow tooling.</span></div>
+          <div class="repo"><b>task-board</b><span>AI-assisted task board and workflow surface.</span></div>
+          <div class="repo"><b>pdf-render-service</b><span>Document generation platform utility.</span></div>
+          <div class="repo"><b>ts-openapi-gen</b><span>TypeScript OpenAPI generation.</span></div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

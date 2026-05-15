@@ -1,0 +1,346 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { syngentaArchitectureAreas, technologyEvidence } from '../../data/portfolio'
+
+const outcomes = [
+  'Supported seed recommendation, sales, catalog, and field-analysis workflows across global markets.',
+  'Helped evolve a regional sustainability platform into a strategic commercial platform ecosystem.',
+  'Modernized the stack from Azure/.NET Framework/Knockout toward AWS, .NET Core, Node.js, TypeScript, React, and Infrastructure-as-Code.',
+  'Integrated global enterprise systems including Salesforce, SAP, sales hierarchy abstractions, and internal product/catalog systems.',
+  'Introduced observability and operational practices suitable for SOC 2 audit expectations.',
+  'Led production AI delivery through Root Cause analysis for agronomic and environmental field patterns.',
+]
+
+const roleSignals = [
+  'Primary technical partner for long-running Global Fortune 500 client delivery.',
+  'Architecture and modernization strategy across cloud, services, integrations, data, observability, and UI.',
+  'Delivery leadership across product, engineering, client stakeholders, and globally distributed teams.',
+  'Mentorship and technical direction for teams moving from bespoke delivery into internal ownership.',
+]
+
+const timeline = [
+  ['2011', 'Regional sustainability and recommendation platform foundations.'],
+  ['2017+', 'Became central to North America Seeds digital recommendation workflows.'],
+  ['Modernization', 'Moved toward TypeScript/React, .NET Core, Node.js services, AWS, IaC, and observability.'],
+  ['AI', 'Root Cause used AI to proactively analyze field patterns and surface concerns plus mitigations.'],
+  ['Transition', 'Supported handoff and internal ownership as global teams absorbed more platform responsibility.'],
+]
+---
+
+<BaseLayout title="Nicholas M. T. Elliott | Global Agricultural Platform Case Study">
+  <article class="case-study">
+    <header class="case-hero">
+      <div>
+        <p class="eyebrow">Detailed case study</p>
+        <h2>Global Agricultural Recommendation Platform</h2>
+        <p>
+          A public-safe view into the E-Luminate / GHX Fields / Cropwise ecosystem work for Syngenta,
+          a Global Fortune 500 agribusiness. The engagement combined enterprise platform architecture,
+          cloud modernization, global integrations, product delivery, observability, and production AI.
+        </p>
+        <div class="button-row">
+          <a class="button" href="/ai">See the AI layer</a>
+          <a class="button-secondary" href="/portfolio">Back to portfolio</a>
+        </div>
+      </div>
+      <aside class="case-summary card">
+        <p class="eyebrow">Scope at a glance</p>
+        <dl>
+          <div><dt>Client context</dt><dd>Syngenta · Global Fortune 500 agribusiness</dd></div>
+          <div><dt>Domains</dt><dd>Seed recommendation, sales workflows, catalogs, field intelligence</dd></div>
+          <div><dt>Systems</dt><dd>Web apps, APIs, AWS, enterprise integrations, observability, AI analysis</dd></div>
+          <div><dt>My role</dt><dd>Primary technical partner, architect, delivery leader, mentor</dd></div>
+        </dl>
+      </aside>
+    </header>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">The business problem</p>
+        <h2>Commercial agriculture platforms carry regional complexity.</h2>
+        <p>
+          Recommendation and sales systems had to account for agronomic data, weather and environmental context,
+          product catalogs, territory rules, discounts, sales hierarchies, branded outputs, and different regional
+          operating models. A one-off app was not enough. The durable value was in platform abstractions that could
+          reduce repeated work while still respecting local market differences.
+        </p>
+      </div>
+    </section>
+
+    <section class="section architecture">
+      <div class="section-heading">
+        <p class="eyebrow">Architecture map</p>
+        <h2>The system had many moving parts.</h2>
+        <p>
+          This is intentionally described at category level. It captures the shape of the platform without exposing
+          confidential implementation details.
+        </p>
+      </div>
+      <div class="architecture-grid">
+        {
+          syngentaArchitectureAreas.map(area => (
+            <article class="architecture-card card">
+              <h3>{area.title}</h3>
+              <p>{area.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section role-impact">
+      <div class="section-heading">
+        <p class="eyebrow">My role</p>
+        <h2>Architecture and leadership across a long-running enterprise engagement.</h2>
+      </div>
+      <div class="role-grid">
+        {
+          roleSignals.map(signal => (
+            <article class="card">
+              <p>{signal}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Outcomes and signals</p>
+        <h2>Why this case matters for Director / Head of Engineering roles.</h2>
+      </div>
+      <ul class="outcome-list">
+        {outcomes.map(outcome => <li>{outcome}</li>)}
+      </ul>
+    </section>
+
+    <section class="section timeline-section">
+      <div class="section-heading">
+        <p class="eyebrow">Evolution</p>
+        <h2>From regional tool to global platform ecosystem.</h2>
+      </div>
+      <div class="timeline">
+        {
+          timeline.map(([label, body]) => (
+            <article>
+              <strong>{label}</strong>
+              <p>{body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Technology evidence</p>
+        <h2>Tools mattered because they supported operational outcomes.</h2>
+      </div>
+      <div class="tech-grid">
+        {
+          technologyEvidence.map(item => (
+            <article class="card">
+              <h3>{item.area}</h3>
+              <p class="tools">{item.tools}</p>
+              <p>{item.proof}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style lang="scss">
+  .case-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    padding-top: clamp(1rem, 3vw, 2rem);
+  }
+
+  .case-hero > div {
+    min-height: clamp(500px, 68vh, 720px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: clamp(1.35rem, 4vw, 3rem);
+    background:
+      linear-gradient(rgba(13, 16, 23, 0.2), rgba(13, 16, 23, 0.92)),
+      url('/images/generated/ag-platform-architecture.webp') center / cover;
+    box-shadow: var(--shadow);
+  }
+
+  .case-hero h2 {
+    max-width: 12ch;
+    margin: 0.7rem 0 1rem;
+    font-size: clamp(2.9rem, 6.8vw, 5.6rem);
+    line-height: 0.92;
+  }
+
+  .case-hero p {
+    max-width: 72ch;
+    color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%);
+    font-size: clamp(1rem, 1.7vw, 1.2rem);
+  }
+
+  .case-summary {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  dl {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 0 0;
+  }
+
+  dl div {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  dt {
+    color: var(--accent-warm);
+    font-weight: 800;
+  }
+
+  dd {
+    margin: 0.3rem 0 0;
+    color: var(--muted);
+  }
+
+  .section {
+    margin-top: clamp(2.2rem, 5vw, 4rem);
+  }
+
+  .architecture {
+    border-block: 1px solid var(--border);
+    padding-block: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .architecture-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .architecture-card {
+    min-height: 230px;
+  }
+
+  .architecture-card h3,
+  .role-grid h3,
+  .tech-grid h3 {
+    margin: 0 0 0.75rem;
+  }
+
+  .architecture-card p,
+  .role-grid p,
+  .tech-grid p {
+    color: var(--muted);
+  }
+
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .outcome-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .outcome-list li {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 1rem;
+    color: var(--muted);
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .timeline article {
+    padding: 1rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .timeline article:last-child {
+    border-right: 0;
+  }
+
+  .timeline strong {
+    color: var(--accent-warm);
+  }
+
+  .timeline p {
+    margin: 0.45rem 0 0;
+    color: var(--muted);
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .tools {
+    color: var(--accent-soft) !important;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 980px) {
+    .case-hero,
+    .architecture-grid,
+    .role-grid,
+    .tech-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .case-hero > div,
+    .case-summary {
+      grid-column: 1 / -1;
+    }
+
+    .timeline,
+    .outcome-list {
+      grid-template-columns: 1fr;
+    }
+
+    .timeline article {
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .case-hero,
+    .architecture-grid,
+    .role-grid,
+    .tech-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .case-hero h2 {
+      max-width: 12ch;
+      font-size: clamp(2.45rem, 15vw, 4rem);
+    }
+  }
+</style>

@@ -1,0 +1,341 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { openSourceRepos } from '../data/portfolio'
+
+const aiTracks = [
+  {
+    title: 'Production Product AI',
+    body: 'Led delivery of Root Cause capability for GHX Fields and E-Luminate at Syngenta North America, using AI to proactively analyze agronomic and environmental patterns and surface concerns plus mitigations for crop fields.',
+  },
+  {
+    title: 'AI-Powered Reports',
+    body: 'Built AI-assisted report-generation workflows for production client releases where narrative output needed to be grounded in operational data and reviewable business context.',
+  },
+  {
+    title: 'AI-Assisted Engineering',
+    body: 'Introduced pragmatic AI-assisted development practices at Skyward, especially for senior developers working with large systems, code review expectations, and repeatable delivery workflows.',
+  },
+  {
+    title: 'Local Model Investigation',
+    body: 'Explored hosted versus local models using tools such as Ollama and vLLM, with attention to privacy, latency, cost, workflow ergonomics, and operational fit.',
+  },
+]
+
+const principles = [
+  'AI should sharpen decisions, not hide uncertainty.',
+  'Generated output needs review paths, context boundaries, and observable failure modes.',
+  'Developer AI is most valuable when it improves flow without weakening engineering judgment.',
+  'Hosted and local models have different privacy, cost, and operations tradeoffs.',
+]
+---
+
+<BaseLayout title="Nicholas M. T. Elliott | AI Work">
+  <section class="ai-hero">
+    <div>
+      <p class="eyebrow">AI in production and engineering practice</p>
+      <h2>AI is useful when it reaches production.</h2>
+      <p>
+        My AI work is grounded in enterprise software delivery: real product capabilities, report generation,
+        AI-assisted engineering workflows, and local model investigation. The through-line is practical value,
+        reviewability, and technical judgment.
+      </p>
+      <div class="button-row">
+        <a class="button" href="/case-studies/global-ag-platform">See the platform context</a>
+        <a class="button-secondary" href="https://github.com/NicholasMTElliott" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </div>
+    <aside class="ai-console card">
+      <span class="console-dot"></span>
+      <span class="console-dot"></span>
+      <span class="console-dot"></span>
+      <dl>
+        <div>
+          <dt>product_ai</dt>
+          <dd>Root Cause for Syngenta North America</dd>
+        </div>
+        <div>
+          <dt>engineering_ai</dt>
+          <dd>AI-assisted coding workflows and team rules</dd>
+        </div>
+        <div>
+          <dt>local_models</dt>
+          <dd>Ollama, vLLM, privacy, cost, ergonomics</dd>
+        </div>
+        <div>
+          <dt>tooling</dt>
+          <dd>task-board, codex-task, local-llm, codex-image-gen</dd>
+        </div>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Work streams</p>
+      <h2>Four ways AI shows up in my work.</h2>
+    </div>
+    <div class="track-grid">
+      {
+        aiTracks.map(track => (
+          <article class="track card">
+            <h3>{track.title}</h3>
+            <p>{track.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section production-ai">
+    <div class="section-heading">
+      <p class="eyebrow">Production AI example</p>
+      <h2>Root Cause inside a Global Fortune 500 platform context.</h2>
+      <p>
+        The value was not a chatbot bolted onto a product. It was AI analysis embedded into field and agronomic
+        workflows, where users needed earlier visibility into patterns, concerns, and possible mitigations.
+      </p>
+    </div>
+    <div class="system-flow">
+      <article><strong>Operational Data</strong><span>field, weather, crop, agronomic, and environmental signals</span></article>
+      <article><strong>Analysis Layer</strong><span>AI-assisted pattern interpretation and concern surfacing</span></article>
+      <article><strong>Human Decision</strong><span>mitigations, field review, recommendation context, and follow-up</span></article>
+    </div>
+  </section>
+
+  <section class="section principles">
+    <div class="section-heading">
+      <p class="eyebrow">Operating principles</p>
+      <h2>How I think about AI adoption.</h2>
+    </div>
+    <ol>
+      {principles.map(principle => <li>{principle}</li>)}
+    </ol>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Open-source tooling</p>
+      <h2>Small tools that show the shape of the work.</h2>
+      <p>
+        These are not meant to be a second resume. They show how I think about AI workflow surfaces,
+        delegation, local models, and practical developer tooling.
+      </p>
+    </div>
+    <div class="repo-grid">
+      {
+        openSourceRepos.map(repo => (
+          <article class="repo card">
+            <h3><a href={repo.href} target="_blank" rel="noreferrer">{repo.name}</a></h3>
+            <p>{repo.summary}</p>
+            <span>{repo.signal}</span>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .ai-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.75fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    align-items: stretch;
+    padding-top: clamp(1rem, 3vw, 2rem);
+  }
+
+  .ai-hero > div {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    min-height: clamp(430px, 62vh, 620px);
+    padding: clamp(1.35rem, 4vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background:
+      linear-gradient(rgba(13, 16, 23, 0.28), rgba(13, 16, 23, 0.92)),
+      url('/images/generated/ai-platform-hero.webp') center / cover;
+    box-shadow: var(--shadow);
+  }
+
+  .ai-hero h2 {
+    max-width: 11ch;
+    margin: 0.7rem 0 1rem;
+    font-size: clamp(3rem, 7vw, 5.7rem);
+    line-height: 0.92;
+  }
+
+  .ai-hero p {
+    max-width: 72ch;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.7vw, 1.22rem);
+  }
+
+  .ai-console {
+    align-self: stretch;
+    display: block;
+    padding-top: 1.1rem;
+  }
+
+  .console-dot {
+    display: inline-block;
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    margin-right: 0.35rem;
+    background: var(--accent-soft);
+  }
+
+  .console-dot:nth-child(2) {
+    background: var(--accent);
+  }
+
+  .console-dot:nth-child(3) {
+    background: var(--accent-warm);
+  }
+
+  dl {
+    display: grid;
+    gap: 1rem;
+    margin: 1.3rem 0 0;
+  }
+
+  dl div {
+    border: 1px solid var(--border);
+    background: var(--surface-alt);
+    padding: 1rem;
+  }
+
+  dt {
+    color: var(--accent-warm);
+    font-family: Consolas, Monaco, monospace;
+    font-size: 0.86rem;
+  }
+
+  dd {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+  }
+
+  .section {
+    margin-top: clamp(2.2rem, 5vw, 4rem);
+  }
+
+  .track-grid,
+  .repo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .track,
+  .repo {
+    min-height: 230px;
+  }
+
+  .track h3,
+  .repo h3 {
+    margin: 0 0 0.8rem;
+  }
+
+  .track p,
+  .repo p,
+  .repo span {
+    color: var(--muted);
+  }
+
+  .repo span {
+    display: block;
+    margin-top: 0.85rem;
+    font-size: 0.86rem;
+  }
+
+  .production-ai {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: clamp(1.2rem, 3vw, 2rem);
+    background:
+      linear-gradient(rgba(13, 16, 23, 0.35), rgba(13, 16, 23, 0.92)),
+      url('/images/generated/ai-platform-hero.webp') center / cover;
+  }
+
+  .system-flow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.2rem;
+  }
+
+  .system-flow article {
+    border: 1px solid color-mix(in srgb, var(--border) 70%, var(--accent) 30%);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    padding: 1rem;
+  }
+
+  .system-flow strong,
+  .system-flow span {
+    display: block;
+  }
+
+  .system-flow span {
+    margin-top: 0.35rem;
+    color: var(--muted);
+  }
+
+  .principles ol {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    counter-reset: principle;
+  }
+
+  .principles li {
+    counter-increment: principle;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 1rem;
+    color: var(--muted);
+  }
+
+  .principles li::before {
+    content: counter(principle, decimal-leading-zero);
+    display: block;
+    color: var(--accent-warm);
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+  }
+
+  @media (max-width: 980px) {
+    .ai-hero,
+    .track-grid,
+    .repo-grid,
+    .system-flow,
+    .principles ol {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .ai-hero > div,
+    .ai-console {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ai-hero,
+    .track-grid,
+    .repo-grid,
+    .system-flow,
+    .principles ol {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-hero h2 {
+      max-width: 12ch;
+      font-size: clamp(2.5rem, 15vw, 4rem);
+    }
+  }
+</style>

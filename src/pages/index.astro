@@ -1,193 +1,443 @@
 ---
-import { getCollection, render } from 'astro:content'
+import { getCollection } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import EmailObfuscated from '../components/EmailObfuscated.astro'
+import SignalGlyph from '../components/SignalGlyph.astro'
+import { openSourceRepos, proofMetrics, valuePillars } from '../data/portfolio'
 
 const profileEntry = (await getCollection('profile'))[0]
-const skillsEntry = (await getCollection('skills'))[0]
 const contactEntry = (await getCollection('contact'))[0]
-const roleEntries = await getCollection('role')
-const roleTitleByKey = roleEntries.reduce<Record<string, string>>((acc, role) => {
-  acc[role.data.key] = role.data.title
-  return acc
-}, {})
 const defaultAvatarUrl = 'https://gravatar.com/avatar/468788fd550c4128b0c250566ea8729f?s=160'
 const displayEmail = contactEntry ? `${contactEntry.data.emailLocal}@${contactEntry.data.emailDomain}` : null
 
-const featuredProjects = (await getCollection('project'))
-  .filter(project => project.data.featured)
-  .sort((a, b) => {
-    const aTime = a.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
-    const bTime = b.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
-
-    return bTime - aTime
-  })
-
-if (!profileEntry || !skillsEntry) {
-  throw new Error('Required profile or skills content is missing.')
+if (!profileEntry) {
+  throw new Error('Required profile content is missing.')
 }
 
-const { Content: ProfileSummary } = await render(profileEntry)
+const platformSignals = [
+  ['Syngenta', 'Global Fortune 500 platform engagement'],
+  ['AWS', 'CDK, Fargate, Lambda, VPC, API Gateway'],
+  ['Global Teams', 'US, India, Brazil, Egypt, Europe'],
+  ['SOC 2', 'Audit-ready operational practices'],
+  ['AI Systems', 'Product features and engineering workflows'],
+]
 ---
 
-<BaseLayout title="Nicholas M. T. Elliott | Home">
-  <section class="hero card">
-    <img class="hero__avatar" src={profileEntry.data.avatarUrl ?? defaultAvatarUrl} alt={profileEntry.data.fullName} />
-    <h2>{profileEntry.data.fullName}</h2>
-    <p class="hero__role">{profileEntry.data.headline}</p>
-    <p class="hero__org">{profileEntry.data.organization} · {profileEntry.data.location}</p>
-    <div class="hero__summary">
-      <ProfileSummary />
-    </div>
-    <p class="hero__links">
-      <a href={profileEntry.data.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-      <span>·</span>
-      <a href={profileEntry.data.github} target="_blank" rel="noreferrer">GitHub</a>
-    </p>
-    {displayEmail && (
-      <p class="hero__email">
-        <EmailObfuscated displayEmail={displayEmail} aliasTag="bot" />
+<BaseLayout title="Nicholas M. T. Elliott | Enterprise Platform Leadership">
+  <section class="hero">
+    <div class="hero__content">
+      <p class="eyebrow">Enterprise platform leadership</p>
+      <h2>Engineering leadership for platforms that survive scale.</h2>
+      <p class="hero__lead">
+        Director-level engineering leader, founder, architect, and hands-on technical partner for Global Fortune
+        500-scale enterprise delivery. I build durable software platforms and the teams that keep them useful.
       </p>
-    )}
+      <div class="button-row">
+        <a class="button" href="/case-studies/global-ag-platform">Read the Syngenta case study</a>
+        <a class="button-secondary" href="/ai">Explore AI work</a>
+        <a class="button-secondary" href={profileEntry.data.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+      {displayEmail && (
+        <div class="hero__email">
+          <EmailObfuscated displayEmail={displayEmail} aliasTag="bot" />
+        </div>
+      )}
+    </div>
+
+    <aside class="proof card" aria-label="Career proof points">
+      <img class="proof__avatar" src={profileEntry.data.avatarUrl ?? defaultAvatarUrl} alt={profileEntry.data.fullName} />
+      <div>
+        <p class="eyebrow">Proof points</p>
+        <h3>Nicholas M.T. Elliott</h3>
+        <p>{profileEntry.data.headline} · {profileEntry.data.location}</p>
+      </div>
+      <ul>
+        {
+          proofMetrics.map(metric => (
+            <li>
+              <strong>{metric.value}</strong>
+              <span>{metric.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
   </section>
 
-  <section class="skills card">
-    <h3>Core Skills</h3>
-    <div class="skills__groups">
+  <section class="signal-strip" aria-label="Platform signals">
+    {
+      platformSignals.map(([label, detail]) => (
+        <article>
+          <strong>{label}</strong>
+          <span>{detail}</span>
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="eyebrow">How I create value</p>
+      <h2>Leadership, architecture, AI, and hands-on judgment in one operating model.</h2>
+    </div>
+    <div class="pillar-grid">
       {
-        skillsEntry.data.groups.map(group => (
-          <article>
-            <h4>{group.name}</h4>
-            <ul>
-              {group.items.map(item => <li>{item}</li>)}
-            </ul>
+        valuePillars.map(pillar => (
+          <article class="pillar card">
+            <SignalGlyph type={pillar.icon} label={`${pillar.title} signal glyph`} />
+            <h3>{pillar.title}</h3>
+            <p>{pillar.body}</p>
           </article>
         ))
       }
     </div>
   </section>
 
-  {featuredProjects.length > 0 && (
-    <section class="projects card">
-      <h3>Featured Projects</h3>
-      <ul>
-        {
-          featuredProjects.map(project => (
-            <li>
-              <strong>{project.data.name}</strong>
-              {roleTitleByKey[project.data.roleKey] && <span> · {roleTitleByKey[project.data.roleKey]}</span>}
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-  )}
+  <section class="section featured-case">
+    <div class="case-visual card">
+      <p class="eyebrow">Featured case study</p>
+      <h2>Global Agricultural Recommendation Platform</h2>
+      <p>Syngenta Global Fortune 500 engagement across web apps, enterprise integrations, AWS modernization, observability, and production AI.</p>
+    </div>
+    <div class="case-copy">
+      <div class="section-heading">
+        <p class="eyebrow">Syngenta · GHX Fields / E-Luminate / Cropwise ecosystem</p>
+        <h2>Long-running enterprise platform work with real commercial impact.</h2>
+        <p>
+          I served as a primary technical partner for systems supporting seed recommendation, catalog, sales hierarchy,
+          and field-analysis workflows across global markets. The platform evolved from .NET Framework, Knockout,
+          SQL Server, and Azure into TypeScript/React, .NET Core, Node.js services, AWS infrastructure, and
+          observability-backed operations.
+        </p>
+      </div>
+      <div class="case-points">
+        <article>
+          <span class="eyebrow">AI</span>
+          <p>Root Cause analyzed agronomic and environmental patterns to surface field concerns and mitigations.</p>
+        </article>
+        <article>
+          <span class="eyebrow">Enterprise</span>
+          <p>Salesforce, SAP, sales hierarchy abstraction, internal systems, and globally varied commercial workflows.</p>
+        </article>
+        <article>
+          <span class="eyebrow">Operations</span>
+          <p>AWS CDK, Fargate, Lambda, VPC segmentation, OpenTelemetry, Grafana, Loki, Tempo, Prometheus/Mimir.</p>
+        </article>
+      </div>
+      <a class="button" href="/case-studies/global-ag-platform">Open detailed case study</a>
+    </div>
+  </section>
+
+  <section class="section ai-preview">
+    <div class="section-heading">
+      <p class="eyebrow">AI in production and practice</p>
+      <h2>Not AI theater. Product AI, developer workflows, and local model investigation.</h2>
+      <p>
+        My AI work spans production client features, report-generation workflows, AI-assisted engineering practices,
+        local LLM evaluation, and open-source tooling for agentic workflows.
+      </p>
+    </div>
+    <div class="button-row">
+      <a class="button" href="/ai">View AI work</a>
+      <a class="button-secondary" href="/portfolio">Browse full portfolio</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Open-source signal</p>
+      <h2>Practical AI and platform tooling.</h2>
+    </div>
+    <div class="repo-grid">
+      {
+        openSourceRepos.map(repo => (
+          <article class="repo card">
+            <h3><a href={repo.href} target="_blank" rel="noreferrer">{repo.name}</a></h3>
+            <p>{repo.summary}</p>
+            <span>{repo.signal}</span>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 </BaseLayout>
 
 <style lang="scss">
   .hero {
-    min-height: clamp(360px, 62vh, 720px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(310px, 0.82fr);
+    gap: clamp(1rem, 3vw, 2.4rem);
+    align-items: stretch;
+    min-height: clamp(560px, 72vh, 760px);
+    padding: clamp(1.1rem, 3vw, 2.25rem) 0 0;
+  }
+
+  .hero__content {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    text-align: center;
-    gap: 0.6rem;
-    background-image: linear-gradient(rgba(13, 16, 23, 0.55), rgba(13, 16, 23, 0.9)),
-      url('/images/tianyi-ma-WiONHd_zYI4-unsplash.jpg');
+    min-height: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: clamp(1.35rem, 4vw, 3.2rem);
+    background-image: linear-gradient(rgba(13, 16, 23, 0.1), rgba(13, 16, 23, 0.9)),
+      url('/images/generated/enterprise-hero.webp');
     background-size: cover;
     background-position: center;
-    padding-inline: clamp(0.9rem, 2.4vw, 2rem);
+    box-shadow: var(--shadow);
   }
 
-  .hero__avatar {
-    width: clamp(72px, 10vw, 92px);
-    height: clamp(72px, 10vw, 92px);
-    border-radius: 50%;
-    border: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  .hero h2 {
+    max-width: 11ch;
+    margin: 0.7rem 0 1rem;
+    font-size: clamp(3rem, 7vw, 5.9rem);
+    line-height: 0.92;
   }
 
-  h2 {
-    margin: 0;
-    font-size: clamp(1.75rem, 4vw, 2.4rem);
-  }
-
-  .hero__role {
-    margin: 0;
-    color: var(--muted);
-  }
-
-  .hero__org {
-    margin: 0;
-  }
-
-  .hero__summary {
-    max-width: 62ch;
-  }
-
-  .hero__links {
-    margin: 0.5rem 0 0;
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .hero__links a {
-    text-decoration: none;
-  }
-
-  .hero__summary :global(p) {
-    margin: 0.25rem 0 0;
+  .hero__lead {
+    max-width: 68ch;
+    color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
+    font-size: clamp(1.02rem, 1.8vw, 1.26rem);
+    margin: 0 0 1.3rem;
   }
 
   .hero__email {
-    margin: 0.2rem 0 0;
+    margin-top: 1rem;
   }
 
-  .skills,
-  .projects {
-    margin-top: clamp(0.9rem, 1.8vw, 1.3rem);
-  }
-
-  .skills__groups {
+  .proof {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    align-content: start;
+    gap: 1.1rem;
+  }
+
+  .proof__avatar {
+    width: clamp(74px, 8vw, 96px);
+    height: clamp(74px, 8vw, 96px);
+    border-radius: 50%;
+    border: 2px solid color-mix(in srgb, var(--accent) 48%, transparent);
+  }
+
+  .proof h3 {
+    margin: 0.35rem 0 0;
+    font-size: clamp(1.35rem, 2vw, 1.7rem);
+  }
+
+  .proof p {
+    margin: 0.25rem 0 0;
+    color: var(--muted);
+  }
+
+  .proof ul {
+    display: grid;
+    gap: 0.85rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .proof li {
+    display: grid;
+    grid-template-columns: minmax(74px, 0.3fr) 1fr;
+    gap: 0.9rem;
+    border-top: 1px solid var(--border);
+    padding-top: 0.85rem;
+  }
+
+  .proof strong {
+    color: var(--accent-warm);
+    font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+    line-height: 1;
+  }
+
+  .proof span {
+    color: var(--muted);
+  }
+
+  .signal-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: clamp(1rem, 2vw, 1.4rem);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: color-mix(in srgb, var(--surface) 78%, #000 22%);
+  }
+
+  .signal-strip article {
+    padding: 1rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .signal-strip article:last-child {
+    border-right: 0;
+  }
+
+  .signal-strip strong,
+  .signal-strip span {
+    display: block;
+  }
+
+  .signal-strip span {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-top: 0.2rem;
+  }
+
+  .section {
+    margin-top: clamp(2.2rem, 5vw, 4.2rem);
+  }
+
+  .pillar-grid,
+  .repo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
   }
 
-  .skills h3,
-  .projects h3,
-  .skills h4 {
-    margin-top: 0;
+  .pillar,
+  .repo {
+    min-height: 210px;
   }
 
-  .projects ul,
-  .skills ul {
+  .pillar {
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
+    transition:
+      border-color 140ms ease,
+      background-color 140ms ease,
+      transform 140ms ease;
+  }
+
+  .pillar::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 45%, transparent), transparent);
+    opacity: 0;
+    transition: opacity 140ms ease;
+  }
+
+  .pillar:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--border) 52%, var(--accent) 48%);
+    background: color-mix(in srgb, var(--surface) 88%, var(--surface-alt) 12%);
+  }
+
+  .pillar:hover::after {
+    opacity: 1;
+  }
+
+  .pillar h3,
+  .repo h3 {
+    margin: 0 0 0.75rem;
+  }
+
+  .pillar p,
+  .repo p,
+  .repo span {
+    color: var(--muted);
+  }
+
+  .repo span {
+    display: block;
+    margin-top: 0.85rem;
+    font-size: 0.86rem;
+  }
+
+  .featured-case {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+    gap: clamp(1rem, 3vw, 2rem);
+  }
+
+  .case-visual {
+    min-height: 410px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background:
+      linear-gradient(rgba(13, 16, 23, 0.08), rgba(13, 16, 23, 0.88)),
+      url('/images/generated/ag-platform-architecture.webp') center / cover;
+  }
+
+  .case-visual h2 {
+    margin: 0.5rem 0;
+    font-size: clamp(1.8rem, 3.6vw, 3rem);
+  }
+
+  .case-visual p {
     margin: 0;
-    padding-left: 1.1rem;
+    color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
   }
 
-  @media (max-width: 700px) {
-    .hero {
-      min-height: 440px;
-      align-items: flex-start;
-      text-align: left;
-      justify-content: flex-end;
-      padding-bottom: 1.2rem;
+  .case-copy {
+    align-self: center;
+  }
+
+  .case-points {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.25rem 0;
+  }
+
+  .case-points article {
+    border-top: 1px solid var(--border);
+    padding-top: 0.85rem;
+  }
+
+  .case-points p {
+    margin: 0.3rem 0 0;
+    color: var(--muted);
+  }
+
+  .ai-preview {
+    border-block: 1px solid var(--border);
+    padding-block: clamp(1.5rem, 4vw, 2.8rem);
+  }
+
+  @media (max-width: 980px) {
+    .hero,
+    .featured-case {
+      grid-template-columns: 1fr;
+      min-height: 0;
     }
 
-    .hero__summary,
-    .hero__links {
-      justify-content: flex-start;
+    .signal-strip,
+    .pillar-grid,
+    .repo-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .hero__links span {
-      display: none;
+    .signal-strip article:nth-child(2n) {
+      border-right: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero h2 {
+      max-width: 12ch;
+      font-size: clamp(2.55rem, 16vw, 4rem);
     }
 
-    .hero__email {
-      align-self: stretch;
+    .signal-strip,
+    .pillar-grid,
+    .repo-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .signal-strip article {
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .signal-strip article:last-child {
+      border-bottom: 0;
     }
   }
 </style>
