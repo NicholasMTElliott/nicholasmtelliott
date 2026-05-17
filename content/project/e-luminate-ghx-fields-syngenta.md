@@ -3,7 +3,6 @@ name: E-Luminate / GHX Fields — Syngenta
 key: e-luminate-ghx-fields-syngenta
 roleKey: skyward-managing-director-president-cto
 startDate: 2011-01-01T00:00:00.000Z
-endDate: 2026-12-01T00:00:00.000Z
 skills:
   - Platform Architecture
   - Microservices

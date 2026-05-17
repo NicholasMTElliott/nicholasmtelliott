@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content'
-import BaseLayout from '../layouts/BaseLayout.astro'
-import EmailObfuscated from '../components/EmailObfuscated.astro'
-import SignalGlyph from '../components/SignalGlyph.astro'
-import { proofMetrics, valuePillars } from '../data/portfolio'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import EmailObfuscated from '../../components/EmailObfuscated.astro'
+import SignalGlyph from '../../components/SignalGlyph.astro'
+import { proofMetrics, valuePillars } from '../../data/portfolio'
 
 const profileEntry = (await getCollection('profile'))[0]
 const contactEntry = (await getCollection('contact'))[0]
@@ -15,29 +15,31 @@ if (!profileEntry) {
 }
 
 const platformSignals = [
-  ['Syngenta', 'Enterprise platform delivery'],
-  ['AWS', 'CDK, Fargate, Lambda, VPC, API Gateway'],
-  ['Global Teams', 'US, India, Brazil, Egypt, Europe'],
-  ['SOC 2', 'Audit-ready operational practices'],
-  ['AI Systems', 'Production features and engineering workflows'],
+  ['30-person org', 'Built from founder-led execution'],
+  ['$3.4M revenue', 'Peak annual Skyward revenue'],
+  ['Global teams', 'US, India, Brazil, Egypt, Europe'],
+  ['Enterprise delivery', 'Syngenta-scale platform work'],
+  ['Operational trust', 'SOC 2-ready practices and observability'],
 ]
 ---
 
 <BaseLayout
-  title="Nicholas M. T. Elliott | Engineering Management and Platform Leadership"
-  description="Engineering leader with founder, director, and CTO experience building teams, managing delivery, modernizing platforms, and leading enterprise work for Syngenta-scale systems."
+  title="Nicholas M. T. Elliott | Engineering Management"
+  description="Engineering manager and director-level leader focused on hiring, delivery accountability, stakeholder trust, and durable platform execution."
+  canonicalPath="/"
 >
   <section class="hero">
     <div class="hero__content">
-      <p class="eyebrow">Engineering management and platform leadership</p>
-      <h1>Building teams that ship durable systems.</h1>
+      <p class="eyebrow">Engineering manager and delivery leader</p>
+      <h1>Teams, delivery, and technical judgment.</h1>
       <p class="hero__lead">
-        Director-level engineering leader, founder, architect, and hands-on technical partner. I build accountable
-        teams, manage complex delivery, and keep architecture decisions tied to business outcomes.
+        I help engineering organizations turn ambiguous, high-stakes work into accountable delivery. My background
+        combines team building, stakeholder management, platform modernization, and enough technical depth to earn trust
+        with senior engineers.
       </p>
       <div class="button-row">
-        <a class="button" href="/case-studies/global-ag-platform">Read the enterprise case study</a>
-        <a class="button-secondary" href="/contact/leadership/control/">Start a leadership conversation</a>
+        <a class="button" href="/contact/leadership/em-home/">Start a leadership conversation</a>
+        <a class="button-secondary" href="/portfolio">Review delivery history</a>
         <a class="button-secondary" href={profileEntry.data.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
       </div>
       {displayEmail && (
@@ -50,7 +52,7 @@ const platformSignals = [
     <aside class="proof card" aria-label="Career proof points">
       <img class="proof__avatar" src={profileEntry.data.avatarUrl ?? defaultAvatarUrl} alt={profileEntry.data.fullName} />
       <div>
-        <p class="eyebrow">Proof points</p>
+        <p class="eyebrow">Manager signal</p>
         <h3>Nicholas M.T. Elliott</h3>
         <p>{profileEntry.data.headline} · {profileEntry.data.location}</p>
       </div>
@@ -67,7 +69,7 @@ const platformSignals = [
     </aside>
   </section>
 
-  <section class="signal-strip" aria-label="Platform signals">
+  <section class="signal-strip" aria-label="Engineering management signals">
     {
       platformSignals.map(([label, detail]) => (
         <article>
@@ -80,8 +82,8 @@ const platformSignals = [
 
   <section class="section">
     <div class="section-heading">
-      <p class="eyebrow">How I create value</p>
-      <h2>People leadership, delivery accountability, and technical judgment in one operating model.</h2>
+      <p class="eyebrow">Operating model</p>
+      <h2>Clear ownership, credible technical guidance, and disciplined delivery.</h2>
     </div>
     <div class="pillar-grid">
       {
@@ -98,54 +100,37 @@ const platformSignals = [
 
   <section class="section featured-case">
     <div class="case-visual card">
-      <p class="eyebrow">Featured case study</p>
-      <h2>Global Agricultural Platforms</h2>
-      <p>Long-running enterprise work across web apps, integrations, AWS modernization, observability, and production AI.</p>
+      <p class="eyebrow">Featured proof</p>
+      <h2>Enterprise Platform Delivery</h2>
+      <p>Long-running work where people leadership, stakeholder alignment, architecture, and operations had to hold together.</p>
     </div>
     <div class="case-copy">
       <div class="section-heading">
         <p class="eyebrow">Syngenta · GHX Fields / E-Luminate / Cropwise ecosystem</p>
-        <h2>Long-running enterprise work with delivery and operating complexity.</h2>
+        <h2>Leadership through complexity, not just architecture diagrams.</h2>
         <p>
-          I served as a primary technical partner for systems supporting seed recommendation, catalog, sales hierarchy,
-          and field-analysis workflows across global markets. The platform evolved from .NET Framework, Knockout,
-          SQL Server, and Azure into TypeScript/React, .NET Core, Node.js services, AWS infrastructure, and
-          observability-backed operations.
+          I coordinated client stakeholders and distributed engineering groups while guiding modernization across web
+          apps, integrations, AWS infrastructure, observability, and product AI. The practical value was making a
+          complex platform operable, explainable, and transferable to internal ownership.
         </p>
       </div>
       <div class="case-points">
         <article>
-          <span class="eyebrow">Leadership</span>
-          <p>Coordinated client stakeholders and distributed engineering groups through multi-year modernization work.</p>
+          <span class="eyebrow">Team</span>
+          <p>Scaled from solo execution to multi-team delivery with mentorship, ownership, and low turnover.</p>
         </article>
         <article>
-          <span class="eyebrow">Enterprise</span>
-          <p>Salesforce, SAP, sales hierarchy abstraction, internal systems, and globally varied commercial workflows.</p>
+          <span class="eyebrow">Delivery</span>
+          <p>Managed long-running stakeholder expectations across product, client, and globally distributed engineering groups.</p>
         </article>
         <article>
-          <span class="eyebrow">Operations</span>
-          <p>AWS CDK, Fargate, Lambda, VPC segmentation, OpenTelemetry, Grafana, Loki, Tempo, Prometheus/Mimir.</p>
+          <span class="eyebrow">Systems</span>
+          <p>Kept architecture decisions connected to reliability, audit readiness, and handoff to internal teams.</p>
         </article>
       </div>
       <a class="button" href="/case-studies/global-ag-platform">Open detailed case study</a>
     </div>
   </section>
-
-  <section class="section ai-preview">
-    <div class="section-heading">
-      <p class="eyebrow">AI in production and practice</p>
-      <h2>Practical AI work, grounded in delivery discipline.</h2>
-      <p>
-        My AI work spans production client features, report-generation workflows, and AI-assisted engineering practices
-        with review paths, operational context, and technical accountability.
-      </p>
-    </div>
-    <div class="button-row">
-      <a class="button" href="/ai">View AI work</a>
-      <a class="button-secondary" href="/portfolio">Browse full portfolio</a>
-    </div>
-  </section>
-
 </BaseLayout>
 
 <style lang="scss">
@@ -283,9 +268,6 @@ const platformSignals = [
 
   .pillar {
     min-height: 210px;
-  }
-
-  .pillar {
     display: grid;
     align-content: start;
     gap: 0.75rem;
@@ -369,11 +351,6 @@ const platformSignals = [
   .case-points p {
     margin: 0.3rem 0 0;
     color: var(--muted);
-  }
-
-  .ai-preview {
-    border-block: 1px solid var(--border);
-    padding-block: clamp(1.5rem, 4vw, 2.8rem);
   }
 
   @media (max-width: 980px) {

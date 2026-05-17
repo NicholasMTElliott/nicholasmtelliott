@@ -20,22 +20,22 @@ export const proofMetrics = [
 export const valuePillars = [
   {
     title: 'Lead Teams',
-    body: 'Hire, mentor, structure, and retain engineering teams that can handle ambiguous enterprise delivery without losing the human center.',
+    body: 'Hire, mentor, structure, and retain engineering teams that can handle ambiguous delivery while keeping clear ownership and humane standards.',
     icon: 'teams',
   },
   {
     title: 'Modernize Platforms',
-    body: 'Move legacy systems toward cloud-native, observable, secure, service-oriented foundations that can evolve for years.',
+    body: 'Move legacy systems toward cloud-native, observable, secure foundations without letting architecture drift away from delivery reality.',
     icon: 'platforms',
   },
   {
     title: 'Ship AI Responsibly',
-    body: 'Apply AI to real product and engineering workflows with attention to reliability, privacy, ergonomics, and business value.',
+    body: 'Apply AI where it improves product or engineering outcomes, with review paths, privacy boundaries, and operational ownership.',
     icon: 'ai',
   },
   {
     title: 'Earn Technical Trust',
-    body: 'Go deep with senior engineers across data, distributed systems, mobile, geospatial, performance, and platform internals.',
+    body: 'Stay technical enough to guide senior engineers, evaluate tradeoffs, and make hard calls without becoming the delivery bottleneck.',
     icon: 'trust',
   },
 ]

@@ -101,7 +101,7 @@ const renderedCompanyEntries = await Promise.all(
 )
 
 const formatMonthYear = (date: Date) =>
-  `${date.toLocaleString('en-US', { month: 'short' })} ${date.getFullYear()}`
+  `${date.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' })} ${date.getUTCFullYear()}`
 
 const formatPeriod = (startDate: Date, endDate?: Date) => {
   const start = formatMonthYear(startDate)
@@ -111,8 +111,20 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
 }
 ---
 
-<BaseLayout title="Nicholas M. T. Elliott | Portfolio">
+<BaseLayout
+  title="Nicholas M. T. Elliott | Portfolio"
+  description="Career timeline and project portfolio for Nicholas M.T. Elliott, focused on engineering leadership, platform modernization, enterprise delivery, and AI-enabled systems."
+>
   <section class="portfolio">
+    <header class="portfolio__header">
+      <p class="eyebrow">Portfolio</p>
+      <h1>Engineering leadership through delivery evidence.</h1>
+      <p>
+        A timeline of organizations, roles, and projects where team leadership, stakeholder coordination,
+        architecture, and operational responsibility came together.
+      </p>
+    </header>
+
     <aside class="card timeline">
       <h2>Experience Timeline</h2>
       <ul>
@@ -144,10 +156,17 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
                 <div class="role-list">
                   {
                     renderedRoles.map(({ role, RoleContent, renderedProjects }) => (
-                      <>
-                      
-                        <h4>{role.data.title}</h4>
                       <article class="role-item">
+                        <header class="role-heading">
+                          <h4>{role.data.title}</h4>
+                          <p class="role-period">
+                            {formatPeriod(role.data.startDate, role.data.endDate)}
+                            {role.data.employmentType && ` · ${role.data.employmentType}`}
+                          </p>
+                        </header>
+                        <div class="role-body">
+                          <RoleContent />
+                        </div>
                         {renderedProjects.length > 0 && (
                           <section class="projects">
                             <h5>Projects</h5>
@@ -169,7 +188,6 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
                           </section>
                         )}
                       </article>
-                      </>
                     ))
                   }
                 </div>
@@ -188,6 +206,23 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
     grid-template-columns: minmax(220px, 280px) 1fr;
     gap: clamp(0.9rem, 2vw, 1.35rem);
     align-items: start;
+  }
+
+  .portfolio__header {
+    grid-column: 1 / -1;
+    max-width: 860px;
+  }
+
+  .portfolio__header h1 {
+    margin: 0.55rem 0 0;
+    font-size: clamp(2.15rem, 5vw, 4.25rem);
+    line-height: 0.98;
+  }
+
+  .portfolio__header p:last-child {
+    margin: 0.9rem 0 0;
+    color: var(--muted);
+    max-width: 72ch;
   }
 
   .timeline {
@@ -281,6 +316,10 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
     padding: 0.85rem;
   }
 
+  .role-heading {
+    margin-bottom: 0.7rem;
+  }
+
   .role-period {
     margin: 0.25rem 0 0;
     color: var(--muted);
@@ -288,7 +327,7 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
   }
 
   .role-body :global(p:first-child) {
-    margin-top: 0.6rem;
+    margin-top: 0;
   }
 
   .role-body :global(p:last-child) {

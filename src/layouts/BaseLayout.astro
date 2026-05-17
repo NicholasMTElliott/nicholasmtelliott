@@ -1,17 +1,26 @@
 ---
 interface Props {
   title?: string
+  description?: string
+  canonicalPath?: string
+  ogType?: string
 }
 
-const { title = 'Nicholas M. T. Elliott' } = Astro.props
+const {
+  title = 'Nicholas M. T. Elliott',
+  description = 'Nicholas M.T. Elliott is an engineering leader focused on team building, delivery accountability, platform architecture, and production AI.',
+  canonicalPath,
+  ogType = 'website',
+} = Astro.props
 const currentPath = Astro.url.pathname
+const canonicalUrl = new URL(canonicalPath ?? currentPath, 'https://nicholasmtelliott.com').toString()
 
 const nav = [
   { href: '/', label: 'Home' },
   { href: '/case-studies/global-ag-platform', label: 'Case Study' },
   { href: '/ai', label: 'AI' },
   { href: '/portfolio', label: 'Portfolio' },
-  { href: '/about', label: 'About' },
+  { href: '/about', label: 'Leadership' },
 ]
 
 const isActive = (href: string) => {
@@ -29,6 +38,12 @@ const isActive = (href: string) => {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
     <link rel="icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://gravatar.com" />
   </head>
@@ -42,7 +57,7 @@ const isActive = (href: string) => {
             alt="Nicholas Elliott avatar"
           />
           <div>
-            <h1>Nicholas M.T. Elliott</h1>
+            <p class="identity__name">Nicholas M.T. Elliott</p>
             <p>Director of Engineering · Platform Architecture · AI in Production</p>
           </div>
         </a>

@@ -94,12 +94,14 @@ li {
   min-width: 0;
 }
 
-.identity h1 {
+.identity__name {
   margin: 0;
   font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
-.identity p {
+.identity p:not(.identity__name) {
   margin: 0.25rem 0 0;
   font-size: 0.85rem;
   color: var(--muted);
@@ -266,11 +268,11 @@ li {
     width: 100%;
   }
 
-  .identity h1 {
+  .identity__name {
     font-size: 0.98rem;
   }
 
-  .identity p {
+  .identity p:not(.identity__name) {
     font-size: 0.8rem;
     max-width: 30ch;
   }
