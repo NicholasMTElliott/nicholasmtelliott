@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import EmailObfuscated from '../../components/EmailObfuscated.astro'
 import SignalGlyph from '../../components/SignalGlyph.astro'
-import { proofMetrics, valuePillars } from '../../data/portfolio'
+import { proofMetrics, selectedAchievements, valuePillars } from '../../data/portfolio'
 
 const profileEntry = (await getCollection('profile'))[0]
 const contactEntry = (await getCollection('contact'))[0]
@@ -14,12 +14,12 @@ if (!profileEntry) {
   throw new Error('Required profile content is missing.')
 }
 
-const platformSignals = [
-  ['30-person org', 'Built from founder-led execution'],
-  ['$3.4M revenue', 'Peak annual Skyward revenue'],
+const careerSignals = [
+  ['Skyward', 'Founder/operator, 30-person engineering org'],
+  ['Syngenta', 'Global Fortune 500 platform delivery'],
+  ['$3.4M', 'Peak annual Skyward revenue'],
   ['Global teams', 'US, India, Brazil, Egypt, Europe'],
-  ['Enterprise delivery', 'Syngenta-scale platform work'],
-  ['Operational trust', 'SOC 2-ready practices and observability'],
+  ['AI', 'Production Root Cause feature'],
 ]
 ---
 
@@ -30,16 +30,15 @@ const platformSignals = [
 >
   <section class="hero">
     <div class="hero__content">
-      <p class="eyebrow">Engineering manager and delivery leader</p>
-      <h1>Teams, delivery, and technical judgment.</h1>
+      <p class="eyebrow">Director / Head of Engineering candidate</p>
+      <h1>Career evidence before slogans.</h1>
       <p class="hero__lead">
-        I help engineering organizations turn ambiguous, high-stakes work into accountable delivery. My background
-        combines team building, stakeholder management, platform modernization, and enough technical depth to earn trust
-        with senior engineers.
+        I founded and scaled Skyward, led long-running enterprise delivery for Syngenta-scale systems, and stayed close
+        enough to architecture, operations, and AI work to make technical leadership credible.
       </p>
       <div class="button-row">
-        <a class="button" href="/contact/leadership/em-home/">Start a leadership conversation</a>
-        <a class="button-secondary" href="/portfolio">Review delivery history</a>
+        <a class="button" href="/portfolio">Review delivery history</a>
+        <a class="button-secondary" href="/contact/leadership/em-home/">Contact me</a>
         <a class="button-secondary" href={profileEntry.data.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
       </div>
       {displayEmail && (
@@ -52,7 +51,7 @@ const platformSignals = [
     <aside class="proof card" aria-label="Career proof points">
       <img class="proof__avatar" src={profileEntry.data.avatarUrl ?? defaultAvatarUrl} alt={profileEntry.data.fullName} />
       <div>
-        <p class="eyebrow">Manager signal</p>
+        <p class="eyebrow">Resume snapshot</p>
         <h3>Nicholas M.T. Elliott</h3>
         <p>{profileEntry.data.headline} · {profileEntry.data.location}</p>
       </div>
@@ -69,9 +68,9 @@ const platformSignals = [
     </aside>
   </section>
 
-  <section class="signal-strip" aria-label="Engineering management signals">
+  <section class="signal-strip" aria-label="Career evidence">
     {
-      platformSignals.map(([label, detail]) => (
+      careerSignals.map(([label, detail]) => (
         <article>
           <strong>{label}</strong>
           <span>{detail}</span>
@@ -82,7 +81,37 @@ const platformSignals = [
 
   <section class="section">
     <div class="section-heading">
-      <p class="eyebrow">Operating model</p>
+      <p class="eyebrow">Selected accomplishments</p>
+      <h2>What I have actually led.</h2>
+    </div>
+    <div class="achievement-grid">
+      {
+        selectedAchievements.map(achievement => (
+          <article class="achievement card">
+            <h3>{achievement.title}</h3>
+            <dl>
+              <div>
+                <dt>Role</dt>
+                <dd>{achievement.role}</dd>
+              </div>
+              <div>
+                <dt>Outcome</dt>
+                <dd>{achievement.outcome}</dd>
+              </div>
+              <div>
+                <dt>Scale</dt>
+                <dd>{achievement.scale}</dd>
+              </div>
+            </dl>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Operating range</p>
       <h2>Clear ownership, credible technical guidance, and disciplined delivery.</h2>
     </div>
     <div class="pillar-grid">
@@ -107,7 +136,7 @@ const platformSignals = [
     <div class="case-copy">
       <div class="section-heading">
         <p class="eyebrow">Syngenta · GHX Fields / E-Luminate / Cropwise ecosystem</p>
-        <h2>Leadership through complexity, not just architecture diagrams.</h2>
+        <h2>A concrete example of the work behind the headline.</h2>
         <p>
           I coordinated client stakeholders and distributed engineering groups while guiding modernization across web
           apps, integrations, AWS infrastructure, observability, and product AI. The practical value was making a
@@ -159,7 +188,7 @@ const platformSignals = [
   }
 
   .hero h1 {
-    max-width: 11ch;
+    max-width: 13ch;
     margin: 0.7rem 0 1rem;
     font-size: clamp(3rem, 7vw, 5.9rem);
     line-height: 0.92;
@@ -258,6 +287,47 @@ const platformSignals = [
 
   .section {
     margin-top: clamp(2.2rem, 5vw, 4.2rem);
+  }
+
+  .achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .achievement {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+
+  .achievement h3 {
+    margin: 0;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+  }
+
+  .achievement dl {
+    display: grid;
+    gap: 0.85rem;
+    margin: 0;
+  }
+
+  .achievement dl div {
+    border-top: 1px solid var(--border);
+    padding-top: 0.85rem;
+  }
+
+  .achievement dt {
+    color: var(--accent-warm);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .achievement dd {
+    margin: 0.25rem 0 0;
+    color: var(--muted);
   }
 
   .pillar-grid {
@@ -360,6 +430,7 @@ const platformSignals = [
       min-height: 0;
     }
 
+    .achievement-grid,
     .signal-strip,
     .pillar-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -376,6 +447,7 @@ const platformSignals = [
       font-size: clamp(2.55rem, 16vw, 4rem);
     }
 
+    .achievement-grid,
     .signal-strip,
     .pillar-grid {
       grid-template-columns: 1fr;

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import { storyBank, technologyEvidence } from '../../data/portfolio'
 
 const companyEntries = (await getCollection('company')).sort(
   (a, b) => {
@@ -109,6 +110,13 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
 
   return `${start} - ${end}`
 }
+
+const portfolioSections = [
+  ['#leadership', 'Leadership'],
+  ['#technology', 'Technology'],
+  ['#stories', 'Story Bank'],
+  ['#timeline', 'Timeline'],
+]
 ---
 
 <BaseLayout
@@ -118,14 +126,77 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
   <section class="portfolio">
     <header class="portfolio__header">
       <p class="eyebrow">Portfolio</p>
-      <h1>Engineering leadership through delivery evidence.</h1>
+      <h1>Career evidence, then chronology.</h1>
       <p>
-        A timeline of organizations, roles, and projects where team leadership, stakeholder coordination,
-        architecture, and operational responsibility came together.
+        Start with the signals a Director / Head of Engineering evaluator usually needs: leadership scale,
+        technical range, production AI, enterprise delivery, and a few specific stories. The full timeline follows.
       </p>
+      <nav class="portfolio-nav" aria-label="Portfolio sections">
+        {portfolioSections.map(([href, label]) => <a href={href}>{label}</a>)}
+      </nav>
     </header>
 
-    <aside class="card timeline">
+    <section class="scan-section" id="leadership">
+      <div class="section-heading">
+        <p class="eyebrow">Leadership scan</p>
+        <h2>What the chronology is meant to prove.</h2>
+      </div>
+      <div class="scan-grid">
+        <article class="scan-card card">
+          <strong>Founder/operator</strong>
+          <p>Built Skyward App Company from founder-led execution into a 30-person engineering organization.</p>
+        </article>
+        <article class="scan-card card">
+          <strong>Enterprise delivery</strong>
+          <p>Served as primary technical partner for long-running Syngenta Global Fortune 500 platform work.</p>
+        </article>
+        <article class="scan-card card">
+          <strong>Distributed teams</strong>
+          <p>Coordinated stakeholders and engineering groups across the US, India, Brazil, Egypt, and Europe.</p>
+        </article>
+        <article class="scan-card card">
+          <strong>Technical credibility</strong>
+          <p>Stayed close to architecture, code, data, reliability, geospatial systems, and AI-assisted workflows.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="scan-section" id="technology">
+      <div class="section-heading">
+        <p class="eyebrow">Technology evidence map</p>
+        <h2>Tools connected to work, not keyword stuffing.</h2>
+      </div>
+      <div class="tech-map">
+        {
+          technologyEvidence.map(item => (
+            <article>
+              <h3>{item.area}</h3>
+              <p class="tools">{item.tools}</p>
+              <p>{item.proof}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="scan-section" id="stories">
+      <div class="section-heading">
+        <p class="eyebrow">Interview story bank</p>
+        <h2>Specific work that makes the profile feel real.</h2>
+      </div>
+      <div class="story-grid">
+        {
+          storyBank.map(story => (
+            <article>
+              <h3>{story.title}</h3>
+              <p>{story.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <aside class="card timeline" id="timeline">
       <h2>Experience Timeline</h2>
       <ul>
         {
@@ -219,10 +290,85 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
     line-height: 0.98;
   }
 
-  .portfolio__header p:last-child {
+  .portfolio__header > p:not(.eyebrow) {
     margin: 0.9rem 0 0;
     color: var(--muted);
     max-width: 72ch;
+  }
+
+  .portfolio-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 1.15rem;
+  }
+
+  .portfolio-nav a {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-alt);
+    color: var(--text);
+    padding: 0.38rem 0.7rem;
+    text-decoration: none;
+  }
+
+  .portfolio-nav a:hover {
+    border-color: color-mix(in srgb, var(--border) 55%, var(--accent) 45%);
+  }
+
+  .scan-section {
+    grid-column: 1 / -1;
+    padding-top: clamp(0.8rem, 2vw, 1.4rem);
+  }
+
+  .scan-grid,
+  .story-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .scan-card {
+    min-height: 170px;
+  }
+
+  .scan-card strong {
+    display: block;
+    color: var(--accent-warm);
+    margin-bottom: 0.45rem;
+  }
+
+  .scan-card p,
+  .tech-map p,
+  .story-grid p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .tech-map {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .tech-map article,
+  .story-grid article {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  .tech-map h3,
+  .story-grid h3 {
+    margin: 0 0 0.5rem;
+  }
+
+  .tools {
+    color: var(--accent-soft) !important;
+    font-size: 0.9rem;
+    margin-bottom: 0.45rem !important;
   }
 
   .timeline {
@@ -375,9 +521,21 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 0.5rem;
     }
+
+    .scan-grid,
+    .tech-map,
+    .story-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   @media (max-width: 640px) {
+    .scan-grid,
+    .tech-map,
+    .story-grid {
+      grid-template-columns: 1fr;
+    }
+
     .timeline ul {
       display: flex;
       overflow-x: auto;

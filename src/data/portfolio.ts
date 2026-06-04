@@ -1,7 +1,7 @@
 export const proofMetrics = [
   {
     value: '30',
-    label: 'person engineering organization built from inception',
+    label: 'person engineering organization built from founder-led execution',
   },
   {
     value: '$3.4M',
@@ -13,30 +13,76 @@ export const proofMetrics = [
   },
   {
     value: 'AI',
-    label: 'production Root Cause feature for Syngenta North America',
+    label: 'production Root Cause feature shipped for Syngenta North America',
   },
 ]
 
 export const valuePillars = [
   {
-    title: 'Lead Teams',
-    body: 'Hire, mentor, structure, and retain engineering teams that can handle ambiguous delivery while keeping clear ownership and humane standards.',
+    title: 'Built Teams',
+    body: 'Hired, mentored, structured, and retained engineering teams that could handle ambiguous delivery with clear ownership and humane standards.',
     icon: 'teams',
   },
   {
-    title: 'Modernize Platforms',
-    body: 'Move legacy systems toward cloud-native, observable, secure foundations without letting architecture drift away from delivery reality.',
+    title: 'Modernized Platforms',
+    body: 'Moved legacy systems toward cloud-native, observable, secure foundations while keeping architecture tied to delivery reality.',
     icon: 'platforms',
   },
   {
-    title: 'Ship AI Responsibly',
-    body: 'Apply AI where it improves product or engineering outcomes, with review paths, privacy boundaries, and operational ownership.',
+    title: 'Shipped Production AI',
+    body: 'Applied AI where it improved product or engineering outcomes, with review paths, privacy boundaries, and operational ownership.',
     icon: 'ai',
   },
   {
-    title: 'Earn Technical Trust',
-    body: 'Stay technical enough to guide senior engineers, evaluate tradeoffs, and make hard calls without becoming the delivery bottleneck.',
+    title: 'Stayed Technical',
+    body: 'Stayed close enough to architecture, code, data, and operations to guide senior engineers and make hard tradeoff calls.',
     icon: 'trust',
+  },
+]
+
+export const selectedAchievements = [
+  {
+    title: 'Scaled Skyward from founder-led execution to a 30-person engineering organization.',
+    role: 'Founder, Managing Director, President, CTO',
+    outcome: 'Built delivery leadership, hiring, mentoring, client coordination, and operating rhythms that supported multi-team work.',
+    scale: '$3.4M peak annual revenue',
+  },
+  {
+    title: 'Led long-running enterprise platform work for Syngenta-scale agricultural systems.',
+    role: 'Primary technical partner, architect, delivery leader',
+    outcome: 'Coordinated stakeholders and distributed teams while modernizing web apps, APIs, integrations, infrastructure, observability, and AI features.',
+    scale: 'Global Fortune 500 client context',
+  },
+  {
+    title: 'Moved mature systems from bespoke delivery toward internal ownership.',
+    role: 'Technical leader and mentor',
+    outcome: 'Created transition paths through documentation, observability, process maturity, team coaching, and practical architecture boundaries.',
+    scale: 'US, India, Brazil, Egypt, Europe',
+  },
+  {
+    title: 'Shipped production AI inside real operational workflows.',
+    role: 'Product and engineering leader',
+    outcome: 'Delivered Root Cause analysis for agronomic and environmental field patterns, plus AI-assisted report and engineering workflows.',
+    scale: 'Production client releases',
+  },
+]
+
+export const storyBank = [
+  {
+    title: 'MySQL internals',
+    body: 'Reduced retrieval from seconds to milliseconds with a custom table handler when normal application tuning was not enough.',
+  },
+  {
+    title: 'GPS hardware debugging',
+    body: 'Solved serial GPS carrier-signal issues on Dell Axim field devices before modern mobile abstractions existed.',
+  },
+  {
+    title: 'SOC 2 readiness',
+    body: 'Helped move operational practices toward repeatable controls, observability, and audit-ready evidence.',
+  },
+  {
+    title: 'Client-to-internal handoff',
+    body: 'Designed delivery and mentoring patterns so mature client systems could move into sustainable internal ownership.',
   },
 ]
 

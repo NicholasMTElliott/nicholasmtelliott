@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import EmailObfuscated from '../components/EmailObfuscated.astro'
 import SignalGlyph from '../components/SignalGlyph.astro'
-import { proofMetrics, valuePillars } from '../data/portfolio'
+import { proofMetrics, selectedAchievements, storyBank, valuePillars } from '../data/portfolio'
 
 const profileEntry = (await getCollection('profile'))[0]
 const contactEntry = (await getCollection('contact'))[0]
@@ -14,12 +14,12 @@ if (!profileEntry) {
   throw new Error('Required profile content is missing.')
 }
 
-const platformSignals = [
-  ['Syngenta', 'Enterprise platform delivery'],
+const careerSignals = [
+  ['Skyward', 'Founder/operator, 30-person engineering org'],
+  ['Syngenta', 'Global Fortune 500 platform delivery'],
   ['AWS', 'CDK, Fargate, Lambda, VPC, API Gateway'],
   ['Global Teams', 'US, India, Brazil, Egypt, Europe'],
-  ['SOC 2', 'Audit-ready operational practices'],
-  ['AI Systems', 'Production features and engineering workflows'],
+  ['Microsoft', 'Product engineering and release discipline'],
 ]
 ---
 
@@ -29,15 +29,15 @@ const platformSignals = [
 >
   <section class="hero">
     <div class="hero__content">
-      <p class="eyebrow">Engineering management and platform leadership</p>
-      <h1>Building teams that ship durable systems.</h1>
+      <p class="eyebrow">Director / Head of Engineering candidate</p>
+      <h1>Engineering leader with founder-level technical depth.</h1>
       <p class="hero__lead">
-        Director-level engineering leader, founder, architect, and hands-on technical partner. I build accountable
-        teams, manage complex delivery, and keep architecture decisions tied to business outcomes.
+        I founded and scaled Skyward App Company, led multi-year enterprise platform work for Syngenta-scale systems,
+        and stayed close enough to architecture, code, operations, and AI delivery to earn senior technical trust.
       </p>
       <div class="button-row">
-        <a class="button" href="/case-studies/global-ag-platform">Read the enterprise case study</a>
-        <a class="button-secondary" href="/contact/leadership/control/">Start a leadership conversation</a>
+        <a class="button" href="/case-studies/global-ag-platform">Read the case study</a>
+        <a class="button-secondary" href="/contact/leadership/control/">Contact me</a>
         <a class="button-secondary" href={profileEntry.data.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
       </div>
       {displayEmail && (
@@ -50,7 +50,7 @@ const platformSignals = [
     <aside class="proof card" aria-label="Career proof points">
       <img class="proof__avatar" src={profileEntry.data.avatarUrl ?? defaultAvatarUrl} alt={profileEntry.data.fullName} />
       <div>
-        <p class="eyebrow">Proof points</p>
+        <p class="eyebrow">Resume snapshot</p>
         <h3>Nicholas M.T. Elliott</h3>
         <p>{profileEntry.data.headline} · {profileEntry.data.location}</p>
       </div>
@@ -67,9 +67,9 @@ const platformSignals = [
     </aside>
   </section>
 
-  <section class="signal-strip" aria-label="Platform signals">
+  <section class="signal-strip" aria-label="Career evidence">
     {
-      platformSignals.map(([label, detail]) => (
+      careerSignals.map(([label, detail]) => (
         <article>
           <strong>{label}</strong>
           <span>{detail}</span>
@@ -80,8 +80,38 @@ const platformSignals = [
 
   <section class="section">
     <div class="section-heading">
-      <p class="eyebrow">How I create value</p>
-      <h2>People leadership, delivery accountability, and technical judgment in one operating model.</h2>
+      <p class="eyebrow">Selected accomplishments</p>
+      <h2>What I have actually led.</h2>
+    </div>
+    <div class="achievement-grid">
+      {
+        selectedAchievements.map(achievement => (
+          <article class="achievement card">
+            <h3>{achievement.title}</h3>
+            <dl>
+              <div>
+                <dt>Role</dt>
+                <dd>{achievement.role}</dd>
+              </div>
+              <div>
+                <dt>Outcome</dt>
+                <dd>{achievement.outcome}</dd>
+              </div>
+              <div>
+                <dt>Scale</dt>
+                <dd>{achievement.scale}</dd>
+              </div>
+            </dl>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Operating range</p>
+      <h2>The common thread is accountable technical leadership.</h2>
     </div>
     <div class="pillar-grid">
       {
@@ -98,14 +128,14 @@ const platformSignals = [
 
   <section class="section featured-case">
     <div class="case-visual card">
-      <p class="eyebrow">Featured case study</p>
+      <p class="eyebrow">Enterprise case study</p>
       <h2>Global Agricultural Platforms</h2>
-      <p>Long-running enterprise work across web apps, integrations, AWS modernization, observability, and production AI.</p>
+      <p>Long-running work across web apps, integrations, AWS modernization, observability, global delivery, and production AI.</p>
     </div>
     <div class="case-copy">
       <div class="section-heading">
         <p class="eyebrow">Syngenta · GHX Fields / E-Luminate / Cropwise ecosystem</p>
-        <h2>Long-running enterprise work with delivery and operating complexity.</h2>
+        <h2>A concrete example of the work behind the headline.</h2>
         <p>
           I served as a primary technical partner for systems supporting seed recommendation, catalog, sales hierarchy,
           and field-analysis workflows across global markets. The platform evolved from .NET Framework, Knockout,
@@ -128,6 +158,27 @@ const platformSignals = [
         </article>
       </div>
       <a class="button" href="/case-studies/global-ag-platform">Open detailed case study</a>
+    </div>
+  </section>
+
+  <section class="section story-bank">
+    <div class="section-heading">
+      <p class="eyebrow">Interview story bank</p>
+      <h2>Specific stories beat generic claims.</h2>
+      <p>
+        These are the kinds of details I want the site to surface: moments where leadership, judgment, and technical
+        depth show up in concrete work.
+      </p>
+    </div>
+    <div class="story-grid">
+      {
+        storyBank.map(story => (
+          <article class="story">
+            <h3>{story.title}</h3>
+            <p>{story.body}</p>
+          </article>
+        ))
+      }
     </div>
   </section>
 
@@ -174,7 +225,7 @@ const platformSignals = [
   }
 
   .hero h1 {
-    max-width: 11ch;
+    max-width: 13ch;
     margin: 0.7rem 0 1rem;
     font-size: clamp(3rem, 7vw, 5.9rem);
     line-height: 0.92;
@@ -273,6 +324,47 @@ const platformSignals = [
 
   .section {
     margin-top: clamp(2.2rem, 5vw, 4.2rem);
+  }
+
+  .achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .achievement {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+
+  .achievement h3 {
+    margin: 0;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+  }
+
+  .achievement dl {
+    display: grid;
+    gap: 0.85rem;
+    margin: 0;
+  }
+
+  .achievement dl div {
+    border-top: 1px solid var(--border);
+    padding-top: 0.85rem;
+  }
+
+  .achievement dt {
+    color: var(--accent-warm);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .achievement dd {
+    margin: 0.25rem 0 0;
+    color: var(--muted);
   }
 
   .pillar-grid {
@@ -376,6 +468,31 @@ const platformSignals = [
     padding-block: clamp(1.5rem, 4vw, 2.8rem);
   }
 
+  .story-bank {
+    border-block: 1px solid var(--border);
+    padding-block: clamp(1.5rem, 4vw, 2.8rem);
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .story {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  .story h3 {
+    margin: 0 0 0.5rem;
+  }
+
+  .story p {
+    margin: 0;
+    color: var(--muted);
+  }
+
   @media (max-width: 980px) {
     .hero,
     .featured-case {
@@ -383,8 +500,10 @@ const platformSignals = [
       min-height: 0;
     }
 
+    .achievement-grid,
     .signal-strip,
-    .pillar-grid {
+    .pillar-grid,
+    .story-grid {
       grid-template-columns: repeat(2, 1fr);
     }
 
@@ -399,8 +518,10 @@ const platformSignals = [
       font-size: clamp(2.55rem, 16vw, 4rem);
     }
 
+    .achievement-grid,
     .signal-strip,
-    .pillar-grid {
+    .pillar-grid,
+    .story-grid {
       grid-template-columns: 1fr;
     }
 
