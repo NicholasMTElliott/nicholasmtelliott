@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { hardProblems, technologyEvidence } from '../../data/portfolio'
+import { technologyEvidence } from '../../data/portfolio'
 
 const companyEntries = (await getCollection('company')).sort(
   (a, b) => {
@@ -50,6 +50,12 @@ const projectsByRoleKey = projectEntries.reduce<Record<string, typeof projectEnt
 
 Object.values(projectsByRoleKey).forEach(projects => {
   projects.sort((a, b) => {
+    const featuredDelta = Number(b.data.featured ?? false) - Number(a.data.featured ?? false)
+
+    if (featuredDelta !== 0) {
+      return featuredDelta
+    }
+
     const aEnd = a.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
     const bEnd = b.data.endDate?.getTime() ?? Number.POSITIVE_INFINITY
 
@@ -111,57 +117,198 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
   return `${start} - ${end}`
 }
 
+const eraYears = (startDate: Date, endDate?: Date) =>
+  endDate ? `${startDate.getUTCFullYear()}–${endDate.getUTCFullYear()}` : `${startDate.getUTCFullYear()}–`
+
+interface EraMeta {
+  accent: string
+  epigraph: string
+  image: string
+}
+
+const eraMeta: Record<string, EraMeta> = {
+  'skyward-app-company': {
+    accent: '#69d2a1',
+    epigraph: 'Profitable all sixteen years — and built to be handed off.',
+    image: '/images/generated/era-skyward.webp',
+  },
+  'prophetic-sky': {
+    accent: '#f1c65b',
+    epigraph: 'Self-funded products keep scope honest.',
+    image: '/images/generated/era-prophetic-sky.webp',
+  },
+  microsoft: {
+    accent: '#60a5fa',
+    epigraph: 'Features shipped end to end, inside one of the most disciplined release processes in the industry.',
+    image: '/images/generated/era-microsoft.webp',
+  },
+  zedx: {
+    accent: '#a78bfa',
+    epigraph: 'A terabyte a day, tamed with a custom storage engine.',
+    image: '/images/generated/era-zedx.webp',
+  },
+}
+
+const projectStats: Record<string, Array<{ value: string; label: string }>> = {
+  'e-luminate-ghx-fields-syngenta': [
+    { value: '15 yrs', label: 'one platform partnership' },
+    { value: '10,000+', label: 'growers served, US & Canada' },
+    { value: '90k', label: 'fields analyzed weekly by AI' },
+    { value: '20', label: 'systems to AWS in six months' },
+  ],
+  'precision-ag-modeling-platform': [
+    { value: '1TB → 12GB', label: 'daily data growth, after my custom storage engine' },
+    { value: '20min → 20s', label: 'average processing time' },
+    { value: '2001', label: 'GPS field devices, pre-smartphone' },
+  ],
+}
+
 const portfolioSections = [
-  ['#leadership', 'Leadership'],
-  ['#technology', 'Technology'],
-  ['#stories', 'Hard Problems'],
+  ['#highlights', 'Highlights'],
   ['#timeline', 'Timeline'],
+  ['#technology', 'Technology'],
+]
+
+const highlights = [
+  ['Founder/operator', 'Skyward: one person to 30, profitable all sixteen years'],
+  ['Enterprise delivery', "Syngenta's technical partner for fifteen years"],
+  ['Distributed teams', 'US, India, Brazil, Egypt, and Europe'],
+  ['Still technical', 'Architecture, code, data, and AI — hands on, throughout'],
 ]
 ---
 
 <BaseLayout
   title="Nicholas M. T. Elliott | Portfolio"
-  description="Career timeline and project portfolio for Nicholas M.T. Elliott, focused on engineering leadership, platform modernization, enterprise delivery, and AI-enabled systems."
+  description="Career timeline and project portfolio for Nicholas M.T. Elliott: 25 years across ZedX, Microsoft, Prophetic Sky, and Skyward App Company."
 >
   <section class="portfolio">
     <header class="portfolio__header">
       <p class="eyebrow">Portfolio</p>
       <h1>Twenty-five years of shipping.</h1>
       <p>
-        The highlights first — leadership scale, technology depth, and a few stories — then the full timeline,
-        company by company, from weather systems at ZedX in 2000 to handing off the Syngenta platforms in 2026.
+        Four eras, newest first: Skyward and the Syngenta platforms, the self-funded studio years, Microsoft, and the
+        weather systems where it all started. Featured work is open; everything else expands when you want the detail.
       </p>
       <nav class="portfolio-nav" aria-label="Portfolio sections">
         {portfolioSections.map(([href, label]) => <a href={href}>{label}</a>)}
       </nav>
     </header>
 
-    <section class="scan-section" id="leadership">
-      <div class="section-heading">
-        <p class="eyebrow">Leadership</p>
-        <h2>The short version</h2>
-      </div>
-      <div class="scan-grid">
-        <article class="scan-card card">
-          <strong>Founder/operator</strong>
-          <p>Built Skyward App Company from one person to 30 — 24 engineers — profitable all sixteen years.</p>
-        </article>
-        <article class="scan-card card">
-          <strong>Enterprise delivery</strong>
-          <p>Syngenta's primary technical partner for fifteen years across E-Luminate, GHX Fields, and Cropwise.</p>
-        </article>
-        <article class="scan-card card">
-          <strong>Distributed teams</strong>
-          <p>Coordinated stakeholders and engineering groups across the US, India, Brazil, Egypt, and Europe.</p>
-        </article>
-        <article class="scan-card card">
-          <strong>Still technical</strong>
-          <p>Architecture, code, data, reliability, geospatial systems, and AI workflows — hands on, throughout.</p>
-        </article>
-      </div>
+    <section class="highlight-strip" id="highlights" aria-label="Career highlights">
+      {
+        highlights.map(([label, detail]) => (
+          <article>
+            <strong>{label}</strong>
+            <span>{detail}</span>
+          </article>
+        ))
+      }
     </section>
 
-    <section class="scan-section" id="technology">
+    <div class="timeline" id="timeline">
+      {
+        renderedCompanyEntries.map(({ company, Content, renderedRoles }) => {
+          const meta = eraMeta[company.data.key]
+
+          return (
+            <section class="era" id={company.data.key} style={`--era: ${meta?.accent ?? 'var(--accent)'}`}>
+              <header
+                class="era__head"
+                style={meta ? `background-image: linear-gradient(rgba(13, 16, 23, 0.45), rgba(13, 16, 23, 0.94)), url(${meta.image})` : undefined}
+              >
+                <span class="era__years">{eraYears(company.data.startDate, company.data.endDate)}</span>
+                <div class="era__id">
+                  <h2>{company.data.title}</h2>
+                  <p class="era__meta">
+                    {formatPeriod(company.data.startDate, company.data.endDate)}
+                    {company.data.location && ` · ${company.data.location}`}
+                  </p>
+                </div>
+              </header>
+
+              <div class="era__rail">
+                <div class="era__intro">
+                  <Content />
+                </div>
+                {meta && <p class="era__epigraph">{meta.epigraph}</p>}
+
+                {renderedRoles.map(({ role, RoleContent, renderedProjects }) => (
+                  <div class="role">
+                    <header class="role__head">
+                      <h3>{role.data.title}</h3>
+                      <p>
+                        {formatPeriod(role.data.startDate, role.data.endDate)}
+                        {role.data.employmentType && ` · ${role.data.employmentType}`}
+                      </p>
+                    </header>
+                    <div class="role__body">
+                      <RoleContent />
+                    </div>
+
+                    {renderedProjects.length > 0 && (
+                      <div class="projects">
+                        {renderedProjects.map(({ project, ProjectContent }) => {
+                          const stats = projectStats[project.data.key]
+                          const period =
+                            project.data.startDate &&
+                            formatPeriod(project.data.startDate, project.data.endDate)
+
+                          return project.data.featured ? (
+                            <article class="feature">
+                              <header class="feature__head">
+                                <p class="eyebrow">Featured</p>
+                                <h4>{project.data.name}</h4>
+                                {period && <p class="proj-period">{period}</p>}
+                              </header>
+                              {stats && (
+                                <ul class="feature__stats">
+                                  {stats.map(stat => (
+                                    <li>
+                                      <strong>{stat.value}</strong>
+                                      <span>{stat.label}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                              <div class="feature__body">
+                                <ProjectContent />
+                              </div>
+                              {project.data.skills && (
+                                <div class="tag-list">
+                                  {project.data.skills.map(skill => (
+                                    <span class="tag">{skill}</span>
+                                  ))}
+                                </div>
+                              )}
+                            </article>
+                          ) : (
+                            <details class="proj">
+                              <summary>
+                                <span class="proj__name">{project.data.name}</span>
+                                {period && <span class="proj-period">{period}</span>}
+                                {project.data.skills && (
+                                  <span class="proj__skills">{project.data.skills.slice(0, 3).join(' · ')}</span>
+                                )}
+                                <span class="proj__chevron" aria-hidden="true">+</span>
+                              </summary>
+                              <div class="proj__body">
+                                <ProjectContent />
+                              </div>
+                            </details>
+                          )
+                        })}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )
+        })
+      }
+    </div>
+
+    <section class="tech-section" id="technology">
       <div class="section-heading">
         <p class="eyebrow">Technology</p>
         <h2>Tools, with the work to back them</h2>
@@ -178,383 +325,412 @@ const portfolioSections = [
         }
       </div>
     </section>
-
-    <section class="scan-section" id="stories">
-      <div class="section-heading">
-        <p class="eyebrow">Career depth</p>
-        <h2>Hard problems I've owned</h2>
-      </div>
-      <div class="story-grid">
-        {
-          hardProblems.map(story => (
-            <article>
-              <h3>{story.title}</h3>
-              <p>{story.body}</p>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <aside class="card timeline" id="timeline">
-      <h2>Experience Timeline</h2>
-      <ul>
-        {
-          companyEntries.map(company => (
-            <li>
-              <a href={`#${company.data.key}`}>
-                <strong>{company.data.title}</strong>
-                <span>{formatPeriod(company.data.startDate, company.data.endDate)}</span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </aside>
-
-    <div class="entries">
-      {
-        renderedCompanyEntries.map(({ company, Content, renderedRoles }) => (
-          <article class="card" id={company.data.key}>
-            <h3>{company.data.title}</h3>
-            <p class="period">{formatPeriod(company.data.startDate, company.data.endDate)}</p>
-            <div class="entry-body">
-              <Content />
-            </div>
-
-            {renderedRoles.length > 0 && (
-              <section class="roles">
-                <div class="role-list">
-                  {
-                    renderedRoles.map(({ role, RoleContent, renderedProjects }) => (
-                      <article class="role-item">
-                        <header class="role-heading">
-                          <h4>{role.data.title}</h4>
-                          <p class="role-period">
-                            {formatPeriod(role.data.startDate, role.data.endDate)}
-                            {role.data.employmentType && ` · ${role.data.employmentType}`}
-                          </p>
-                        </header>
-                        <div class="role-body">
-                          <RoleContent />
-                        </div>
-                        {renderedProjects.length > 0 && (
-                          <section class="projects">
-                            <h5>Projects</h5>
-                            <div class="project-list">
-                              {
-                                renderedProjects.map(({ project, ProjectContent }) => (
-                                  <article class="project-item">
-                                    <p class="project-name">{project.data.name}</p>
-                                    {project.data.startDate && (
-                                      <p class="project-period">{formatPeriod(project.data.startDate, project.data.endDate)}</p>
-                                    )}
-                                    <div class="project-body">
-                                      <ProjectContent />
-                                    </div>
-                                  </article>
-                                ))
-                              }
-                            </div>
-                          </section>
-                        )}
-                      </article>
-                    ))
-                  }
-                </div>
-              </section>
-            )}
-          </article>
-        ))
-      }
-    </div>
   </section>
 </BaseLayout>
 
 <style lang="scss">
-  .portfolio {
-    display: grid;
-    grid-template-columns: minmax(220px, 280px) 1fr;
-    gap: clamp(0.9rem, 2vw, 1.35rem);
-    align-items: start;
-  }
-
   .portfolio__header {
-    grid-column: 1 / -1;
-    max-width: 860px;
+    padding-top: clamp(0.8rem, 2.5vw, 1.8rem);
   }
 
   .portfolio__header h1 {
-    margin: 0.55rem 0 0;
-    font-size: clamp(2.15rem, 5vw, 4.25rem);
-    line-height: 0.98;
+    margin: 0.6rem 0 0.9rem;
+    font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+    line-height: 0.95;
   }
 
   .portfolio__header > p:not(.eyebrow) {
-    margin: 0.9rem 0 0;
+    max-width: 70ch;
+    margin: 0;
     color: var(--muted);
-    max-width: 72ch;
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
   }
 
   .portfolio-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.55rem;
-    margin-top: 1.15rem;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
   }
 
   .portfolio-nav a {
-    min-height: 38px;
     display: inline-flex;
     align-items: center;
+    min-height: 38px;
+    padding: 0.3rem 0.75rem;
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface-alt);
+    border-radius: 999px;
+    background: var(--surface);
     color: var(--text);
-    padding: 0.38rem 0.7rem;
     text-decoration: none;
+    font-size: 0.9rem;
   }
 
   .portfolio-nav a:hover {
     border-color: color-mix(in srgb, var(--border) 55%, var(--accent) 45%);
   }
 
-  .scan-section {
-    grid-column: 1 / -1;
-    padding-top: clamp(0.8rem, 2vw, 1.4rem);
-  }
-
-  .scan-grid,
-  .story-grid {
+  .highlight-strip {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    margin-top: clamp(1.2rem, 2.5vw, 1.8rem);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: color-mix(in srgb, var(--surface) 78%, #000 22%);
   }
 
-  .scan-card {
-    min-height: 170px;
+  .highlight-strip article {
+    padding: 1rem;
+    border-right: 1px solid var(--border);
   }
 
-  .scan-card strong {
+  .highlight-strip article:last-child {
+    border-right: 0;
+  }
+
+  .highlight-strip strong,
+  .highlight-strip span {
     display: block;
-    color: var(--accent-warm);
-    margin-bottom: 0.45rem;
   }
 
-  .scan-card p,
-  .tech-map p,
-  .story-grid p {
+  .highlight-strip span {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-top: 0.2rem;
+  }
+
+  .timeline {
+    margin-top: clamp(2rem, 4.5vw, 3.4rem);
+    display: grid;
+    gap: clamp(2.2rem, 5vw, 4rem);
+  }
+
+  .era__head {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(1rem, 3vw, 2.2rem);
+    min-height: clamp(170px, 24vh, 250px);
+    padding: clamp(1rem, 2.5vw, 1.6rem);
+    border: 1px solid color-mix(in srgb, var(--border) 70%, var(--era) 30%);
+    border-radius: var(--radius);
+    background-size: cover;
+    background-position: center;
+    box-shadow: var(--shadow);
+  }
+
+  .era__years {
+    color: var(--era);
+    font-size: clamp(2.4rem, 6vw, 4.6rem);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+  }
+
+  .era__id h2 {
+    margin: 0;
+    font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  }
+
+  .era__meta {
+    margin: 0.3rem 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .era__rail {
+    position: relative;
+    margin: clamp(0.9rem, 2vw, 1.3rem) 0 0 clamp(0.4rem, 1.5vw, 1.1rem);
+    padding-left: clamp(1rem, 2.5vw, 1.8rem);
+    border-left: 2px solid color-mix(in srgb, var(--era) 45%, var(--border));
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  .era__rail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -7px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--era);
+  }
+
+  .era__intro :global(p) {
+    margin: 0 0 0.7rem;
+    color: var(--muted);
+    max-width: 74ch;
+  }
+
+  .era__intro :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .era__epigraph {
+    margin: 0;
+    padding-left: 1rem;
+    border-left: 3px solid var(--era);
+    color: var(--text);
+    font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+    font-weight: 650;
+    max-width: 56ch;
+  }
+
+  .role {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .role__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 0.9rem;
+  }
+
+  .role__head h3 {
+    margin: 0;
+    font-size: clamp(1.12rem, 1.9vw, 1.4rem);
+  }
+
+  .role__head p {
     margin: 0;
     color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .role__body :global(p) {
+    margin: 0;
+    color: var(--muted);
+    max-width: 74ch;
+  }
+
+  .projects {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 0.3rem;
+  }
+
+  .feature {
+    border: 1px solid color-mix(in srgb, var(--border) 60%, var(--era) 40%);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    padding: clamp(1rem, 2vw, 1.4rem);
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .feature .eyebrow {
+    margin: 0;
+    color: var(--era);
+  }
+
+  .feature__head h4 {
+    margin: 0.25rem 0 0;
+    font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  }
+
+  .proj-period {
+    margin: 0.25rem 0 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .feature__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: color-mix(in srgb, var(--surface-alt) 70%, #000 30%);
+  }
+
+  .feature__stats li {
+    padding: 0.75rem 0.9rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .feature__stats li:last-child {
+    border-right: 0;
+  }
+
+  .feature__stats strong {
+    display: block;
+    color: var(--era);
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    line-height: 1.1;
+  }
+
+  .feature__stats span {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .feature__body :global(p) {
+    margin: 0 0 0.7rem;
+    color: var(--muted);
+    max-width: 74ch;
+  }
+
+  .feature__body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .proj {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--surface) 70%, transparent);
+  }
+
+  .proj summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.9rem;
+    padding: 0.7rem 0.9rem;
+    cursor: pointer;
+    list-style: none;
+    min-height: 44px;
+  }
+
+  .proj summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .proj__name {
+    font-weight: 700;
+  }
+
+  .proj summary .proj-period {
+    margin: 0;
+  }
+
+  .proj__skills {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .proj__chevron {
+    margin-left: auto;
+    color: var(--era);
+    font-weight: 800;
+    font-size: 1.1rem;
+    transition: transform 140ms ease;
+  }
+
+  .proj[open] .proj__chevron {
+    transform: rotate(45deg);
+  }
+
+  .proj summary:hover {
+    background: color-mix(in srgb, var(--surface-alt) 70%, transparent);
+  }
+
+  .proj__body {
+    padding: 0.2rem 0.9rem 0.9rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .proj__body :global(p) {
+    margin: 0.7rem 0 0;
+    color: var(--muted);
+    max-width: 74ch;
+  }
+
+  .tech-section {
+    margin-top: clamp(2.4rem, 5vw, 4rem);
+    border-top: 1px solid var(--border);
+    padding-top: clamp(1.6rem, 3.5vw, 2.6rem);
   }
 
   .tech-map {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.9rem;
   }
 
-  .tech-map article,
-  .story-grid article {
-    border-top: 1px solid var(--border);
-    padding-top: 1rem;
+  .tech-map article {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 0.95rem 1.05rem;
   }
 
-  .tech-map h3,
-  .story-grid h3 {
-    margin: 0 0 0.5rem;
+  .tech-map h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1.02rem;
   }
 
   .tools {
-    color: var(--accent-soft) !important;
-    font-size: 0.9rem;
-    margin-bottom: 0.45rem !important;
+    margin: 0 0 0.35rem;
+    color: var(--accent-soft);
+    font-size: 0.88rem;
   }
 
-  .timeline {
-    position: sticky;
-    top: 5.1rem;
-  }
-
-  .timeline h2 {
-    margin: 0 0 0.75rem;
-    font-size: 1rem;
-  }
-
-  .timeline ul {
-    list-style: none;
-    padding: 0;
+  .tech-map p:not(.tools) {
     margin: 0;
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  .timeline a {
-    color: inherit;
-    text-decoration: none;
-    display: grid;
-    gap: 0.2rem;
-    border-radius:0;
-    padding: 0.38rem 0.42rem;
-    border: 1px solid transparent;
-    transition: background-color 120ms ease, border-color 120ms ease;
-  }
-
-  .timeline a:hover {
-    background: color-mix(in srgb, var(--surface-alt) 78%, var(--accent) 22%);
-    border-color: color-mix(in srgb, var(--border) 65%, var(--accent) 35%);
-  }
-
-  .timeline span {
     color: var(--muted);
-    font-size: 0.86rem;
-  }
-
-  .entries {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .entries h3 {
-    margin: 0;
-  }
-
-  .period {
-    margin-top: 0.35rem;
-    color: var(--muted);
-  }
-
-  .entry-body :global(p:first-child) {
-    margin-top: 0;
-  }
-
-  .entry-body :global(p:last-child) {
-    margin-bottom: 0;
-  }
-
-  .roles {
-    margin-top: 1.1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .roles h4,
-  .role-item h5,
-  .projects h6 {
-    margin: 0;
-  }
-
-  .project-name {
-    margin: 0;
-    font-weight: 600;
-  }
-
-  .role-list {
-    display: grid;
-    gap: 0.9rem;
-    margin-top: 0.75rem;
-  }
-
-  .role-item {
-    background: var(--surface-alt);
-    border: 1px solid var(--border);
-    border-radius: 0;
-    padding: 0.85rem;
-  }
-
-  .role-heading {
-    margin-bottom: 0.7rem;
-  }
-
-  .role-period {
-    margin: 0.25rem 0 0;
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-
-  .role-body :global(p:first-child) {
-    margin-top: 0;
-  }
-
-  .role-body :global(p:last-child) {
-    margin-bottom: 0;
-  }
-
-  .projects {
-  }
-
-  .project-list {
-    display: grid;
-    gap: 0.9rem;
-    margin-top: 0.75rem;
-  }
-
-  .project-item {
-    padding: 0.85rem;
-    padding-left: 0;
-  }
-
-  .project-period {
-    margin: 0.25rem 0 0;
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-
-  .project-body :global(p:first-child) {
-    margin-top: 0.6rem;
-  }
-
-  .project-body :global(p:last-child) {
-    margin-bottom: 0;
+    font-size: 0.92rem;
   }
 
   @media (max-width: 900px) {
-    .portfolio {
+    .highlight-strip {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .highlight-strip article:nth-child(2n) {
+      border-right: 0;
+    }
+
+    .highlight-strip article:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tech-map {
       grid-template-columns: 1fr;
     }
 
-    .timeline {
-      position: static;
-    }
-
-    .timeline ul {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 0.5rem;
-    }
-
-    .scan-grid,
-    .tech-map,
-    .story-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .era__head {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      gap: 0.4rem;
     }
   }
 
-  @media (max-width: 640px) {
-    .scan-grid,
-    .tech-map,
-    .story-grid {
+  @media (max-width: 600px) {
+    .highlight-strip {
       grid-template-columns: 1fr;
     }
 
-    .timeline ul {
-      display: flex;
-      overflow-x: auto;
-      padding-bottom: 0.25rem;
-      gap: 0.45rem;
-      scroll-snap-type: x proximity;
+    .highlight-strip article {
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    .timeline li {
-      min-width: 220px;
-      scroll-snap-align: start;
+    .highlight-strip article:last-child {
+      border-bottom: 0;
     }
 
-    .entries {
-      gap: 0.8rem;
+    .proj summary {
+      gap: 0.2rem 0.6rem;
     }
 
-    .project-item {
-      padding: 0.72rem;
+    .proj__skills {
+      width: 100%;
+      order: 3;
     }
   }
 </style>

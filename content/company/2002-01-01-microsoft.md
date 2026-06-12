@@ -7,10 +7,6 @@ location: Redmond, Washington
 website: https://www.microsoft.com
 ---
 
-At Microsoft, I worked across both test engineering and product engineering on large-scale desktop software systems.
+I worked both sides of the engineering house in Redmond: test engineering on Windows certification systems, then product engineering on Visio.
 
-This period sharpened my understanding of enterprise delivery practices, cross-team coordination, and the trade-offs that appear in long-horizon product planning.
-
-### Engineering & Platform Leadership
-
-I operated across quality and product delivery responsibilities in mature software programs with high release discipline. The experience established foundational patterns I have carried forward in later leadership roles: structured execution, clear ownership boundaries, and systems decisions that remain maintainable over multi-year product cycles.
+Microsoft in those years ran one of the most disciplined release processes in the industry, and the habits stuck — structured execution, clear ownership, and decisions that hold up over multi-year product cycles.

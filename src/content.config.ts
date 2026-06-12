@@ -56,14 +56,6 @@ const profile = defineCollection({
   }),
 })
 
-const about = defineCollection({
-  loader: glob({ pattern: 'about.md', base: './content/about' }),
-  schema: z.object({
-    title: z.string(),
-    updatedAt: z.coerce.date().optional(),
-  }),
-})
-
 const skills = defineCollection({
   loader: glob({ pattern: 'skills.md', base: './content/skills' }),
   schema: z.object({
@@ -94,7 +86,6 @@ export const collections = {
   role,
   project,
   profile,
-  about,
   skills,
   contact,
 }

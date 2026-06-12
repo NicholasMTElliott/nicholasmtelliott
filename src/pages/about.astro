@@ -1,49 +1,247 @@
 ---
-import { getCollection, render } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 
-const aboutEntry = (await getCollection('about'))[0]
-
-if (!aboutEntry) {
-  throw new Error('Required about content is missing.')
-}
-
-const { Content: AboutContent } = await render(aboutEntry)
+const principles = [
+  {
+    index: '01',
+    title: 'Team Building',
+    paragraphs: [
+      'I have grown an engineering team from just me to 24 engineers across five countries. That work is hiring, mentoring, role clarity, technical coaching, and helping senior engineers take ownership without routing every decision through me.',
+    ],
+    quote:
+      'The goal is not more headcount. The goal is a team that can make good decisions, recover from ambiguity, and deliver without burning trust.',
+    evidence: { label: 'Sixteen years of Skyward', href: '/portfolio#skyward-app-company' },
+  },
+  {
+    index: '02',
+    title: 'Delivery Cadence',
+    paragraphs: [
+      'I prefer practical operating rhythms: clear priorities, visible risks, increments small enough to inspect, and direct communication when tradeoffs change.',
+      'In client and product work, I have coordinated executives, product stakeholders, domain experts, and engineering groups across the US, India, Brazil, Egypt, and Europe.',
+    ],
+    quote: 'Process is not the product. It earns its keep when delivery gets more predictable and decisions get easier to audit.',
+    evidence: { label: 'Fifteen years with Syngenta', href: '/case-studies/global-ag-platform' },
+  },
+  {
+    index: '03',
+    title: 'Technical Trust',
+    paragraphs: [
+      'I stay close enough to architecture, code, data, reliability, and operational constraints to evaluate tradeoffs with senior engineers. I do not need to be the deepest specialist in every subsystem — I need enough range to ask useful questions and spot weak assumptions.',
+      'That matters most in platform modernization, where the hard part is rarely a framework choice.',
+    ],
+    quote: 'The hard part is sequencing change while the business still needs the system to run.',
+    evidence: { label: '20 systems to AWS in six months', href: '/case-studies/global-ag-platform' },
+  },
+  {
+    index: '04',
+    title: 'Stakeholder Management',
+    paragraphs: [
+      'I translate between business goals, product constraints, and engineering reality. That means naming risk early, keeping promises precise, and connecting technical-debt conversations to operational or commercial consequences.',
+    ],
+    quote:
+      'I am comfortable being the person who makes ambiguity discussable — instead of letting it leak into missed dates, vague architecture, or quiet team frustration.',
+    evidence: { label: 'Client relationships that lasted a decade or more', href: '/portfolio#skyward-app-company' },
+  },
+  {
+    index: '05',
+    title: 'Sustainable Ownership',
+    paragraphs: [
+      'I have repeatedly worked toward transition-to-internal-team models, where mature systems, practices, and roadmaps end up owned by the client organization. That requires documentation, mentoring, observability, operational hygiene, and honest conversations about what the team is ready to own.',
+    ],
+    quote: 'The best outcome is not a team that depends on one heroic operator.',
+    evidence: { label: 'The Syngenta handoff, 2026', href: '/case-studies/global-ag-platform' },
+  },
+]
 ---
 
 <BaseLayout
   title="Nicholas M. T. Elliott | Leadership Operating Style"
-  description="How Nicholas M.T. Elliott leads engineering teams: hiring, mentoring, delivery cadence, stakeholder communication, technical trust, and sustainable ownership."
+  description="How Nicholas M.T. Elliott leads engineering teams: team building, delivery cadence, technical trust, stakeholder management, and sustainable ownership."
 >
-  <section class="card prose">
-    <h1>{aboutEntry.data.title}</h1>
-    <AboutContent />
+  <section class="lead-hero">
+    <p class="eyebrow">Leadership operating style</p>
+    <h1>How I lead.</h1>
+    <p class="lead-hero__statement">
+      By making ownership clear, keeping technical decisions tied to delivery outcomes, and creating enough structure
+      for people to do serious work — without hiding behind process.
+    </p>
+  </section>
+
+  <section class="principles" aria-label="Leadership principles">
+    {
+      principles.map(principle => (
+        <article class="principle">
+          <div class="principle__label">
+            <span class="principle__index">{principle.index}</span>
+            <h2>{principle.title}</h2>
+          </div>
+          <div class="principle__body">
+            {principle.paragraphs.map(text => (
+              <p>{text}</p>
+            ))}
+            <blockquote>{principle.quote}</blockquote>
+            <a class="principle__evidence" href={principle.evidence.href}>
+              See it in practice: {principle.evidence.label} →
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="why">
+    <p class="eyebrow">Why I do this</p>
+    <div class="why__body">
+      <p>
+        Agriculture runs on handshakes. It is a trust-based industry where reputation is the only durable currency,
+        and I have worked the same way my whole career — a fifteen-year client relationship does not survive on
+        contracts alone.
+      </p>
+      <p>
+        The point of modernizing legacy systems is not the technology. It is freeing people to do the things humans
+        are actually good at — solving problems and being creative — instead of filling out forms.
+      </p>
+    </div>
+    <p class="why__statement">We are citizens of our community first and business leaders second.</p>
+    <div class="button-row why__actions">
+      <a class="button" href="/contact/leadership/">Start a conversation</a>
+      <a class="button-secondary" href="/portfolio">See the work</a>
+    </div>
   </section>
 </BaseLayout>
 
 <style lang="scss">
-  .prose {
-    max-width: min(760px, 100%);
-    margin: 0 auto;
-    padding: clamp(0.25rem, 1vw, 0.6rem);
+  .lead-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: clamp(380px, 52vh, 560px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: clamp(1.35rem, 4vw, 3rem);
+    margin-top: clamp(1rem, 3vw, 2rem);
+    background:
+      linear-gradient(rgba(13, 16, 23, 0.25), rgba(13, 16, 23, 0.92)),
+      url('/images/generated/leadership-hero.webp') center / cover;
+    box-shadow: var(--shadow);
   }
 
-  .prose :global(p) {
-    margin: 0.75rem 0;
+  .lead-hero h1 {
+    margin: 0.7rem 0 0.9rem;
+    font-size: clamp(3rem, 7vw, 5.9rem);
+    line-height: 0.92;
   }
 
-  .prose :global(h3) {
-    margin-top: 1.3rem;
+  .lead-hero__statement {
+    max-width: 56ch;
+    margin: 0;
+    color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
+    font-size: clamp(1.05rem, 1.9vw, 1.3rem);
   }
 
-  h1 {
-    margin-top: 0;
-    font-size: clamp(1.5rem, 3vw, 2rem);
+  .principles {
+    margin-top: clamp(2rem, 4.5vw, 3.5rem);
+    border-top: 1px solid var(--border);
   }
 
-  @media (max-width: 700px) {
-    .prose {
-      padding: 0;
+  .principle {
+    display: grid;
+    grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+    gap: clamp(1rem, 3vw, 2.5rem);
+    padding: clamp(1.6rem, 3.5vw, 2.8rem) clamp(0.2rem, 1.5vw, 1.4rem);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .principle:nth-child(even) {
+    background: color-mix(in srgb, var(--surface) 55%, transparent);
+  }
+
+  .principle__label {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .principle__index {
+    color: var(--accent-warm);
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .principle__label h2 {
+    margin: 0;
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+  }
+
+  .principle__body p {
+    margin: 0 0 0.9rem;
+    color: var(--muted);
+    max-width: 64ch;
+  }
+
+  .principle__body blockquote {
+    margin: 1.2rem 0;
+    padding: 0.2rem 0 0.2rem 1.1rem;
+    border-left: 3px solid var(--accent-warm);
+    color: var(--text);
+    font-size: clamp(1.06rem, 1.8vw, 1.28rem);
+    font-weight: 600;
+    max-width: 56ch;
+    text-wrap: pretty;
+  }
+
+  .principle__evidence {
+    display: inline-block;
+    margin-top: 0.2rem;
+    font-size: 0.92rem;
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    padding-bottom: 2px;
+  }
+
+  .why {
+    margin-top: clamp(2.4rem, 5vw, 4rem);
+    padding: clamp(1.8rem, 4vw, 3.2rem) clamp(0.2rem, 1.5vw, 1.4rem);
+    border-block: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .why__body {
+    max-width: 64ch;
+    margin: 1rem auto 0;
+    text-align: left;
+  }
+
+  .why__body p {
+    color: var(--muted);
+    margin: 0 0 0.9rem;
+  }
+
+  .why__statement {
+    max-width: 26ch;
+    margin: clamp(1.4rem, 3vw, 2.2rem) auto 0;
+    font-size: clamp(1.7rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .why__actions {
+    justify-content: center;
+    margin-top: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  @media (max-width: 820px) {
+    .principle {
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+    }
+
+    .principle__label {
+      gap: 0.75rem;
     }
   }
 </style>

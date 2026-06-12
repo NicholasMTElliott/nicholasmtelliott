@@ -7,6 +7,4 @@ endDate: 2010-12-01T00:00:00.000Z
 employmentType: Full-time
 ---
 
-Founded and led product and client engineering delivery across early iOS and cross-platform initiatives.
-
-Owned technical direction, architecture choices, and execution prioritization across self-funded product development and client engagements, with sustained focus on performance under constrained devices, delivery discipline, and viable MVP scope.
+Owned technical direction and delivery across self-funded games and client contracts: performance on constrained devices, disciplined scope, and shipping on the money we actually had.

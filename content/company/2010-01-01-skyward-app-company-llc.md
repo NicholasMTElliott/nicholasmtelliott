@@ -5,12 +5,8 @@ key: skyward-app-company
 location: Columbia, Maryland
 ---
 
-I founded and led Skyward App Company, LLC as a bespoke software development and platform engineering firm focused on enterprise, regulated, and data-intensive domains.
+I founded Skyward in 2010 as a software and platform engineering firm for enterprise, regulated, and data-intensive domains — and ran it profitably for sixteen straight years.
 
-Over this period, we scaled from a solo operation to roughly 30 employees and reached peak annual revenue of approximately $3.4M while delivering long-lived systems for clients across agriculture, manufacturing, and enterprise software.
+We grew from just me to roughly 30 people (24 of them engineers) at peak in 2023, with $3.4M peak revenue, building long-lived systems for clients in agriculture, manufacturing, and enterprise software across teams in the US, India, Brazil, Egypt, and Europe.
 
-### Engineering & Platform Leadership
-
-I led multi-year modernization programs spanning cloud architecture, platform engineering, and product delivery while coordinating stakeholders and delivery teams across the US, India, Brazil, Egypt, and Europe. The organization maintained low turnover through mentorship-centered team structures, explicit ownership, and a deliberate focus on durable systems over short-term project churn.
-
-As systems matured, I emphasized transition-to-internal-team strategies so client organizations could sustainably own operations, roadmap execution, and ongoing platform evolution.
+When systems matured, we planned their transition to internal client teams. Durable systems, then a clean handoff — that was the model.

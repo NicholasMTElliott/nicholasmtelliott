@@ -5,10 +5,6 @@ endDate: 2010-12-01T00:00:00.000Z
 key: prophetic-sky
 ---
 
-Prophetic Sky, Inc. was an independent mobile product studio I founded during the early iPhone era.
+An independent mobile studio I founded for the early iPhone era, balancing original games with contract delivery for clients including Microsoft, Cisco-Linksys, and Ubermind.
 
-The company balanced original game development with contract software delivery, creating a practical proving ground for MVP execution, mobile performance work, and product-market learning.
-
-### Engineering & Platform Leadership
-
-I led architecture and delivery across both product and client work while operating under self-funded constraints. That operating model required disciplined prioritization, careful scope control, and technical decisions that balanced performance, maintainability, and time-to-market on early mobile hardware.
+Everything was self-funded, which made scope discipline a survival skill rather than a slide in a deck.

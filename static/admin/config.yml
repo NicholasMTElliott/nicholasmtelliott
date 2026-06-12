@@ -77,14 +77,6 @@ collections:
           - {label: "GitHub", name: "github", widget: "string"}
           - {label: "Summary", name: "body", widget: "markdown"}
 
-      - label: "About"
-        name: "about"
-        file: "content/about/about.md"
-        fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Updated At", name: "updatedAt", widget: "datetime", required: false}
-          - {label: "Body", name: "body", widget: "markdown"}
-
       - label: "Skills"
         name: "skills"
         file: "content/skills/skills.md"

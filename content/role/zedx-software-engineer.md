@@ -8,6 +8,4 @@ location: Bellefonte, Pennsylvania
 employmentType: Full-time
 ---
 
-Delivered geospatial and mobile-oriented software systems for precision agriculture products.
-
-Owned implementation work across field mobility, data pipeline performance, and hardware-integration edge cases where reliability depended on low-level troubleshooting and pragmatic system design.
+Built geospatial and mobile software for precision agriculture: field data collection, pipeline performance, and the hardware edge cases where reliability meant low-level debugging.
