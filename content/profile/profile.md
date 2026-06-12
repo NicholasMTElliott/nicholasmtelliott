@@ -8,6 +8,6 @@ linkedin: https://www.linkedin.com/in/nicholasmtelliott/
 github: https://github.com/NicholasMTElliott
 ---
 
-I build durable software platforms and delivery organizations that connect architecture decisions to measurable business outcomes.
+I build software platforms and the engineering teams that keep them alive.
 
-Mission-Driven Technology & Product Leader | Built and Scaled Engineering Teams & Platforms (30+ FT, $3.4M+ Revenue) | Cloud, Modern Architecture, Strategy, Delivery
+I founded Skyward App Company in 2010 and ran it profitably for sixteen years, growing it to 30 people. For fifteen of those years I was Syngenta's technical partner for their global seed-recommendation platforms.

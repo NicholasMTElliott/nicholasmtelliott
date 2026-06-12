@@ -73,3 +73,6 @@ pnpm-debug.log*
 memory-bank/
 AGENTS.md
 CLAUDE.md
+# codex-image-gen
+codex-image-gen-output/
+.codex-image-gen-tmp/

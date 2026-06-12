@@ -4,28 +4,35 @@ import { openSourceRepos } from '../data/portfolio'
 
 const aiTracks = [
   {
-    title: 'Production Product AI',
-    body: 'Led delivery of Root Cause capability for GHX Fields and E-Luminate at Syngenta North America, using AI to proactively analyze agronomic and environmental patterns and surface concerns plus mitigations for crop fields.',
+    title: 'Root Cause, in production',
+    body: 'Led delivery of Root Cause for GHX Fields at Syngenta North America. It analyzes agronomic and environmental patterns across 90,000 fields a week and surfaces concerns with suggested mitigations — before the grower has to ask.',
   },
   {
-    title: 'AI-Powered Reports',
-    body: 'Built AI-assisted report-generation workflows for production client releases where narrative output needed to be grounded in operational data and reviewable business context.',
+    title: 'AI-generated reports',
+    body: 'Built report-generation pipelines where LLM output is grounded in operational data and reviewed before it reaches a client. Narrative quality matters less than being checkably right.',
   },
   {
-    title: 'AI-Assisted Engineering',
-    body: 'Introduced pragmatic AI-assisted development practices at Skyward, especially for senior developers working with large systems, code review expectations, and repeatable delivery workflows.',
+    title: 'AI-assisted engineering',
+    body: 'Rolled out AI-assisted development at Skyward — coding agents for senior engineers on large codebases, with the same code-review bar as human-written changes.',
   },
   {
-    title: 'Local Model Investigation',
-    body: 'Explored hosted versus local models using tools such as Ollama and vLLM, with attention to privacy, latency, cost, workflow ergonomics, and operational fit.',
+    title: 'Local models',
+    body: 'Run hosted-versus-local comparisons with Ollama and vLLM. For some client data, the privacy answer decides the architecture before cost or latency get a vote.',
   },
+]
+
+const rootCauseFacts = [
+  ['Shipped', '2026, Syngenta North America'],
+  ['Scale', '90,000 fields analyzed weekly'],
+  ['Reach', 'Actionable findings for 90% of growers'],
+  ['Impact', 'Dozens of hours saved per grower'],
 ]
 
 const principles = [
   'AI should sharpen decisions, not hide uncertainty.',
-  'Generated output needs review paths, context boundaries, and observable failure modes.',
-  'Developer AI is most valuable when it improves flow without weakening engineering judgment.',
-  'Hosted and local models have different privacy, cost, and operations tradeoffs.',
+  'Generated output needs a review path and observable failure modes.',
+  'Developer AI earns its place by improving flow, not replacing judgment.',
+  'Hosted and local models trade privacy, cost, and operations differently.',
 ]
 ---
 
@@ -35,12 +42,12 @@ const principles = [
 >
   <section class="ai-hero">
     <div>
-      <p class="eyebrow">AI in production and engineering practice</p>
-      <h1>AI is useful when it reaches production.</h1>
+      <p class="eyebrow">AI in production</p>
+      <h1>90,000 fields a week.</h1>
       <p>
-        My AI work is grounded in enterprise software delivery: real product capabilities, report generation,
-        AI-assisted engineering workflows, and local model investigation. The through-line is practical value,
-        reviewability, and technical judgment.
+        That's what Root Cause, the AI feature my team shipped for Syngenta, analyzes in production every week. I've
+        also built AI report pipelines, rolled out coding agents across an engineering team, and run local models on
+        my own hardware to understand the tradeoffs firsthand.
       </p>
       <div class="button-row">
         <a class="button" href="/case-studies/global-ag-platform">See the platform context</a>
@@ -48,34 +55,24 @@ const principles = [
       </div>
     </div>
     <aside class="ai-console card">
-      <span class="console-dot"></span>
-      <span class="console-dot"></span>
-      <span class="console-dot"></span>
+      <p class="eyebrow">Root Cause</p>
       <dl>
-        <div>
-          <dt>product_ai</dt>
-          <dd>Root Cause for Syngenta North America</dd>
-        </div>
-        <div>
-          <dt>engineering_ai</dt>
-          <dd>AI-assisted coding workflows and team rules</dd>
-        </div>
-        <div>
-          <dt>local_models</dt>
-          <dd>Ollama, vLLM, privacy, cost, ergonomics</dd>
-        </div>
-        <div>
-          <dt>tooling</dt>
-          <dd>task-board, codex-task, local-llm, codex-image-gen</dd>
-        </div>
+        {
+          rootCauseFacts.map(([label, value]) => (
+            <div>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))
+        }
       </dl>
     </aside>
   </section>
 
   <section class="section">
     <div class="section-heading">
-      <p class="eyebrow">Work streams</p>
-      <h2>Four ways AI shows up in my work.</h2>
+      <p class="eyebrow">The work</p>
+      <h2>Four ways I use AI</h2>
     </div>
     <div class="track-grid">
       {
@@ -91,11 +88,11 @@ const principles = [
 
   <section class="section production-ai">
     <div class="section-heading">
-      <p class="eyebrow">Production AI example</p>
-      <h2>Root Cause inside an enterprise platform context.</h2>
+      <p class="eyebrow">How Root Cause works</p>
+      <h2>Data in, judgment out</h2>
       <p>
-        The value came from AI analysis embedded into field and agronomic workflows, where users needed earlier
-        visibility into patterns, concerns, and possible mitigations.
+        The AI sits in the middle of an existing agronomic workflow. It gets growers to a problem earlier; the
+        decision about what to do stays with people who know the field.
       </p>
     </div>
     <div class="system-flow">
@@ -107,8 +104,8 @@ const principles = [
 
   <section class="section principles">
     <div class="section-heading">
-      <p class="eyebrow">Operating principles</p>
-      <h2>How I think about AI adoption.</h2>
+      <p class="eyebrow">Principles</p>
+      <h2>What I hold AI work to</h2>
     </div>
     <ol>
       {principles.map(principle => <li>{principle}</li>)}
@@ -117,11 +114,11 @@ const principles = [
 
   <section class="section">
     <div class="section-heading">
-      <p class="eyebrow">Open-source tooling</p>
-      <h2>Small tools that show the shape of the work.</h2>
+      <p class="eyebrow">Open source</p>
+      <h2>Tools I've published</h2>
       <p>
-        These are supporting examples, not the headline. They show how I think about AI workflow surfaces,
-        delegation, local models, and practical developer tooling.
+        Small, working tools from my own AI workflows — agent task boards, image-generation wrappers, local-model
+        experiments.
       </p>
     </div>
     <div class="repo-grid">
@@ -130,7 +127,6 @@ const principles = [
           <article class="repo card">
             <h3><a href={repo.href} target="_blank" rel="noreferrer">{repo.name}</a></h3>
             <p>{repo.summary}</p>
-            <span>{repo.signal}</span>
           </article>
         ))
       }
@@ -180,23 +176,6 @@ const principles = [
     padding-top: 1.1rem;
   }
 
-  .console-dot {
-    display: inline-block;
-    width: 0.65rem;
-    height: 0.65rem;
-    border-radius: 50%;
-    margin-right: 0.35rem;
-    background: var(--accent-soft);
-  }
-
-  .console-dot:nth-child(2) {
-    background: var(--accent);
-  }
-
-  .console-dot:nth-child(3) {
-    background: var(--accent-warm);
-  }
-
   dl {
     display: grid;
     gap: 1rem;
@@ -211,8 +190,10 @@ const principles = [
 
   dt {
     color: var(--accent-warm);
-    font-family: Consolas, Monaco, monospace;
-    font-size: 0.86rem;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   dd {

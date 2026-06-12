@@ -15,11 +15,11 @@ if (!profileEntry) {
 }
 
 const careerSignals = [
-  ['Skyward', 'Founder/operator, 30-person engineering org'],
-  ['Syngenta', 'Global Fortune 500 platform delivery'],
-  ['$3.4M', 'Peak annual Skyward revenue'],
-  ['Global teams', 'US, India, Brazil, Egypt, Europe'],
-  ['AI', 'Production Root Cause feature'],
+  ['Skyward', 'Founded 2010, profitable every year since'],
+  ['Syngenta', '15-year platform partnership, 2011–2026'],
+  ['24', 'Engineers at peak, across five countries'],
+  ['$3.4M', 'Peak annual revenue (2023)'],
+  ['90k', 'Fields analyzed weekly by production AI'],
 ]
 ---
 
@@ -30,11 +30,12 @@ const careerSignals = [
 >
   <section class="hero">
     <div class="hero__content">
-      <p class="eyebrow">Director / Head of Engineering candidate</p>
-      <h1>Career evidence before slogans.</h1>
+      <p class="eyebrow">Nicholas M.T. Elliott · Engineering Leader</p>
+      <h1>I build teams that ship.</h1>
       <p class="hero__lead">
-        I founded and scaled Skyward, led long-running enterprise delivery for Syngenta-scale systems, and stayed close
-        enough to architecture, operations, and AI work to make technical leadership credible.
+        I grew Skyward App Company from one person to 30 — 24 of them engineers — and kept it profitable for sixteen
+        straight years. I led Syngenta's seed-recommendation platforms for fifteen of those, and I stayed close enough
+        to the architecture and the code to be useful in any design review.
       </p>
       <div class="button-row">
         <a class="button" href="/portfolio">Review delivery history</a>
@@ -51,7 +52,7 @@ const careerSignals = [
     <aside class="proof card" aria-label="Career proof points">
       <img class="proof__avatar" src={profileEntry.data.avatarUrl ?? defaultAvatarUrl} alt={profileEntry.data.fullName} />
       <div>
-        <p class="eyebrow">Resume snapshot</p>
+        <p class="eyebrow">At a glance</p>
         <h3>Nicholas M.T. Elliott</h3>
         <p>{profileEntry.data.headline} · {profileEntry.data.location}</p>
       </div>
@@ -81,8 +82,8 @@ const careerSignals = [
 
   <section class="section">
     <div class="section-heading">
-      <p class="eyebrow">Selected accomplishments</p>
-      <h2>What I have actually led.</h2>
+      <p class="eyebrow">Track record</p>
+      <h2>Selected work</h2>
     </div>
     <div class="achievement-grid">
       {
@@ -111,8 +112,8 @@ const careerSignals = [
 
   <section class="section">
     <div class="section-heading">
-      <p class="eyebrow">Operating range</p>
-      <h2>Clear ownership, credible technical guidance, and disciplined delivery.</h2>
+      <p class="eyebrow">How I work</p>
+      <h2>Four things I keep doing</h2>
     </div>
     <div class="pillar-grid">
       {
@@ -129,32 +130,32 @@ const careerSignals = [
 
   <section class="section featured-case">
     <div class="case-visual card">
-      <p class="eyebrow">Featured proof</p>
-      <h2>Enterprise Platform Delivery</h2>
-      <p>Long-running work where people leadership, stakeholder alignment, architecture, and operations had to hold together.</p>
+      <p class="eyebrow">Case study</p>
+      <h2>Fifteen years with one client</h2>
+      <p>Syngenta's E-Luminate, GHX Fields, and Cropwise platforms, 2011–2026.</p>
     </div>
     <div class="case-copy">
       <div class="section-heading">
-        <p class="eyebrow">Syngenta · GHX Fields / E-Luminate / Cropwise ecosystem</p>
-        <h2>A concrete example of the work behind the headline.</h2>
+        <p class="eyebrow">Syngenta · E-Luminate / GHX Fields / Cropwise</p>
+        <h2>From regional tool to global seed-recommendation platform</h2>
         <p>
-          I coordinated client stakeholders and distributed engineering groups while guiding modernization across web
-          apps, integrations, AWS infrastructure, observability, and product AI. The practical value was making a
-          complex platform operable, explainable, and transferable to internal ownership.
+          A relationship that lasted fifteen years because the work held up. I coordinated Syngenta stakeholders and
+          distributed engineering teams through platform growth, an Azure-to-AWS migration, a SOC 2 Type 2 audit, and
+          finally the handoff of the platforms to their internal teams.
         </p>
       </div>
       <div class="case-points">
         <article>
           <span class="eyebrow">Team</span>
-          <p>Scaled from solo execution to multi-team delivery with mentorship, ownership, and low turnover.</p>
+          <p>Scaled from solo execution to multi-team delivery across the US, India, Brazil, Egypt, and Europe.</p>
         </article>
         <article>
           <span class="eyebrow">Delivery</span>
-          <p>Managed long-running stakeholder expectations across product, client, and globally distributed engineering groups.</p>
+          <p>20 systems migrated to AWS in six months while feature work continued; deployments got 75% faster.</p>
         </article>
         <article>
-          <span class="eyebrow">Systems</span>
-          <p>Kept architecture decisions connected to reliability, audit readiness, and handoff to internal teams.</p>
+          <span class="eyebrow">Handoff</span>
+          <p>Planned the transition of mature systems to Syngenta's internal teams — the end state, not an afterthought.</p>
         </article>
       </div>
       <a class="button" href="/case-studies/global-ag-platform">Open detailed case study</a>

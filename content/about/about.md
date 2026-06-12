@@ -34,3 +34,11 @@ I am comfortable being the person who makes ambiguity discussable instead of let
 The best outcome is not a team that depends on one heroic operator. I have repeatedly worked toward transition-to-internal-team models where mature systems, practices, and roadmaps can be owned by the client or internal product organization over time.
 
 That requires documentation, mentoring, observability, operational hygiene, and honest conversations about what the team is ready to own.
+
+### Why I Do This
+
+Agriculture runs on handshakes. It is a trust-based industry where reputation is the only durable currency, and I have worked the same way my whole career — a fifteen-year client relationship does not survive on contracts alone.
+
+The point of modernizing legacy systems is not the technology. It is freeing people to do the things humans are actually good at — solving problems and being creative — instead of filling out forms.
+
+I believe we are citizens of our community first and business leaders second.

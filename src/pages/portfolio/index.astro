@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { storyBank, technologyEvidence } from '../../data/portfolio'
+import { hardProblems, technologyEvidence } from '../../data/portfolio'
 
 const companyEntries = (await getCollection('company')).sort(
   (a, b) => {
@@ -114,7 +114,7 @@ const formatPeriod = (startDate: Date, endDate?: Date) => {
 const portfolioSections = [
   ['#leadership', 'Leadership'],
   ['#technology', 'Technology'],
-  ['#stories', 'Story Bank'],
+  ['#stories', 'Hard Problems'],
   ['#timeline', 'Timeline'],
 ]
 ---
@@ -126,10 +126,10 @@ const portfolioSections = [
   <section class="portfolio">
     <header class="portfolio__header">
       <p class="eyebrow">Portfolio</p>
-      <h1>Career evidence, then chronology.</h1>
+      <h1>Twenty-five years of shipping.</h1>
       <p>
-        Start with the signals a Director / Head of Engineering evaluator usually needs: leadership scale,
-        technical range, production AI, enterprise delivery, and a few specific stories. The full timeline follows.
+        The highlights first — leadership scale, technology depth, and a few stories — then the full timeline,
+        company by company, from weather systems at ZedX in 2000 to handing off the Syngenta platforms in 2026.
       </p>
       <nav class="portfolio-nav" aria-label="Portfolio sections">
         {portfolioSections.map(([href, label]) => <a href={href}>{label}</a>)}
@@ -138,33 +138,33 @@ const portfolioSections = [
 
     <section class="scan-section" id="leadership">
       <div class="section-heading">
-        <p class="eyebrow">Leadership scan</p>
-        <h2>What the chronology is meant to prove.</h2>
+        <p class="eyebrow">Leadership</p>
+        <h2>The short version</h2>
       </div>
       <div class="scan-grid">
         <article class="scan-card card">
           <strong>Founder/operator</strong>
-          <p>Built Skyward App Company from founder-led execution into a 30-person engineering organization.</p>
+          <p>Built Skyward App Company from one person to 30 — 24 engineers — profitable all sixteen years.</p>
         </article>
         <article class="scan-card card">
           <strong>Enterprise delivery</strong>
-          <p>Served as primary technical partner for long-running Syngenta Global Fortune 500 platform work.</p>
+          <p>Syngenta's primary technical partner for fifteen years across E-Luminate, GHX Fields, and Cropwise.</p>
         </article>
         <article class="scan-card card">
           <strong>Distributed teams</strong>
           <p>Coordinated stakeholders and engineering groups across the US, India, Brazil, Egypt, and Europe.</p>
         </article>
         <article class="scan-card card">
-          <strong>Technical credibility</strong>
-          <p>Stayed close to architecture, code, data, reliability, geospatial systems, and AI-assisted workflows.</p>
+          <strong>Still technical</strong>
+          <p>Architecture, code, data, reliability, geospatial systems, and AI workflows — hands on, throughout.</p>
         </article>
       </div>
     </section>
 
     <section class="scan-section" id="technology">
       <div class="section-heading">
-        <p class="eyebrow">Technology evidence map</p>
-        <h2>Tools connected to work, not keyword stuffing.</h2>
+        <p class="eyebrow">Technology</p>
+        <h2>Tools, with the work to back them</h2>
       </div>
       <div class="tech-map">
         {
@@ -181,12 +181,12 @@ const portfolioSections = [
 
     <section class="scan-section" id="stories">
       <div class="section-heading">
-        <p class="eyebrow">Interview story bank</p>
-        <h2>Specific work that makes the profile feel real.</h2>
+        <p class="eyebrow">Career depth</p>
+        <h2>Hard problems I've owned</h2>
       </div>
       <div class="story-grid">
         {
-          storyBank.map(story => (
+          hardProblems.map(story => (
             <article>
               <h3>{story.title}</h3>
               <p>{story.body}</p>

@@ -3,27 +3,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import { syngentaArchitectureAreas, technologyEvidence } from '../../data/portfolio'
 
 const outcomes = [
-  'Supported seed recommendation, sales, catalog, and field-analysis workflows across global markets.',
-  'Helped evolve a regional sustainability platform into a strategic commercial platform ecosystem.',
-  'Modernized the stack from Azure/.NET Framework/Knockout toward AWS, .NET Core, Node.js, TypeScript, React, and Infrastructure-as-Code.',
-  'Integrated global enterprise systems including Salesforce, SAP, sales hierarchy abstractions, and internal product/catalog systems.',
-  'Introduced observability and operational practices suitable for SOC 2 audit expectations.',
-  'Led production AI delivery through Root Cause analysis for agronomic and environmental field patterns.',
+  'E-Luminate / GHX Fields: a few hundred advisors serving 10,000+ growers across the US and Canada.',
+  'Cropwise: similar scale in international markets including Argentina, Brazil, Germany, Ukraine, and Hungary.',
+  'Azure-to-AWS migration: 20 systems in six months, 25% lower burn rate, 75% faster deployments.',
+  'Enterprise integrations with Salesforce, SAP, and a sales-hierarchy abstraction reused across regions.',
+  'SOC 2 Type 2 passed in 2025, built on observability and processes the team already ran.',
+  'Root Cause shipped to production in 2026: 90,000 fields analyzed weekly, reaching 90% of growers.',
 ]
 
 const roleSignals = [
-  'Primary technical partner for long-running Global Fortune 500 client delivery.',
-  'Architecture and modernization strategy across cloud, services, integrations, data, observability, and UI.',
-  'Delivery leadership across product, engineering, client stakeholders, and globally distributed teams.',
-  'Mentorship and technical direction for teams moving from bespoke delivery into internal ownership.',
+  'Primary technical partner to Syngenta for fifteen years, 2011 through 2026.',
+  'Owned architecture and modernization strategy across cloud, services, integrations, data, and UI.',
+  'Led delivery across product stakeholders and engineering teams in the US, India, Brazil, Egypt, and Europe.',
+  'Mentored and planned the handoff so Syngenta’s internal teams could own the platforms outright.',
 ]
 
 const timeline = [
-  ['2011', 'Regional sustainability and recommendation platform foundations.'],
-  ['2017+', 'Became central to North America Seeds digital recommendation workflows.'],
-  ['Modernization', 'Moved toward TypeScript/React, .NET Core, Node.js services, AWS, IaC, and observability.'],
-  ['AI', 'Root Cause used AI to proactively analyze field patterns and surface concerns plus mitigations.'],
-  ['Transition', 'Supported handoff and internal ownership as global teams absorbed more platform responsibility.'],
+  ['2011', 'Engagement begins: E-Luminate, a regional sustainability and recommendation tool.'],
+  ['2017', 'The platform becomes central to North America Seeds digital recommendations; later rebranded GHX Fields.'],
+  ['2020s', 'Cropwise extends the work internationally. Stack modernizes to TypeScript/React, .NET Core, Node.js, and AWS.'],
+  ['2025', 'SOC 2 Type 2 passed, following the six-month migration of 20 systems to AWS.'],
+  ['2026', 'Root Cause AI ships; platforms transition to Syngenta’s internal teams.'],
 ]
 ---
 
@@ -35,12 +35,13 @@ const timeline = [
   <article class="case-study">
     <header class="case-hero">
       <div>
-        <p class="eyebrow">Detailed case study</p>
+        <p class="eyebrow">Case study · Syngenta, 2011–2026</p>
         <h1>Global Agricultural Recommendation Platform</h1>
         <p>
-          A public-safe view into the E-Luminate / GHX Fields / Cropwise ecosystem work for Syngenta,
-          a Global Fortune 500 agribusiness. The engagement combined enterprise platform architecture,
-          cloud modernization, global integrations, product delivery, observability, and production AI.
+          Fifteen years building E-Luminate, GHX Fields, and Cropwise for Syngenta: from a regional sustainability
+          tool to seed-recommendation systems that a few hundred advisors use to serve 10,000+ growers per platform,
+          across North America, South America, and Europe. Some details stay at category level out of respect for
+          client confidentiality; everything here is public-safe.
         </p>
         <div class="button-row">
           <a class="button" href="/ai">See the AI layer</a>
@@ -50,9 +51,9 @@ const timeline = [
       <aside class="case-summary card">
         <p class="eyebrow">Scope at a glance</p>
         <dl>
-          <div><dt>Client context</dt><dd>Syngenta · Global Fortune 500 agribusiness</dd></div>
-          <div><dt>Domains</dt><dd>Seed recommendation, sales workflows, catalogs, field intelligence</dd></div>
-          <div><dt>Systems</dt><dd>Web apps, APIs, AWS, enterprise integrations, observability, AI analysis</dd></div>
+          <div><dt>Client</dt><dd>Syngenta · global agribusiness · 2011–2026</dd></div>
+          <div><dt>Reach</dt><dd>10,000+ growers per platform, across three continents</dd></div>
+          <div><dt>Systems</dt><dd>Web apps, APIs, AWS, Salesforce/SAP integrations, observability, AI</dd></div>
           <div><dt>My role</dt><dd>Primary technical partner, architect, delivery leader, mentor</dd></div>
         </dl>
       </aside>
@@ -60,24 +61,23 @@ const timeline = [
 
     <section class="section">
       <div class="section-heading">
-        <p class="eyebrow">The business problem</p>
-        <h2>Commercial agriculture platforms carry regional complexity.</h2>
+        <p class="eyebrow">The problem</p>
+        <h2>Every region farms differently</h2>
         <p>
-          Recommendation and sales systems had to account for agronomic data, weather and environmental context,
-          product catalogs, territory rules, discounts, sales hierarchies, branded outputs, and different regional
-          operating models. A one-off app was not enough. The durable value was in platform abstractions that could
-          reduce repeated work while still respecting local market differences.
+          A seed recommendation depends on agronomic data, weather, product catalogs, territory rules, discounts, and
+          sales hierarchies — and every one of those works differently in Iowa, Mato Grosso, and Hungary. Building a
+          separate app per market would have buried the team in duplicate work. The durable value was a set of
+          platform abstractions that absorbed regional differences instead of multiplying them.
         </p>
       </div>
     </section>
 
     <section class="section architecture">
       <div class="section-heading">
-        <p class="eyebrow">Architecture map</p>
-        <h2>The system had many moving parts.</h2>
+        <p class="eyebrow">Architecture</p>
+        <h2>The shape of the platform</h2>
         <p>
-          This is intentionally described at category level. It captures the shape of the platform without exposing
-          confidential implementation details.
+          Described at category level — enough to show the shape of the system without exposing client internals.
         </p>
       </div>
       <div class="architecture-grid">
@@ -95,7 +95,7 @@ const timeline = [
     <section class="section role-impact">
       <div class="section-heading">
         <p class="eyebrow">My role</p>
-        <h2>Architecture and leadership across a long-running enterprise engagement.</h2>
+        <h2>What I was accountable for</h2>
       </div>
       <div class="role-grid">
         {
@@ -110,8 +110,8 @@ const timeline = [
 
     <section class="section">
       <div class="section-heading">
-        <p class="eyebrow">Outcomes and signals</p>
-        <h2>Why this case matters for Director / Head of Engineering roles.</h2>
+        <p class="eyebrow">Outcomes</p>
+        <h2>What the numbers say</h2>
       </div>
       <ul class="outcome-list">
         {outcomes.map(outcome => <li>{outcome}</li>)}
@@ -120,8 +120,8 @@ const timeline = [
 
     <section class="section timeline-section">
       <div class="section-heading">
-        <p class="eyebrow">Evolution</p>
-        <h2>From regional tool to global platform ecosystem.</h2>
+        <p class="eyebrow">Timeline</p>
+        <h2>Fifteen years in five steps</h2>
       </div>
       <div class="timeline">
         {
@@ -137,8 +137,8 @@ const timeline = [
 
     <section class="section">
       <div class="section-heading">
-        <p class="eyebrow">Technology evidence</p>
-        <h2>Tools mattered because they supported operational outcomes.</h2>
+        <p class="eyebrow">Technology</p>
+        <h2>The stack, with receipts</h2>
       </div>
       <div class="tech-grid">
         {

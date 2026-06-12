@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import EmailObfuscated from '../components/EmailObfuscated.astro'
 import SignalGlyph from '../components/SignalGlyph.astro'
-import { proofMetrics, selectedAchievements, storyBank, valuePillars } from '../data/portfolio'
+import { hardProblems, proofMetrics, selectedAchievements, valuePillars } from '../data/portfolio'
 
 const profileEntry = (await getCollection('profile'))[0]
 const contactEntry = (await getCollection('contact'))[0]
@@ -15,25 +15,26 @@ if (!profileEntry) {
 }
 
 const careerSignals = [
-  ['Skyward', 'Founder/operator, 30-person engineering org'],
-  ['Syngenta', 'Global Fortune 500 platform delivery'],
-  ['AWS', 'CDK, Fargate, Lambda, VPC, API Gateway'],
+  ['Skyward', 'Founded 2010, profitable every year since'],
+  ['Syngenta', '15-year platform partnership, 2011–2026'],
+  ['10,000+', 'Growers served per platform, three continents'],
   ['Global Teams', 'US, India, Brazil, Egypt, Europe'],
-  ['Microsoft', 'Product engineering and release discipline'],
+  ['Microsoft', 'Visio layers, indexing, theming, 2003–2006'],
 ]
 ---
 
 <BaseLayout
-  title="Nicholas M. T. Elliott | Engineering Management and Platform Leadership"
-  description="Engineering leader with founder, director, and CTO experience building teams, managing delivery, modernizing platforms, and leading enterprise work for Syngenta-scale systems."
+  title="Nicholas M. T. Elliott | Engineering Leadership"
+  description="Founder of Skyward App Company and fifteen-year technical lead for Syngenta's seed-recommendation platforms. Teams, platform modernization, and production AI."
 >
   <section class="hero">
     <div class="hero__content">
-      <p class="eyebrow">Director / Head of Engineering candidate</p>
-      <h1>Engineering leader with founder-level technical depth.</h1>
+      <p class="eyebrow">Nicholas M.T. Elliott · Engineering Leader</p>
+      <h1>Teams and platforms that last.</h1>
       <p class="hero__lead">
-        I founded and scaled Skyward App Company, led multi-year enterprise platform work for Syngenta-scale systems,
-        and stayed close enough to architecture, code, operations, and AI delivery to earn senior technical trust.
+        I founded Skyward App Company in 2010 and ran it profitably for sixteen years. For fifteen of them, I led
+        Syngenta's seed-recommendation platforms — from a regional sustainability tool to systems serving 10,000+
+        growers across three continents. I built the team, made the architecture calls, and still write code.
       </p>
       <div class="button-row">
         <a class="button" href="/case-studies/global-ag-platform">Read the case study</a>
@@ -50,7 +51,7 @@ const careerSignals = [
     <aside class="proof card" aria-label="Career proof points">
       <img class="proof__avatar" src={profileEntry.data.avatarUrl ?? defaultAvatarUrl} alt={profileEntry.data.fullName} />
       <div>
-        <p class="eyebrow">Resume snapshot</p>
+        <p class="eyebrow">At a glance</p>
         <h3>Nicholas M.T. Elliott</h3>
         <p>{profileEntry.data.headline} · {profileEntry.data.location}</p>
       </div>
@@ -80,8 +81,8 @@ const careerSignals = [
 
   <section class="section">
     <div class="section-heading">
-      <p class="eyebrow">Selected accomplishments</p>
-      <h2>What I have actually led.</h2>
+      <p class="eyebrow">Track record</p>
+      <h2>Selected work</h2>
     </div>
     <div class="achievement-grid">
       {
@@ -110,8 +111,8 @@ const careerSignals = [
 
   <section class="section">
     <div class="section-heading">
-      <p class="eyebrow">Operating range</p>
-      <h2>The common thread is accountable technical leadership.</h2>
+      <p class="eyebrow">How I work</p>
+      <h2>Four things I keep doing</h2>
     </div>
     <div class="pillar-grid">
       {
@@ -128,33 +129,33 @@ const careerSignals = [
 
   <section class="section featured-case">
     <div class="case-visual card">
-      <p class="eyebrow">Enterprise case study</p>
-      <h2>Global Agricultural Platforms</h2>
-      <p>Long-running work across web apps, integrations, AWS modernization, observability, global delivery, and production AI.</p>
+      <p class="eyebrow">Case study</p>
+      <h2>Fifteen years with one client</h2>
+      <p>Syngenta's E-Luminate, GHX Fields, and Cropwise platforms, 2011–2026.</p>
     </div>
     <div class="case-copy">
       <div class="section-heading">
-        <p class="eyebrow">Syngenta · GHX Fields / E-Luminate / Cropwise ecosystem</p>
-        <h2>A concrete example of the work behind the headline.</h2>
+        <p class="eyebrow">Syngenta · E-Luminate / GHX Fields / Cropwise</p>
+        <h2>From regional tool to global seed-recommendation platform</h2>
         <p>
-          I served as a primary technical partner for systems supporting seed recommendation, catalog, sales hierarchy,
-          and field-analysis workflows across global markets. The platform evolved from .NET Framework, Knockout,
-          SQL Server, and Azure into TypeScript/React, .NET Core, Node.js services, AWS infrastructure, and
-          observability-backed operations.
+          What started as a regional sustainability app became Syngenta's digital seed-recommendation system: a few
+          hundred advisors using it to serve 10,000+ growers in the US and Canada, with Cropwise carrying similar
+          scale into Argentina, Brazil, Germany, Ukraine, Hungary, and other markets. Along the way we rebuilt it from
+          .NET Framework and Knockout on Azure into TypeScript/React and .NET Core/Node.js services on AWS.
         </p>
       </div>
       <div class="case-points">
         <article>
-          <span class="eyebrow">Leadership</span>
-          <p>Coordinated client stakeholders and distributed engineering groups through multi-year modernization work.</p>
+          <span class="eyebrow">Migration</span>
+          <p>20 systems moved from Azure to AWS in six months — 25% lower burn rate, 75% faster deployments.</p>
         </article>
         <article>
-          <span class="eyebrow">Enterprise</span>
-          <p>Salesforce, SAP, sales hierarchy abstraction, internal systems, and globally varied commercial workflows.</p>
+          <span class="eyebrow">Integrations</span>
+          <p>Salesforce, SAP, and a shared sales-hierarchy abstraction spanning regional commercial models.</p>
         </article>
         <article>
           <span class="eyebrow">Operations</span>
-          <p>AWS CDK, Fargate, Lambda, VPC segmentation, OpenTelemetry, Grafana, Loki, Tempo, Prometheus/Mimir.</p>
+          <p>OpenTelemetry instrumentation end to end; the same telemetry carried us through SOC 2 Type 2 in 2025.</p>
         </article>
       </div>
       <a class="button" href="/case-studies/global-ag-platform">Open detailed case study</a>
@@ -163,16 +164,15 @@ const careerSignals = [
 
   <section class="section story-bank">
     <div class="section-heading">
-      <p class="eyebrow">Interview story bank</p>
-      <h2>Specific stories beat generic claims.</h2>
+      <p class="eyebrow">Career depth</p>
+      <h2>Hard problems I've owned</h2>
       <p>
-        These are the kinds of details I want the site to surface: moments where leadership, judgment, and technical
-        depth show up in concrete work.
+        Twenty-five years of shipping means a few stories. These are the ones I still get asked about.
       </p>
     </div>
     <div class="story-grid">
       {
-        storyBank.map(story => (
+        hardProblems.map(story => (
           <article class="story">
             <h3>{story.title}</h3>
             <p>{story.body}</p>
@@ -184,11 +184,12 @@ const careerSignals = [
 
   <section class="section ai-preview">
     <div class="section-heading">
-      <p class="eyebrow">AI in production and practice</p>
-      <h2>Practical AI work, grounded in delivery discipline.</h2>
+      <p class="eyebrow">AI in production</p>
+      <h2>90,000 fields a week</h2>
       <p>
-        My AI work spans production client features, report-generation workflows, and AI-assisted engineering practices
-        with review paths, operational context, and technical accountability.
+        Root Cause, the AI feature my team shipped for Syngenta in 2026, analyzes 90,000 grower fields weekly and
+        surfaces concerns with suggested mitigations. I also run AI-assisted engineering practices and local-model
+        experiments — details on the AI page.
       </p>
     </div>
     <div class="button-row">
