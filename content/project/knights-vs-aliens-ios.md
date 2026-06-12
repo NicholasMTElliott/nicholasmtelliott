@@ -10,8 +10,8 @@ skills:
   - iOS Development
 ---
 
-Knights vs Aliens was intentionally scoped for rapid delivery and shipped in approximately three months.
+Shipped in about three months, on purpose.
 
-The game was engineered for constrained mobile hardware, with practical tradeoffs in rendering complexity, thread utilization, and memory pressure to preserve stable frame behavior during fast iteration.
+After Spires' two-year cycle, Knights vs Aliens was the counter-experiment: scope tightly, ship fast. The engineering still had to respect early iPhone hardware — rendering complexity, threading, and memory pressure all traded against stable frame rates.
 
-The project reached profitability through disciplined MVP boundaries and execution speed, reinforcing a repeatable product lesson from Prophetic Sky: self-funded work succeeds when technical ambition is matched to strict operational constraints.
+It turned a profit. The lesson that stuck from the self-funded Prophetic Sky years: technical ambition has to match the money and time you actually have.

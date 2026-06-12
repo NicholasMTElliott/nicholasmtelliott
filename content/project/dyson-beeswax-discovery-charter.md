@@ -10,6 +10,6 @@ skills:
   - Roadmapping
 ---
 
-Led a discovery engagement focused on automating fragmented business workflows spanning legacy and SaaS systems.
+Ran a discovery engagement to map automation opportunities across a tangle of legacy and SaaS systems.
 
-Delivered a phased roadmap prioritizing high-value, low-risk integrations.
+Delivered a phased roadmap that put the high-value, low-risk integrations first — so the client could start getting returns before committing to the harder work.

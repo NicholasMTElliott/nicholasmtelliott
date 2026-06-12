@@ -9,6 +9,6 @@ skills:
   - Team Transition
 ---
 
-Bootstrapped the Cropwise Planting product and transitioned delivery ownership to internal teams.
+Bootstrapped Cropwise Planting, then handed it off — which was the plan from day one.
 
-I led the early platform and delivery phase to establish architecture, implementation cadence, and operating practices, then executed a planned handoff model so internal engineering teams could own the long-term roadmap and production operations.
+I led the early phase: architecture, delivery cadence, and operating practices. Once the product stood on its own, I executed the transition so Syngenta's internal engineers owned the roadmap and production operations outright.

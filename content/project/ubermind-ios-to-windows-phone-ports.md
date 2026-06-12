@@ -9,6 +9,6 @@ skills:
   - Cross-Platform Engineering
 ---
 
-Delivered contract engineering to port popular iOS applications to Windows Phone for Ubermind.
+Ported popular iOS applications to Windows Phone under contract for Ubermind.
 
-The work required disciplined cross-platform adaptation of interaction patterns and performance behavior while preserving product intent across materially different mobile runtime constraints.
+The craft was in adapting interaction patterns and performance behavior to a very different runtime while keeping each product recognizably itself.

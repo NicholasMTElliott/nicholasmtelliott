@@ -10,6 +10,6 @@ skills:
   - Device Interoperability
 ---
 
-Worked on Blink, a comprehensive certification and testing platform used to validate digital cameras and camcorders for Windows compatibility.
+Worked on Blink, the certification platform that validated digital cameras and camcorders for Windows compatibility.
 
-I developed automated test harnesses for complex capture, streaming, and interoperability scenarios, and contributed to an internal media-editing-capable test framework.
+I built automated test harnesses for capture, streaming, and interoperability scenarios — the messy edges where real devices misbehave — and contributed to an internal test framework capable of media editing.

@@ -9,4 +9,4 @@ skills:
   - Networking UX
 ---
 
-Developed Mac-based router installation and configuration software for Cisco-Linksys.
+Built the Mac installation and configuration software for Cisco-Linksys routers — the out-of-the-box setup experience a non-technical customer walks through.

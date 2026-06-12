@@ -10,6 +10,6 @@ skills:
   - WordPress Customization
 ---
 
-Delivered a Pennsylvania grant-funded iOS and Android platform for aquatic invasive species identification and reporting.
+Built a Pennsylvania grant-funded iOS and Android platform for identifying and reporting aquatic invasive species.
 
-Implemented mobile apps plus a WordPress backend with custom content and reporting workflows; the platform later expanded to multi-state use.
+Mobile apps plus a WordPress backend with custom content and reporting workflows. It worked well enough that other states adopted it.

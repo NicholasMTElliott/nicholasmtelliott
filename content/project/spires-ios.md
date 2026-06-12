@@ -10,8 +10,8 @@ skills:
   - Product Strategy
 ---
 
-Spires was a large-scale strategy game developed over roughly two years, reaching several thousand paid users.
+A large-scale strategy game built over roughly two years. Several thousand people paid for it.
 
-Building for early iPhone hardware required careful performance optimization across rendering paths, multithreaded work scheduling, and memory layout decisions to keep gameplay responsive on constrained devices.
+Early iPhone hardware made performance the constant constraint: rendering paths, thread scheduling, and memory layout all had to be tuned to keep gameplay responsive.
 
-Because the product was self-funded, architecture and scope decisions were tied directly to operational discipline. The release provided practical lessons in distribution economics, piracy impact, and the limits of long-cycle MVP strategy in consumer mobile markets.
+It was self-funded, which kept every scope decision honest. The release taught me real lessons about distribution economics, piracy, and how long a consumer product can safely stay in development — lessons that shaped the much faster Knights vs Aliens that followed.

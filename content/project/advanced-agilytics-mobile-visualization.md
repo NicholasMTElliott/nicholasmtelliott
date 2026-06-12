@@ -10,6 +10,6 @@ skills:
   - API Modernization
 ---
 
-Developed a mobile visualization platform for field analytics consumption.
+Built a React Native app that put field analytics in agronomists' hands.
 
-Delivered a React Native mobile app and a secure .NET API layer that exposed analytics previously trapped behind legacy PHP-generated pages.
+The data already existed but was trapped in legacy PHP-generated pages. We wrapped it in a secure .NET API and built the mobile visualization experience on top.

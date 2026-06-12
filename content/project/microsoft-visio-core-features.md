@@ -10,6 +10,6 @@ skills:
   - SDLC Collaboration
 ---
 
-Delivered independent core features in Microsoft Visio, including low-level data structure extensions, theming capabilities, and diagram element z-index controls.
+Shipped core features in Microsoft Visio: the layer system and z-order controls, indexing, file-format extensions, and theming.
 
-The work involved end-to-end engineering responsibilities across estimation, cross-team coordination, QA collaboration, and release planning.
+I owned features end to end — estimation, cross-team coordination, QA collaboration, and release planning — inside one of the most disciplined release processes in the industry at the time. That discipline shaped how I've run delivery ever since.

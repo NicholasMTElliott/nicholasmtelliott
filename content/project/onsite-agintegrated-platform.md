@@ -11,6 +11,6 @@ skills:
   - API Design
 ---
 
-Built a grassroots agricultural operations platform enabling field workers and managers to coordinate work orders, equipment data, and geospatial information.
+Built Onsite, an agricultural operations platform for coordinating work orders, equipment data, and geospatial information from the field.
 
-Delivered iOS and Android apps, secure Bluetooth hardware integrations, GPS boundary tooling, and supporting server/API plus desktop WPF workflows.
+From Skyward's earliest years: iOS and Android apps, secure Bluetooth integrations with field hardware, GPS boundary tooling, and the server APIs and desktop WPF workflows behind them.

@@ -9,4 +9,4 @@ skills:
   - Enterprise Engineering
 ---
 
-Delivered software solutions for Microsoft under contract as part of Prophetic Sky's client services work.
+Delivered software for Microsoft under contract through Prophetic Sky — returning to my former employer as a vendor rather than an employee.

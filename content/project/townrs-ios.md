@@ -10,6 +10,6 @@ skills:
   - Product Launch
 ---
 
-Townrs was a strategy game released commercially during the early iOS ecosystem and received a Silver Award from Pocket Gamer Magazine.
+A strategy game from the earliest days of the iOS App Store. Pocket Gamer Magazine gave it a Silver Award.
 
-Development on first-generation iPhone hardware required aggressive optimization choices around rendering behavior and memory usage while preserving gameplay quality within a small-team execution model.
+First-generation iPhone hardware forced aggressive choices about rendering and memory while keeping the gameplay intact — all with a team you could count on one hand.

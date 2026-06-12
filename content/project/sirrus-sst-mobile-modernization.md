@@ -10,6 +10,6 @@ skills:
   - Offline Sync
 ---
 
-Led delivery of iOS tablet and phone applications modernizing SST Software's farm management and scouting workflows.
+Led delivery of the iOS tablet and phone apps that modernized SST Software's farm management and scouting workflows.
 
-The platform included custom Objective-C++ geospatial math libraries (Boost/proj4), incremental offline synchronization, and satellite imagery overlays.
+The interesting parts were under the hood: custom Objective-C++ geospatial math libraries built on Boost and proj4, incremental offline sync for fieldwork without coverage, and satellite imagery overlays.

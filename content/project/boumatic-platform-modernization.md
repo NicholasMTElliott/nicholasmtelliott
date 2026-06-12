@@ -10,8 +10,8 @@ skills:
   - Hardware Abstraction
 ---
 
-Directed a multi-year modernization initiative to evolve dairy management systems into an open, pluggable platform.
+BouMatic builds dairy-farm equipment. Over two years we modernized their herd-management software into an open, pluggable platform.
 
-Delivered an MVP with a hybrid, offline-first architecture that allowed field operations to continue during intermittent connectivity while synchronizing reliably with centralized cloud services.
+Barns have terrible connectivity, so the architecture was offline-first: operations kept running through dropouts and synced reliably with the cloud when the connection came back.
 
-The platform introduced plugin modules for third-party integrations and a hardware-abstraction layer spanning desktop systems, IoT endpoints, and CANBUS-linked equipment, reducing coupling and creating a more extensible long-term product foundation.
+We added plugin modules for third-party integrations and a hardware-abstraction layer spanning desktop systems, IoT endpoints, and CANBUS-linked milking equipment — so new hardware didn't mean another rewrite.

@@ -8,4 +8,6 @@ skills:
   - Data Synchronization
 ---
 
-Designed and delivered a unified abstraction layer for global sales hierarchies and territory synchronization across Salesforce and related enterprise systems.
+Designed the abstraction layer that synchronizes global sales hierarchies and territories across Salesforce and related enterprise systems.
+
+One model, reused across regions that each structure their sales organizations differently — instead of a fresh integration per market.
