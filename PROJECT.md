@@ -1,6 +1,6 @@
 # Nicholas M. T. Elliott — Resume / Portfolio Site
 
-Public portfolio and resume site for [nicholasmtelliott.com](https://nicholasmtelliott.com), currently running on Astro and deployed with Netlify.
+Public portfolio and resume site for [nicholasmtelliott.com](https://nicholasmtelliott.com), currently running on Astro and deployed with Cloudflare Pages.
 
 ## Stack
 
@@ -8,7 +8,7 @@ Public portfolio and resume site for [nicholasmtelliott.com](https://nicholasmte
 - TypeScript
 - SCSS
 - pnpm
-- Netlify
+- Cloudflare Pages
 
 ## Prerequisites
 
@@ -70,19 +70,18 @@ Astro will print the local URL (typically `http://localhost:4321`).
 - Astro content collections are configured in:
   - `src/content.config.ts`
 
-## Deploy (Netlify)
+## Deploy (Cloudflare Pages)
 
-Deployment is configured in `netlify.toml`:
+Cloudflare Pages builds from the GitHub repo:
 
 - Build command: `pnpm build`
 - Publish directory: `dist`
 - Node version: `20`
-- Redirect: `/admin/*` → `/admin/index.html`
 
 Standard flow:
 
 1. Push commits to GitHub
-2. Netlify picks up the change and runs the build
+2. Cloudflare Pages picks up the change and runs the build
 3. Built site is published from `dist`
 
 ## CMS (Decap) Setup
@@ -92,39 +91,7 @@ The admin UI is available at `/admin` and is configured in:
 - `static/admin/index.html`
 - `static/admin/config.yml`
 
-This project uses the Decap **GitHub backend** (`backend.name: github`) with Netlify-hosted auth endpoint settings:
-
-- `site_domain: nicholasmtelliott.netlify.app`
-- `base_url: https://api.netlify.com`
-- `auth_endpoint: auth`
-
-### Required one-time auth setup (Netlify hosted flow)
-
-This configuration uses Netlify's hosted auth flow for Decap GitHub backend.
-
-1. Confirm Netlify site is connected to `NicholasMTElliott/nicholasmtelliott`.
-2. Ensure the deploy-connected GitHub account/app has write access to `main`.
-3. Re-authorize Netlify GitHub access if prompted in Netlify/GitHub integrations.
-4. Test login first at `https://nicholasmtelliott.netlify.app/admin`.
-
-Without a valid Netlify↔GitHub authorization state, `/admin` will load but login/publish flow will fail.
-
-### Operational prerequisites and verification
-
-Keep these values aligned before troubleshooting code:
-
-1. `site_domain` in Decap config matches the active Netlify subdomain.
-2. Decap config uses Netlify hosted auth endpoint (`base_url` + `auth_endpoint`).
-3. Netlify site is linked to the same GitHub repo/branch used in Decap config.
-4. Authenticated GitHub identity has push access to `NicholasMTElliott/nicholasmtelliott`.
-
-Verification checklist:
-
-1. Open deployed `/admin` and complete GitHub login.
-2. Confirm CMS loads collections without auth errors.
-3. Create or edit a Company entry and save.
-4. Confirm a commit is created on `main`.
-5. Confirm Netlify builds and publishes the content change.
+This project uses the Decap **GitHub backend** (`backend.name: github`). Editing is **local-only**: the production `/admin` page has no OAuth provider configured (the Netlify-hosted auth flow was removed 2026-07 along with the Netlify deployment), and `/admin` is noindexed.
 
 ### Local CMS editing UX
 
@@ -150,4 +117,5 @@ You can create/edit entries in the **Company** collection and Decap will write m
 ## Current Status
 
 - Migration foundation from Gatsby to Astro is complete.
-- Ongoing work includes Decap CMS integration, content expansion, and further responsive visual refinement.
+- Deployed exclusively on Cloudflare Pages; Netlify deployment and integrations removed 2026-07.
+- CMS editing is local-only; content updates land as commits to `main`.
