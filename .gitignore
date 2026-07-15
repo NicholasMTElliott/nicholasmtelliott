@@ -76,3 +76,5 @@ CLAUDE.md
 # codex-image-gen
 codex-image-gen-output/
 .codex-image-gen-tmp/
+
+.local-board/
