@@ -18,7 +18,7 @@ const aliasEmail = `${localPart}+${aliasTag}@${domainPart}`
 <div class="email-obfuscated" data-email-obfuscated>
   <a
     class="email-obfuscated__link"
-    href="#"
+    href={`mailto:${aliasEmail}`}
     aria-label={`Email ${displayEmail}`}
     data-obfuscated-email-link
     data-alias-email={aliasEmail}
@@ -44,8 +44,12 @@ const aliasEmail = `${localPart}+${aliasTag}@${domainPart}`
       input.style.opacity = '0'
       document.body.appendChild(input)
       input.select()
-      document.execCommand('copy')
+      const copied = document.execCommand('copy')
       document.body.removeChild(input)
+
+      if (!copied) {
+        throw new Error('copy command rejected')
+      }
     }
 
     const setCopyStatus = (button, message) => {
@@ -162,7 +166,8 @@ const aliasEmail = `${localPart}+${aliasTag}@${domainPart}`
     border-radius: 999px;
     background: var(--surface-alt);
     color: var(--text);
-    padding: 0.25rem 0.65rem;
+    min-height: 44px;
+    padding: 0.25rem 0.9rem;
     cursor: pointer;
     font: inherit;
     font-size: 0.82rem;

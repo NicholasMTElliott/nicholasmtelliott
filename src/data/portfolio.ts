@@ -1,44 +1,21 @@
 export const proofMetrics = [
   {
-    value: '2010',
-    label: 'founded Skyward App Company — profitable every year since',
+    value: '25 yrs',
+    label: 'shipping software: ZedX, Microsoft, Prophetic Sky, Skyward',
   },
   {
-    value: '15 yrs',
-    label: 'leading platform delivery for Syngenta, 2011 through 2026',
+    value: '10,000+',
+    label: 'growers served per platform, across three continents',
   },
   {
-    value: '30',
-    label: 'people at peak (2023), 24 of them engineers, across five countries',
+    value: 'SOC 2',
+    label: 'Type 2 audit passed in 2025, minimal remediation',
   },
   {
-    value: '90k',
-    label: 'fields analyzed every week by Root Cause, our production AI feature',
+    value: '2026',
+    label: 'Root Cause ships; the Syngenta platforms transition to internal teams',
   },
 ]
-
-export const valuePillars = [
-  {
-    title: 'Built Teams',
-    body: 'Grew Skyward from just me to 30 people — 24 engineers — across the US, India, Brazil, Egypt, and Europe, and kept the company profitable every year.',
-    icon: 'teams',
-  },
-  {
-    title: 'Modernized Platforms',
-    body: 'Moved 20 production systems from Azure to AWS in six months. Infrastructure burn dropped 25% and deployments got 75% faster.',
-    icon: 'platforms',
-  },
-  {
-    title: 'Shipped Production AI',
-    body: 'Root Cause analyzes 90,000 grower fields a week and puts actionable findings in front of 90% of growers.',
-    icon: 'ai',
-  },
-  {
-    title: 'Stayed Technical',
-    body: 'From a custom MySQL storage engine in the early 2000s to AWS CDK and LLM pipelines today, I have never stopped doing technical work alongside the leadership work.',
-    icon: 'trust',
-  },
-] as const
 
 export const selectedAchievements = [
   {
@@ -49,7 +26,7 @@ export const selectedAchievements = [
   },
   {
     title: 'Led Syngenta’s seed-recommendation platforms for fifteen years, from regional tool to global systems.',
-    role: 'Primary technical partner and architect',
+    role: 'Platform architect and engineering org lead',
     outcome: 'E-Luminate (later GHX Fields) supports a few hundred advisors serving 10,000+ growers in the US and Canada; Cropwise reaches similar scale in markets including Argentina, Brazil, Germany, Ukraine, and Hungary.',
     scale: '2011–2026 · three continents',
   },
@@ -62,7 +39,7 @@ export const selectedAchievements = [
   {
     title: 'Shipped Root Cause, an AI feature analyzing 90,000 fields every week in production.',
     role: 'Product and engineering lead',
-    outcome: 'Proactively surfaces agronomic and environmental concerns with suggested mitigations, reaching 90% of growers and saving each dozens of hours per season.',
+    outcome: 'Proactively surfaces agronomic and environmental concerns with suggested mitigations, putting actionable findings in front of 90% of growers.',
     scale: 'In production since 2026',
   },
 ]
@@ -109,41 +86,50 @@ export const openSourceRepos = [
   },
 ]
 
+// scope: 'syngenta' rows are safe to show inside the Syngenta case study;
+// 'career' rows are pre-2011 work and appear only on the full portfolio.
 export const technologyEvidence = [
   {
     area: 'Cloud',
     tools: 'AWS CDK, Fargate, Lambda, API Gateway, VPC, Azure migration',
     proof: 'Migrated 20 systems from Azure to AWS in six months: 25% lower burn rate, 75% faster deployments.',
+    scope: 'syngenta',
   },
   {
     area: 'AI',
     tools: 'LLM APIs, Root Cause, report generation, vLLM, Ollama',
     proof: 'Root Cause analyzes 90,000 fields a week in production; local-model experiments with vLLM and Ollama.',
+    scope: 'syngenta',
   },
   {
     area: 'Observability',
     tools: 'OpenTelemetry, Grafana, Loki, Tempo, Prometheus/Mimir, Datadog',
     proof: 'Instrumented the Syngenta platforms end to end; the same telemetry became SOC 2 audit evidence.',
+    scope: 'syngenta',
   },
   {
     area: 'Enterprise Integrations',
     tools: 'Salesforce, SAP, internal systems, sales hierarchy abstraction',
     proof: 'One sales-hierarchy abstraction serving commercial workflows across three continents.',
+    scope: 'syngenta',
   },
   {
     area: 'Backend Platforms',
     tools: '.NET, .NET Core, Node.js, REST APIs, Redis, RabbitMQ, Temporal',
     proof: 'Service boundaries, caching, and workflow engines for systems that have run for over a decade.',
+    scope: 'syngenta',
   },
   {
     area: 'Frontend & Mobile',
     tools: 'TypeScript, React, Knockout migration, iOS, Android, React Native',
-    proof: 'From Pocket PC field devices in the early 2000s to the React tools advisors use with growers today.',
+    proof: 'Rebuilt the advisor tools from Knockout-era web apps into the React interfaces advisors use with growers today.',
+    scope: 'syngenta',
   },
   {
     area: 'Deep Systems',
     tools: 'MySQL internals, GPS hardware, geospatial math, rendering/performance',
     proof: 'Custom MySQL storage engine: daily data growth cut from 1TB to 12GB, 20-minute jobs down to 20 seconds.',
+    scope: 'career',
   },
 ]
 

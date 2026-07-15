@@ -1,9 +1,15 @@
 ---
+import { getCollection } from 'astro:content'
+import EmailObfuscated from '../components/EmailObfuscated.astro'
+
 interface Props {
   title?: string
   description?: string
   canonicalPath?: string
   ogType?: string
+  ogImage?: string
+  robots?: string
+  preloadImage?: string
 }
 
 const {
@@ -11,13 +17,21 @@ const {
   description = 'Nicholas M.T. Elliott is an engineering leader focused on team building, delivery accountability, platform architecture, and production AI.',
   canonicalPath,
   ogType = 'website',
+  ogImage = '/images/social-card.jpg',
+  robots,
+  preloadImage,
 } = Astro.props
+const siteOrigin = 'https://nicholasmtelliott.com'
 const currentPath = Astro.url.pathname
-const canonicalUrl = new URL(canonicalPath ?? currentPath, 'https://nicholasmtelliott.com').toString()
+const canonicalUrl = new URL(canonicalPath ?? currentPath, siteOrigin).toString()
+const ogImageUrl = new URL(ogImage, siteOrigin).toString()
+
+const contactEntry = (await getCollection('contact'))[0]
+const footerEmail = contactEntry ? `${contactEntry.data.emailLocal}@${contactEntry.data.emailDomain}` : null
 
 const nav = [
   { href: '/', label: 'Home' },
-  { href: '/case-studies/global-ag-platform', label: 'Global Case' },
+  { href: '/case-studies/global-ag-platform', label: 'Case Study' },
   { href: '/ai', label: 'AI' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/about', label: 'Leadership' },
@@ -39,15 +53,24 @@ const isActive = (href: string) => {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
     <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:site_name" content="Nicholas M.T. Elliott" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Aerial farmland at dusk — Nicholas M.T. Elliott, engineering leadership" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.ico" />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} />}
     <link rel="preconnect" href="https://gravatar.com" />
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="site-header__inner">
         <a class="identity" href="/">
@@ -64,7 +87,11 @@ const isActive = (href: string) => {
         <nav class="site-nav" aria-label="Primary navigation">
           {
             nav.map(link => (
-              <a class={isActive(link.href) ? 'active' : ''} href={link.href}>
+              <a
+                class={isActive(link.href) ? 'active' : ''}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                href={link.href}
+              >
                 {link.label}
               </a>
             ))
@@ -72,9 +99,36 @@ const isActive = (href: string) => {
         </nav>
       </div>
     </header>
-    <main class="site-main">
+    <main class="site-main" id="main">
       <slot />
     </main>
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__cta">
+          <p class="eyebrow">Contact</p>
+          <p class="site-footer__title">Tell me about the role.</p>
+          <div class="button-row">
+            <a class="button" href="/contact/leadership/">Start the conversation</a>
+            {contactEntry && (
+              <a class="button-secondary" href={contactEntry.data.linkedin} target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+            )}
+            {contactEntry && (
+              <a class="button-secondary" href={contactEntry.data.github} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+            )}
+          </div>
+          {footerEmail && (
+            <div class="site-footer__email">
+              <EmailObfuscated displayEmail={footerEmail} aliasTag="site" />
+            </div>
+          )}
+        </div>
+        <p class="site-footer__meta">© 2026 Nicholas M.T. Elliott · Columbia, Maryland</p>
+      </div>
+    </footer>
   </body>
 </html>
 

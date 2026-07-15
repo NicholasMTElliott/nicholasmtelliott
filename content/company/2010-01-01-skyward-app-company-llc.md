@@ -5,7 +5,7 @@ key: skyward-app-company
 location: Columbia, Maryland
 ---
 
-I founded Skyward in 2010 as a software and platform engineering firm for enterprise, regulated, and data-intensive domains — and ran it profitably for sixteen straight years.
+I founded Skyward in 2010 as a software and platform engineering firm for enterprise, regulated, and data-intensive domains — profitable for all sixteen years.
 
 We grew from just me to roughly 30 people (24 of them engineers) at peak in 2023, with $3.4M peak revenue, building long-lived systems for clients in agriculture, manufacturing, and enterprise software across teams in the US, India, Brazil, Egypt, and Europe.
 

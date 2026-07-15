@@ -2,7 +2,7 @@
 title: Software Development Engineer in Test (SDET)
 key: microsoft-sdet
 companyKey: microsoft
-startDate: 2002-01-01T00:00:00.000Z
+startDate: 2003-05-01T00:00:00.000Z
 endDate: 2003-12-01T00:00:00.000Z
 location: Redmond, Washington
 employmentType: Full-time

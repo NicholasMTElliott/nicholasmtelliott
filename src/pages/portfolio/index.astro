@@ -110,11 +110,15 @@ const renderedCompanyEntries = await Promise.all(
 const formatMonthYear = (date: Date) =>
   `${date.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' })} ${date.getUTCFullYear()}`
 
-const formatPeriod = (startDate: Date, endDate?: Date) => {
-  const start = formatMonthYear(startDate)
-  const end = endDate ? formatMonthYear(endDate) : 'Present'
+// Eras before Prophetic Sky predate reliable month-level records; show years only.
+const yearOnlyEras = new Set(['zedx', 'microsoft'])
 
-  return `${start} - ${end}`
+const formatPeriod = (startDate: Date, endDate?: Date, yearOnly = false) => {
+  const format = yearOnly ? (date: Date) => `${date.getUTCFullYear()}` : formatMonthYear
+  const start = format(startDate)
+  const end = endDate ? format(endDate) : 'Present'
+
+  return start === end ? start : `${start} - ${end}`
 }
 
 const eraYears = (startDate: Date, endDate?: Date) =>
@@ -139,7 +143,7 @@ const eraMeta: Record<string, EraMeta> = {
   },
   microsoft: {
     accent: '#60a5fa',
-    epigraph: 'Features shipped end to end, inside one of the most disciplined release processes in the industry.',
+    epigraph: 'Features shipped end to end, inside a famously disciplined release process.',
     image: '/images/generated/era-microsoft.webp',
   },
   zedx: {
@@ -159,8 +163,15 @@ const projectStats: Record<string, Array<{ value: string; label: string }>> = {
   'precision-ag-modeling-platform': [
     { value: '1TB → 12GB', label: 'daily data growth, after my custom storage engine' },
     { value: '20min → 20s', label: 'average processing time' },
-    { value: '2001', label: 'GPS field devices, pre-smartphone' },
+    { value: 'Early 2000s', label: 'GPS field devices, pre-smartphone' },
   ],
+}
+
+const projectLinks: Record<string, { href: string; label: string }> = {
+  'e-luminate-ghx-fields-syngenta': {
+    href: '/case-studies/global-ag-platform',
+    label: 'Read the full case study',
+  },
 }
 
 const portfolioSections = [
@@ -171,9 +182,9 @@ const portfolioSections = [
 
 const highlights = [
   ['Founder/operator', 'Skyward: one person to 30, profitable all sixteen years'],
-  ['Enterprise delivery', "Syngenta's technical partner for fifteen years"],
+  ['Enterprise delivery', "Fifteen years owning Syngenta's recommendation platforms"],
   ['Distributed teams', 'US, India, Brazil, Egypt, and Europe'],
-  ['Still technical', 'Architecture, code, data, and AI — hands on, throughout'],
+  ['Still technical', 'Custom MySQL storage engine to AWS CDK and LLM pipelines'],
 ]
 ---
 
@@ -187,7 +198,7 @@ const highlights = [
       <h1>Twenty-five years of shipping.</h1>
       <p>
         Four eras, newest first: Skyward and the Syngenta platforms, the self-funded studio years, Microsoft, and the
-        weather systems where it all started. Featured work is open; everything else expands when you want the detail.
+        weather systems where it all started.
       </p>
       <nav class="portfolio-nav" aria-label="Portfolio sections">
         {portfolioSections.map(([href, label]) => <a href={href}>{label}</a>)}
@@ -220,7 +231,7 @@ const highlights = [
                 <div class="era__id">
                   <h2>{company.data.title}</h2>
                   <p class="era__meta">
-                    {formatPeriod(company.data.startDate, company.data.endDate)}
+                    {formatPeriod(company.data.startDate, company.data.endDate, yearOnlyEras.has(company.data.key))}
                     {company.data.location && ` · ${company.data.location}`}
                   </p>
                 </div>
@@ -237,7 +248,7 @@ const highlights = [
                     <header class="role__head">
                       <h3>{role.data.title}</h3>
                       <p>
-                        {formatPeriod(role.data.startDate, role.data.endDate)}
+                        {formatPeriod(role.data.startDate, role.data.endDate, yearOnlyEras.has(company.data.key))}
                         {role.data.employmentType && ` · ${role.data.employmentType}`}
                       </p>
                     </header>
@@ -249,9 +260,10 @@ const highlights = [
                       <div class="projects">
                         {renderedProjects.map(({ project, ProjectContent }) => {
                           const stats = projectStats[project.data.key]
+                          const link = projectLinks[project.data.key]
                           const period =
                             project.data.startDate &&
-                            formatPeriod(project.data.startDate, project.data.endDate)
+                            formatPeriod(project.data.startDate, project.data.endDate, yearOnlyEras.has(company.data.key))
 
                           return project.data.featured ? (
                             <article class="feature">
@@ -279,6 +291,11 @@ const highlights = [
                                     <span class="tag">{skill}</span>
                                   ))}
                                 </div>
+                              )}
+                              {link && (
+                                <a class="feature__link" href={link.href}>
+                                  {link.label} →
+                                </a>
                               )}
                             </article>
                           ) : (
@@ -586,6 +603,18 @@ const highlights = [
 
   .feature__body :global(p:last-child) {
     margin-bottom: 0;
+  }
+
+  .feature__link {
+    justify-self: start;
+    color: var(--era, var(--accent));
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .feature__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   .proj {

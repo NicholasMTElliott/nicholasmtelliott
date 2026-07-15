@@ -12,7 +12,7 @@ const outcomes = [
 ]
 
 const roleSignals = [
-  'Primary technical partner to Syngenta for fifteen years, 2011 through 2026.',
+  'Led architecture and the engineering organization behind the platforms for fifteen years, 2011 through 2026.',
   'Owned architecture and modernization strategy across cloud, services, integrations, data, and UI.',
   'Led delivery across product stakeholders and engineering teams in the US, India, Brazil, Egypt, and Europe.',
   'Mentored and planned the handoff so Syngenta’s internal teams could own the platforms outright.',
@@ -31,6 +31,7 @@ const timeline = [
   title="Nicholas M. T. Elliott | Global Agricultural Platform Case Study"
   description="Case study on enterprise platform delivery, distributed engineering leadership, AWS modernization, observability, integrations, and production AI for Syngenta-scale agricultural systems."
   ogType="article"
+  preloadImage="/images/generated/ag-platform-architecture.webp"
 >
   <article class="case-study">
     <header class="case-hero">
@@ -41,20 +42,20 @@ const timeline = [
           Fifteen years building E-Luminate, GHX Fields, and Cropwise for Syngenta: from a regional sustainability
           tool to seed-recommendation systems that a few hundred advisors use to serve 10,000+ growers per platform,
           across North America, South America, and Europe. Some details stay at category level out of respect for
-          client confidentiality; everything here is public-safe.
+          client confidentiality.
         </p>
         <div class="button-row">
-          <a class="button" href="/ai">See the AI layer</a>
-          <a class="button-secondary" href="/portfolio">Back to portfolio</a>
+          <a class="button" href="/contact/leadership/">Tell me about the role</a>
+          <a class="button-secondary" href="/ai">See the AI layer</a>
         </div>
       </div>
       <aside class="case-summary card">
         <p class="eyebrow">Scope at a glance</p>
         <dl>
-          <div><dt>Client</dt><dd>Syngenta · global agribusiness · 2011–2026</dd></div>
+          <div><dt>Program</dt><dd>Syngenta · global agribusiness · 2011–2026</dd></div>
           <div><dt>Reach</dt><dd>10,000+ growers per platform, across three continents</dd></div>
           <div><dt>Systems</dt><dd>Web apps, APIs, AWS, Salesforce/SAP integrations, observability, AI</dd></div>
-          <div><dt>My role</dt><dd>Primary technical partner, architect, delivery leader, mentor</dd></div>
+          <div><dt>My role</dt><dd>Architect, engineering org lead, delivery owner, mentor</dd></div>
         </dl>
       </aside>
     </header>
@@ -76,9 +77,6 @@ const timeline = [
       <div class="section-heading">
         <p class="eyebrow">Architecture</p>
         <h2>The shape of the platform</h2>
-        <p>
-          Described at category level — enough to show the shape of the system without exposing client internals.
-        </p>
       </div>
       <div class="architecture-grid">
         {
@@ -142,7 +140,7 @@ const timeline = [
       </div>
       <div class="tech-grid">
         {
-          technologyEvidence.map(item => (
+          technologyEvidence.filter(item => item.scope === 'syngenta').map(item => (
             <article class="card">
               <h3>{item.area}</h3>
               <p class="tools">{item.tools}</p>
@@ -305,8 +303,8 @@ const timeline = [
     gap: 1rem;
   }
 
-  .tools {
-    color: var(--accent-soft) !important;
+  .tech-grid .tools {
+    color: var(--accent-soft);
     font-size: 0.9rem;
   }
 

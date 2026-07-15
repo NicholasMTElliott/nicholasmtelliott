@@ -2,8 +2,7 @@
 import { getCollection } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import EmailObfuscated from '../components/EmailObfuscated.astro'
-import SignalGlyph from '../components/SignalGlyph.astro'
-import { hardProblems, proofMetrics, selectedAchievements, valuePillars } from '../data/portfolio'
+import { hardProblems, proofMetrics, selectedAchievements } from '../data/portfolio'
 
 const profileEntry = (await getCollection('profile'))[0]
 const contactEntry = (await getCollection('contact'))[0]
@@ -17,28 +16,29 @@ if (!profileEntry) {
 const careerSignals = [
   ['Skyward', 'Founded 2010, profitable every year since'],
   ['Syngenta', '15-year platform partnership, 2011–2026'],
-  ['10,000+', 'Growers served per platform, three continents'],
-  ['Global Teams', 'US, India, Brazil, Egypt, Europe'],
-  ['Microsoft', 'Visio layers, indexing, theming, 2003–2006'],
+  ['24', 'Engineers at peak, across five countries'],
+  ['$3.4M', 'Peak annual revenue (2023)'],
+  ['90k', 'Fields analyzed weekly by production AI'],
 ]
 ---
 
 <BaseLayout
   title="Nicholas M. T. Elliott | Engineering Leadership"
   description="Founder of Skyward App Company and fifteen-year technical lead for Syngenta's seed-recommendation platforms. Teams, platform modernization, and production AI."
+  preloadImage="/images/generated/enterprise-hero.webp"
 >
   <section class="hero">
     <div class="hero__content">
       <p class="eyebrow">Nicholas M.T. Elliott · Engineering Leader</p>
-      <h1>Teams and platforms that last.</h1>
+      <h1>I build teams that ship.</h1>
       <p class="hero__lead">
-        I founded Skyward App Company in 2010 and ran it profitably for sixteen years. For fifteen of them, I led
-        Syngenta's seed-recommendation platforms — from a regional sustainability tool to systems serving 10,000+
-        growers across three continents. I built the team, made the architecture calls, and still write code.
+        I grew Skyward App Company from one person to 30 — 24 of them engineers — and have kept it profitable for
+        sixteen straight years. I led Syngenta's seed-recommendation platforms for fifteen of those, and I stayed
+        close enough to the architecture and the code to be useful in any design review.
       </p>
       <div class="button-row">
         <a class="button" href="/case-studies/global-ag-platform">Read the case study</a>
-        <a class="button-secondary" href="/contact/leadership/control/">Contact me</a>
+        <a class="button-secondary" href="/contact/leadership/">Contact me</a>
         <a class="button-secondary" href={profileEntry.data.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
       </div>
       {displayEmail && (
@@ -52,7 +52,7 @@ const careerSignals = [
       <img class="proof__avatar" src={profileEntry.data.avatarUrl ?? defaultAvatarUrl} alt={profileEntry.data.fullName} />
       <div>
         <p class="eyebrow">At a glance</p>
-        <h3>Nicholas M.T. Elliott</h3>
+        <p class="proof__name">Nicholas M.T. Elliott</p>
         <p>{profileEntry.data.headline} · {profileEntry.data.location}</p>
       </div>
       <ul>
@@ -109,28 +109,10 @@ const careerSignals = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="section-heading">
-      <p class="eyebrow">How I work</p>
-      <h2>Four things I keep doing</h2>
-    </div>
-    <div class="pillar-grid">
-      {
-        valuePillars.map(pillar => (
-          <article class="pillar card">
-            <SignalGlyph type={pillar.icon} label={`${pillar.title} signal glyph`} />
-            <h3>{pillar.title}</h3>
-            <p>{pillar.body}</p>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
   <section class="section featured-case">
     <div class="case-visual card">
       <p class="eyebrow">Case study</p>
-      <h2>Fifteen years with one client</h2>
+      <h2>Fifteen years owning one enterprise platform</h2>
       <p>Syngenta's E-Luminate, GHX Fields, and Cropwise platforms, 2011–2026.</p>
     </div>
     <div class="case-copy">
@@ -185,11 +167,11 @@ const careerSignals = [
   <section class="section ai-preview">
     <div class="section-heading">
       <p class="eyebrow">AI in production</p>
-      <h2>90,000 fields a week</h2>
+      <h2>Root Cause, in production</h2>
       <p>
-        Root Cause, the AI feature my team shipped for Syngenta in 2026, analyzes 90,000 grower fields weekly and
-        surfaces concerns with suggested mitigations. I also run AI-assisted engineering practices and local-model
-        experiments — details on the AI page.
+        The AI feature my team shipped for Syngenta analyzes grower fields weekly and surfaces concerns with
+        suggested mitigations — the decision about what to do stays with the people who know the field. I also run
+        AI-assisted engineering practices and local-model experiments.
       </p>
     </div>
     <div class="button-row">
@@ -256,12 +238,15 @@ const careerSignals = [
     border: 2px solid color-mix(in srgb, var(--accent) 48%, transparent);
   }
 
-  .proof h3 {
+  .proof__name {
     margin: 0.35rem 0 0;
     font-size: clamp(1.35rem, 2vw, 1.7rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--text);
   }
 
-  .proof p {
+  .proof p:not(.proof__name):not(.eyebrow) {
     margin: 0.25rem 0 0;
     color: var(--muted);
   }
@@ -368,56 +353,6 @@ const careerSignals = [
     color: var(--muted);
   }
 
-  .pillar-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-  }
-
-  .pillar {
-    min-height: 210px;
-  }
-
-  .pillar {
-    display: grid;
-    align-content: start;
-    gap: 0.75rem;
-    position: relative;
-    overflow: hidden;
-    transition:
-      border-color 140ms ease,
-      background-color 140ms ease,
-      transform 140ms ease;
-  }
-
-  .pillar::after {
-    content: '';
-    position: absolute;
-    inset: auto 0 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 45%, transparent), transparent);
-    opacity: 0;
-    transition: opacity 140ms ease;
-  }
-
-  .pillar:hover {
-    transform: translateY(-2px);
-    border-color: color-mix(in srgb, var(--border) 52%, var(--accent) 48%);
-    background: color-mix(in srgb, var(--surface) 88%, var(--surface-alt) 12%);
-  }
-
-  .pillar:hover::after {
-    opacity: 1;
-  }
-
-  .pillar h3 {
-    margin: 0 0 0.75rem;
-  }
-
-  .pillar p {
-    color: var(--muted);
-  }
-
   .featured-case {
     display: grid;
     grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
@@ -503,7 +438,6 @@ const careerSignals = [
 
     .achievement-grid,
     .signal-strip,
-    .pillar-grid,
     .story-grid {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -521,7 +455,6 @@ const careerSignals = [
 
     .achievement-grid,
     .signal-strip,
-    .pillar-grid,
     .story-grid {
       grid-template-columns: 1fr;
     }

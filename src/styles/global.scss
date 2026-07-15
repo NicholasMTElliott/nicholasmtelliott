@@ -24,7 +24,13 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    system-ui,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.55;
@@ -46,9 +52,40 @@ a:hover {
   color: color-mix(in srgb, var(--accent) 82%, white 18%);
 }
 
-a:focus-visible {
+a:focus-visible,
+summary:focus-visible,
+button:focus-visible {
   outline: 2px solid var(--accent-strong);
   outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 20;
+  padding: 0.6rem 1rem;
+  background: var(--accent-soft);
+  color: #071019;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.skip-link:focus-visible {
+  top: 0.5rem;
+  color: #071019;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 h1,
@@ -144,6 +181,39 @@ li {
   max-width: var(--max-content-width);
   margin: 0 auto;
   padding: clamp(1.1rem, 2vw, 1.65rem) 1rem clamp(2.2rem, 4.2vw, 3.25rem);
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 78%, #000 22%);
+}
+
+.site-footer__inner {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: clamp(1.6rem, 4vw, 2.8rem) 1rem clamp(1.2rem, 3vw, 1.8rem);
+  display: grid;
+  gap: 1.4rem;
+}
+
+.site-footer__title {
+  margin: 0.4rem 0 1rem;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.site-footer__email {
+  margin-top: 1rem;
+  color: var(--muted);
+}
+
+.site-footer__meta {
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 .card {
