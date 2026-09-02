@@ -10,6 +10,8 @@ interface Props {
   ogImage?: string
   robots?: string
   preloadImage?: string
+  /** Set false on pages that already are the contact CTA (avoids the footer repeating the page). */
+  footerCta?: boolean
 }
 
 const {
@@ -20,6 +22,7 @@ const {
   ogImage = '/images/social-card.jpg',
   robots,
   preloadImage,
+  footerCta = true,
 } = Astro.props
 const siteOrigin = 'https://nicholasmtelliott.com'
 const currentPath = Astro.url.pathname
@@ -27,7 +30,26 @@ const canonicalUrl = new URL(canonicalPath ?? currentPath, siteOrigin).toString(
 const ogImageUrl = new URL(ogImage, siteOrigin).toString()
 
 const contactEntry = (await getCollection('contact'))[0]
+const profileEntry = (await getCollection('profile'))[0]
 const footerEmail = contactEntry ? `${contactEntry.data.emailLocal}@${contactEntry.data.emailDomain}` : null
+
+const avatarSrc = profileEntry?.data.avatarUrl ?? '/images/avatar.jpg'
+
+const personSchema = profileEntry
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: profileEntry.data.fullName,
+      jobTitle: profileEntry.data.headline,
+      url: siteOrigin,
+      image: new URL(avatarSrc, siteOrigin).toString(),
+      address: { '@type': 'PostalAddress', addressLocality: 'Columbia', addressRegion: 'MD', addressCountry: 'US' },
+      ...(profileEntry.data.organization && {
+        worksFor: { '@type': 'Organization', name: profileEntry.data.organization },
+      }),
+      sameAs: [profileEntry.data.linkedin, profileEntry.data.github],
+    }
+  : null
 
 const nav = [
   { href: '/', label: 'Home' },
@@ -67,18 +89,14 @@ const isActive = (href: string) => {
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.ico" />
     {preloadImage && <link rel="preload" as="image" href={preloadImage} />}
-    <link rel="preconnect" href="https://gravatar.com" />
+    {personSchema && <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="site-header__inner">
         <a class="identity" href="/">
-          <img
-            class="identity__avatar"
-            src="https://gravatar.com/avatar/468788fd550c4128b0c250566ea8729f?s=128"
-            alt="Nicholas Elliott avatar"
-          />
+          <img class="identity__avatar" src={avatarSrc} width="50" height="50" alt="Nicholas Elliott avatar" />
           <div>
             <p class="identity__name">Nicholas M.T. Elliott</p>
             <p>Founder · Engineering Leader · Platform Architect</p>
@@ -104,29 +122,33 @@ const isActive = (href: string) => {
     </main>
     <footer class="site-footer">
       <div class="site-footer__inner">
-        <div class="site-footer__cta">
-          <p class="eyebrow">Contact</p>
-          <p class="site-footer__title">Tell me about the role.</p>
-          <div class="button-row">
-            <a class="button" href="/contact/leadership/">Start the conversation</a>
-            {contactEntry && (
-              <a class="button-secondary" href={contactEntry.data.linkedin} target="_blank" rel="noreferrer">
-                LinkedIn
-              </a>
-            )}
-            {contactEntry && (
-              <a class="button-secondary" href={contactEntry.data.github} target="_blank" rel="noreferrer">
-                GitHub
-              </a>
+        {footerCta && (
+          <div class="site-footer__cta">
+            <p class="eyebrow">Contact</p>
+            <p class="site-footer__title">Tell me about the role.</p>
+            <div class="button-row">
+              <a class="button" href="/contact/leadership/">Start the conversation</a>
+              {contactEntry && (
+                <a class="button-secondary" href={contactEntry.data.linkedin} target="_blank" rel="noreferrer">
+                  LinkedIn
+                </a>
+              )}
+              {contactEntry && (
+                <a class="button-secondary" href={contactEntry.data.github} target="_blank" rel="noreferrer">
+                  GitHub
+                </a>
+              )}
+            </div>
+            {footerEmail && (
+              <div class="site-footer__email">
+                <EmailObfuscated displayEmail={footerEmail} aliasTag="site" />
+              </div>
             )}
           </div>
-          {footerEmail && (
-            <div class="site-footer__email">
-              <EmailObfuscated displayEmail={footerEmail} aliasTag="site" />
-            </div>
-          )}
-        </div>
-        <p class="site-footer__meta">© 2026 Nicholas M.T. Elliott · Columbia, Maryland</p>
+        )}
+        <p class:list={['site-footer__meta', !footerCta && 'site-footer__meta--solo']}>
+          © 2026 Nicholas M.T. Elliott · Columbia, Maryland
+        </p>
       </div>
     </footer>
   </body>

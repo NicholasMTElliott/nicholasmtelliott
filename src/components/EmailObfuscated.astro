@@ -2,9 +2,11 @@
 interface Props {
   displayEmail: string
   aliasTag?: string
+  /** 'button' renders the address as a primary button (used where email is the page's main action). */
+  variant?: 'inline' | 'button'
 }
 
-const { displayEmail, aliasTag = 'bot' } = Astro.props
+const { displayEmail, aliasTag = 'bot', variant = 'inline' } = Astro.props
 
 const [localPart, domainPart] = displayEmail.split('@')
 
@@ -17,7 +19,7 @@ const aliasEmail = `${localPart}+${aliasTag}@${domainPart}`
 
 <div class="email-obfuscated" data-email-obfuscated>
   <a
-    class="email-obfuscated__link"
+    class:list={['email-obfuscated__link', variant === 'button' && 'button']}
     href={`mailto:${aliasEmail}`}
     aria-label={`Email ${displayEmail}`}
     data-obfuscated-email-link
@@ -159,6 +161,14 @@ const aliasEmail = `${localPart}+${aliasTag}@${domainPart}`
   .email-obfuscated__link:hover {
     text-decoration: underline;
     text-underline-offset: 2px;
+  }
+
+  .email-obfuscated__link.button {
+    color: #071019;
+  }
+
+  .email-obfuscated__link.button:hover {
+    text-decoration: none;
   }
 
   .email-obfuscated__copy {

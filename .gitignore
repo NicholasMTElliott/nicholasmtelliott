@@ -78,3 +78,10 @@ codex-image-gen-output/
 .codex-image-gen-tmp/
 
 .local-board/
+
+# Playwright MCP screenshots/snapshots
+.playwright-mcp/
+
+# Playwright test output
+test-results/
+playwright-report/

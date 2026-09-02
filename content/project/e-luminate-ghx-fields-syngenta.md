@@ -11,7 +11,7 @@ skills:
 featured: true
 ---
 
-Led the evolution of a long-running platform from a regional sustainability tool into Syngenta's digital seed recommendation and portfolio solution. By the end of the engagement, a few hundred advisors used E-Luminate (rebranded GHX Fields) to serve more than 10,000 growers across the US and Canada.
+Led the evolution of a long-running platform from a regional sustainability tool into Syngenta's digital seed recommendation and portfolio solution. By the 2026 handoff, a few hundred advisors used E-Luminate (rebranded GHX Fields) to serve more than 10,000 growers across the US and Canada.
 
 The platform evolved from Knockout/.NET Framework on Azure to TypeScript/React plus .NET Core and Node.js services, with integrations across Salesforce, SAP, and internal Syngenta systems.
 

@@ -7,4 +7,4 @@ location: Columbia, Maryland
 employmentType: Full-time
 ---
 
-Led strategy and execution end to end: hiring and mentoring the team, owning client relationships, setting architecture direction, and keeping delivery honest from first commit to final handoff.
+Led strategy and execution end to end: hiring and mentoring the team, owning executive and stakeholder relationships, setting architecture direction, and keeping delivery honest from first commit to final handoff.

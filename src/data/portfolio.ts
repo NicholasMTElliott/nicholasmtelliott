@@ -21,7 +21,7 @@ export const selectedAchievements = [
   {
     title: 'Built Skyward App Company from one person into a 30-person firm, profitable for sixteen straight years.',
     role: 'Founder, Managing Director, CTO',
-    outcome: 'Hired and mentored a 24-engineer team, built the delivery practices, and kept client relationships running for a decade or more.',
+    outcome: 'Hired and mentored a 24-engineer team, built the delivery practices, and kept platform partnerships running for a decade or more.',
     scale: '$3.4M peak revenue (2023) · zero unprofitable years',
   },
   {

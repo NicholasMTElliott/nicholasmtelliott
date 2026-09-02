@@ -8,4 +8,4 @@ resumeUrl: https://nicholasmtelliott.com
 availabilityNote: Open to architecture, delivery leadership, and advisory conversations.
 ---
 
-If you'd like to discuss a role, engagement, or collaboration, reach out and include a little context on what you're building.
+If you'd like to discuss a role or collaboration, reach out and include a little context on what you're building.

@@ -225,7 +225,7 @@ const highlights = [
             <section class="era" id={company.data.key} style={`--era: ${meta?.accent ?? 'var(--accent)'}`}>
               <header
                 class="era__head"
-                style={meta ? `background-image: linear-gradient(rgba(13, 16, 23, 0.45), rgba(13, 16, 23, 0.94)), url(${meta.image})` : undefined}
+                style={meta ? `background-image: linear-gradient(rgba(13, 16, 23, 0.15), rgba(13, 16, 23, 0.92)), url(${meta.image})` : undefined}
               >
                 <span class="era__years">{eraYears(company.data.startDate, company.data.endDate)}</span>
                 <div class="era__id">
@@ -695,6 +695,11 @@ const highlights = [
     border-radius: var(--radius);
     background: var(--surface);
     padding: 0.95rem 1.05rem;
+  }
+
+  /* Odd item count: let the last card span the row instead of sitting alone. */
+  .tech-map article:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 
   .tech-map h3 {

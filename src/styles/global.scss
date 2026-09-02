@@ -216,6 +216,11 @@ li {
   font-size: 0.85rem;
 }
 
+.site-footer__meta--solo {
+  padding-top: 0;
+  border-top: 0;
+}
+
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -327,11 +332,12 @@ li {
 
 @media (max-width: 600px) {
   :root {
-    --anchor-offset: 9.25rem;
+    --anchor-offset: 8.25rem;
   }
 
   .site-header__inner {
-    padding: 0.8rem 0.9rem;
+    padding: 0.7rem 0.9rem 0.6rem;
+    gap: 0.5rem;
   }
 
   .identity {
@@ -342,24 +348,35 @@ li {
     font-size: 0.98rem;
   }
 
+  /* Tagline is dropped on phones so the sticky header stays two rows tall. */
   .identity p:not(.identity__name) {
-    font-size: 0.8rem;
-    max-width: 30ch;
+    display: none;
   }
 
   .identity__avatar {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
   }
 
+  /* Single-row nav; scrolls sideways on very narrow phones instead of wrapping. */
   .site-nav {
-    gap: 0.35rem;
+    flex-wrap: nowrap;
+    gap: 0.1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: -0.9rem;
+    padding-inline: 0.9rem;
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .site-nav a {
-    padding: 0.44rem 0.7rem;
-    font-size: 0.9rem;
+    flex: 0 0 auto;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.84rem;
   }
 }
 

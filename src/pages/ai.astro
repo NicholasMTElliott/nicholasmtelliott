@@ -9,7 +9,7 @@ const aiTracks = [
   },
   {
     title: 'AI-generated reports',
-    body: 'Built report-generation pipelines where LLM output is grounded in operational data and reviewed before it reaches a client. Narrative quality matters less than being checkably right.',
+    body: 'Built report-generation pipelines where LLM output is grounded in operational data and reviewed before it reaches a reader. Narrative quality matters less than being checkably right.',
   },
   {
     title: 'AI-assisted engineering',
@@ -17,7 +17,7 @@ const aiTracks = [
   },
   {
     title: 'Local models',
-    body: 'Run hosted-versus-local comparisons with Ollama and vLLM. For some client data, the privacy answer decides the architecture before cost or latency get a vote.',
+    body: 'Run hosted-versus-local comparisons with Ollama and vLLM. For some datasets, the privacy answer decides the architecture before cost or latency get a vote.',
   },
 ]
 
@@ -172,7 +172,9 @@ const principles = [
 
   .ai-console {
     align-self: stretch;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding-top: 1.1rem;
   }
 
@@ -185,7 +187,11 @@ const principles = [
   dl div {
     border: 1px solid var(--border);
     background: var(--surface-alt);
-    padding: 1rem;
+    padding: 1.1rem 1rem;
+  }
+
+  dd {
+    font-size: 1.08rem;
   }
 
   dt {
@@ -210,11 +216,6 @@ const principles = [
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
-  }
-
-  .track,
-  .repo {
-    min-height: 230px;
   }
 
   .track h3,

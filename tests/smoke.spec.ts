@@ -1,0 +1,79 @@
+import { expect, test } from '@playwright/test'
+
+const routes = ['/', '/ai/', '/portfolio/', '/about/', '/case-studies/global-ag-platform/', '/contact/leadership/']
+
+const viewports = [
+  { name: 'phone', width: 390, height: 844 },
+  { name: 'tablet', width: 1024, height: 768 },
+  { name: 'desktop', width: 1440, height: 900 },
+]
+
+for (const route of routes) {
+  for (const viewport of viewports) {
+    test(`${route} renders cleanly at ${viewport.name}`, async ({ page }) => {
+      const consoleErrors: string[] = []
+      page.on('console', message => {
+        if (message.type() === 'error') consoleErrors.push(message.text())
+      })
+      page.on('pageerror', error => consoleErrors.push(error.message))
+
+      await page.setViewportSize({ width: viewport.width, height: viewport.height })
+      const response = await page.goto(route)
+      expect(response?.status()).toBe(200)
+
+      // Exactly one page-level h1; the header identity is not a heading.
+      await expect(page.locator('h1')).toHaveCount(1)
+
+      // No horizontal overflow and no heading spilling out of its box.
+      const metrics = await page.evaluate(() => {
+        const h1 = document.querySelector('h1') as HTMLElement
+        return {
+          docWidth: document.documentElement.scrollWidth,
+          viewportWidth: document.documentElement.clientWidth,
+          h1Overflow: h1.scrollWidth - h1.clientWidth,
+          headerHeight: (document.querySelector('.site-header') as HTMLElement).offsetHeight,
+          anchorOffset: parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop),
+        }
+      })
+      expect(metrics.docWidth).toBeLessThanOrEqual(metrics.viewportWidth)
+      expect(metrics.h1Overflow).toBeLessThanOrEqual(0)
+      // Sticky header must not cover anchored sections.
+      expect(metrics.anchorOffset).toBeGreaterThanOrEqual(metrics.headerHeight)
+
+      // Every page carries the Person schema and an og:image.
+      await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1)
+      await expect(page.locator('meta[property="og:image"]')).toHaveCount(1)
+
+      expect(consoleErrors).toEqual([])
+    })
+  }
+}
+
+test('local images referenced by pages resolve', async ({ page, request }) => {
+  const seen = new Set<string>()
+  for (const route of routes) {
+    await page.goto(route)
+    const urls = await page.evaluate(() => {
+      const out: string[] = []
+      document.querySelectorAll('img[src], link[rel="preload"][href], meta[property="og:image"]').forEach(el => {
+        const value = el.getAttribute('src') ?? el.getAttribute('href') ?? el.getAttribute('content') ?? ''
+        out.push(value)
+      })
+      return out
+    })
+    for (const url of urls) {
+      const path = url.replace(/^https?:\/\/[^/]+/, '')
+      if (path.startsWith('/')) seen.add(path)
+    }
+  }
+  expect(seen.size).toBeGreaterThan(0)
+  for (const path of seen) {
+    const response = await request.get(path)
+    expect(response.status(), path).toBe(200)
+  }
+})
+
+test('admin UI is not shipped', async ({ request }) => {
+  const response = await request.get('/admin/')
+  expect(response.status()).toBe(404)
+})
