@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import EmailObfuscated from '../components/EmailObfuscated.astro'
 import { hardProblems, proofMetrics, selectedAchievements } from '../data/portfolio'
+import film from '../data/film.json'
 
 const profileEntry = (await getCollection('profile'))[0]
 const contactEntry = (await getCollection('contact'))[0]
@@ -16,7 +17,7 @@ if (!profileEntry) {
 const careerSignals = [
   ['Skyward', 'Founded 2010, profitable every year since'],
   ['Syngenta', '15-year platform partnership, 2011–2026'],
-  ['24', 'Engineers at peak, across five countries'],
+  ['24', 'Engineers at peak, across the US'],
   ['$3.4M', 'Peak annual revenue (2023)'],
   ['90k', 'Fields analyzed weekly by production AI'],
 ]
@@ -83,6 +84,21 @@ const careerSignals = [
         </article>
       ))
     }
+  </section>
+
+  <section class="section film" aria-labelledby="film-title">
+    <div class="section-heading">
+      <p class="eyebrow">Film · {Math.round(film.durationSec)} seconds</p>
+      <h2 id="film-title">The short version</h2>
+      <p>Skyward, Syngenta, and Root Cause, drawn as one paper trail.</p>
+    </div>
+    <figure class="film__frame card">
+      <video controls preload="none" playsinline width="1920" height="1080" poster={film.poster}>
+        <source src={film.src} type="video/mp4" />
+        {film.captions && <track kind="captions" srclang="en" label="English" src={film.captions} />}
+        <a href={film.src}>Download the film (MP4, {film.sizeMB} MB)</a>
+      </video>
+    </figure>
   </section>
 
   <section class="section">
@@ -189,6 +205,20 @@ const careerSignals = [
 </BaseLayout>
 
 <style lang="scss">
+  .film__frame {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    video {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      background: #f3ead7;
+    }
+  }
+
   .hero {
     display: grid;
     grid-template-columns: minmax(0, 1.18fr) minmax(310px, 0.82fr);
