@@ -77,3 +77,21 @@ test('admin UI is not shipped', async ({ request }) => {
   const response = await request.get('/admin/')
   expect(response.status()).toBe(404)
 })
+
+// Cloudflare Pages serves dist/404.html with a 404 status; without it, unknown paths fall back to the home page with 200.
+test('unknown paths get the 404 page with a 404 status', async ({ page }) => {
+  const consoleErrors: string[] = []
+  page.on('console', message => {
+    // the browser logs the document's own 404 status; anything else is a real error
+    if (message.type() === 'error' && !/status of 404/.test(message.text())) consoleErrors.push(message.text())
+  })
+  await page.setViewportSize({ width: 390, height: 844 })
+  const response = await page.goto('/no-such-page/')
+  expect(response?.status()).toBe(404)
+  await expect(page.locator('h1')).toHaveCount(1)
+  await expect(page.locator('h1')).toHaveText('Page not found')
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex')
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
+  expect(overflow).toBeLessThanOrEqual(0)
+  expect(consoleErrors).toEqual([])
+})

@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Page not found | Nicholas M. T. Elliott"
+  description="There's no page at this address on nicholasmtelliott.com."
+  canonicalPath="/404"
+  robots="noindex"
+>
+  <section class="not-found card">
+    <p class="eyebrow">404</p>
+    <h1>Page not found</h1>
+    <p>There's nothing at this address. These are the places worth starting.</p>
+    <div class="not-found__actions">
+      <a class="button" href="/">Home</a>
+      <a class="button-secondary" href="/case-studies/global-ag-platform/">Case study</a>
+      <a class="button-secondary" href="/portfolio/">Portfolio</a>
+      <a class="button-secondary" href="/contact/leadership/">Contact</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .not-found {
+    max-width: min(780px, 100%);
+    margin: clamp(1rem, 4vw, 3rem) auto;
+    padding: clamp(1.2rem, 4vw, 2.4rem);
+  }
+
+  .not-found h1 {
+    margin: 0.6rem 0 1rem;
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
+    line-height: 0.98;
+  }
+
+  .not-found p:not(.eyebrow) {
+    color: var(--muted);
+    max-width: 68ch;
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 1.4rem;
+  }
+</style>
