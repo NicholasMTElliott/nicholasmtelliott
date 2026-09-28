@@ -13,8 +13,8 @@
     "test": "playwright test"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.3",
-    "astro": "^6.4.6",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.5",
     "sass": "^1.83.4"
   },
   "devDependencies": {
@@ -22,5 +22,11 @@
     "prettier": "^3.4.2",
     "typescript": "5.4.5"
   },
-  "packageManager": "pnpm@9.15.3"
+  "packageManager": "pnpm@9.15.3",
+  "pnpm": {
+    "overrides": {
+      "devalue": ">=5.9.2",
+      "immutable": ">=5.1.8"
+    }
+  }
 }
