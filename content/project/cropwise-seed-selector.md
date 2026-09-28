@@ -8,8 +8,8 @@ skills:
   - Recommendation Systems
 ---
 
-Delivered a global seed recommendation platform in collaboration with distributed international teams, carrying the GHX Fields model into markets including Argentina, Brazil, Germany, Ukraine, and Hungary — a few hundred advisors serving roughly 10,000 growers.
+Delivered a global seed recommendation platform, integrating work from partner teams abroad and carrying the GHX Fields model into markets including Argentina, Brazil, Germany, Ukraine, and Hungary — a few hundred advisors serving roughly 10,000 growers.
 
-The program aligned technical and business stakeholders across the US, India, Brazil, Egypt, and Europe while evolving recommendation capabilities, portfolio tooling, and integration points needed for global commercial operations.
+My team, distributed across the US, owned the finished product. That meant aligning business stakeholders and partner engineering teams in India, Brazil, Egypt, and Europe, and integrating their deliveries, while evolving recommendation capabilities, portfolio tooling, and integration points needed for global commercial operations.
 
 As the platform matured, I prioritized reusable platform abstractions to reduce duplication across adjacent product lines and improve long-horizon maintainability.

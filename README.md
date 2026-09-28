@@ -7,7 +7,7 @@ Engineering Leadership • Platform Strategy • Cloud Architecture
 
 ## About Me
 
-I’m a mission-driven technology leader with 15+ years of experience building, modernizing, and scaling mission-critical software platforms. I’ve led engineering organizations from early inception to 30+ employees, delivered long-lived enterprise systems across global teams, and defined multi-year product and technology roadmaps aligned with business strategy.
+I’m a mission-driven technology leader with 15+ years of experience building, modernizing, and scaling mission-critical software platforms. I’ve led engineering organizations from early inception to 30+ employees, delivered long-lived enterprise systems used in twelve countries, and defined multi-year product and technology roadmaps aligned with business strategy.
 
 My background spans early-stage startups, enterprise product development at Microsoft, and building and leading a profitable software organization delivering complex platform systems in regulated and data-intensive domains.
 
@@ -60,7 +60,7 @@ I’m particularly interested in practical, production-ready uses of AI that enh
 --- 
 
 ### Distributed Platform Engineering
-Built and mentored globally distributed teams across the US, India, Brazil, Egypt, and Europe.
+Built and mentored an engineering team distributed across the US, organized as several teams with their own leads. On larger programs we owned the finished product, integrating work from partner teams in India, Brazil, Egypt, Mexico, and Europe.
 
 • Defined shared services and abstraction layers to eliminate duplication  
 • Coordinated cross-product platform alignment  

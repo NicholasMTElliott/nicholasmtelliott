@@ -21,4 +21,4 @@ I led implementation of production observability using OpenTelemetry and Grafana
 
 In 2026 we shipped Root Cause, an AI feature that proactively analyzes agronomic and environmental patterns across 90,000 fields each week, surfacing concerns and suggested mitigations to 90% of growers.
 
-Delivery ran through stakeholders and engineering groups in the US, India, Brazil, Egypt, and Europe. As capabilities matured, I guided platform abstractions to reduce duplication across product lines and executed the transition plans that let Syngenta's internal teams take over the roadmap and operations.
+My team was distributed across the US. We owned the finished product, which meant aligning stakeholders and integrating work from partner engineering teams in India, Brazil, Egypt, and Europe. As capabilities matured, I guided platform abstractions to reduce duplication across product lines and executed the transition plans that let Syngenta's internal teams take over the roadmap and operations.
