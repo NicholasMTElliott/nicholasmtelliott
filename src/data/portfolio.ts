@@ -26,7 +26,7 @@ export const selectedAchievements = [
   },
   {
     title: 'Led Syngenta’s seed-recommendation platforms for fifteen years, from regional tool to global systems.',
-    role: 'Platform architect and engineering org lead',
+    role: 'Platform architect and engineering org lead at Skyward App Company',
     outcome: 'E-Luminate (later GHX Fields) supports a few hundred advisors serving 10,000+ growers in the US and Canada; Cropwise reaches similar scale in markets including Argentina, Brazil, Germany, Ukraine, and Hungary.',
     scale: '2011–2026 · three continents',
   },

@@ -19,7 +19,7 @@ const roleSignals = [
   'Mentored and planned the handoff so Syngenta’s internal teams could own the platforms outright.',
 ]
 
-// The film's text version (it has no narration yet), in the film's order. Keep it in step with video/src/story-case.js.
+// The film's text version (it has no narration yet), in the film's order. Keep it in step with video/src/story-case-v2.js.
 const filmText = [
   {
     label: '2011',
@@ -28,11 +28,11 @@ const filmText = [
   },
   {
     label: '2017',
-    text: 'The seed catalog becomes North America’s seed recommendation and ordering platform, with Game Plan for whole-farm planning across brands.',
+    text: 'The seed catalog becomes the primary seed recommendation and ordering platform in the US, with Game Plan for whole-farm planning across brands. In the last five years, more than $800 million in sales went through it, to over 80,000 growers.',
   },
   {
     label: '2020',
-    text: 'We take it global as Cropwise Seed Selector: Brazil, Argentina, the UK, Germany, Hungary, Ukraine, and more. Cropwise Planting follows as a South America pilot.',
+    text: 'We take it global as Cropwise Seed Selector: Brazil, Argentina, the UK, Germany, Hungary, Ukraine, and more. E‑Luminate serves the US, and Canada from 2024. Cropwise Planting follows as a South America pilot.',
     mine: 'I owned the finished product.',
   },
   {
@@ -51,9 +51,23 @@ const filmText = [
     mine: 'I led it into production.',
   },
   {
-    label: 'Foundation',
-    text: 'AWS with CDK, Fargate, and Lambda; Temporal, RabbitMQ, and Redis; Prometheus, Loki, Tempo, and Grafana. Twenty systems moved to AWS in six months.',
-    mine: 'I led the AWS migration and observability.',
+    label: 'Migration',
+    text: 'Twenty systems move from Azure click-ops to AWS, defined in CDK, in six months, and features keep shipping.',
+    mine: 'I planned and led the AWS migration.',
+  },
+  {
+    label: 'Services',
+    text: 'Auto-scaling Fargate services. Every one talks to Redis and Temporal directly; some use SQL Server, some RabbitMQ. All of it runs in AWS, deployed by CDK.',
+    mine: 'I designed and built the service architecture.',
+  },
+  {
+    label: 'Observability',
+    text: 'Every service sends traces, logs, and metrics to an OpenTelemetry Collector, which splits them to Datadog and to Prometheus, Mimir, Loki, and Tempo, with Grafana dashboards on top. SOC 2 Type 2 passed.',
+    mine: 'I built and ran production observability.',
+  },
+  {
+    label: 'Credit',
+    text: 'Nicholas Elliott, Founder & CTO of Skyward App Company: architect and engineering org lead behind Syngenta’s seed platforms, 2011–2026.',
   },
 ]
 ---
@@ -86,7 +100,7 @@ const filmText = [
           <div><dt>Program</dt><dd>Syngenta · global agribusiness · 2011–2026</dd></div>
           <div><dt>Reach</dt><dd>10,000+ growers per platform, across three continents</dd></div>
           <div><dt>Systems</dt><dd>Web apps, APIs, AWS, Salesforce/SAP integrations, observability, AI</dd></div>
-          <div><dt>My role</dt><dd>Architect, engineering org lead, delivery owner, mentor</dd></div>
+          <div><dt>My role at Skyward App Company</dt><dd>Architect, engineering org lead, delivery owner, mentor</dd></div>
         </dl>
       </aside>
     </header>
