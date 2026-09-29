@@ -380,6 +380,17 @@ li {
   }
 }
 
+/* Landscape phones: a sticky two-row header would cover ~40% of the screen, so it scrolls away. */
+@media (max-height: 500px) and (orientation: landscape) {
+  :root {
+    --anchor-offset: 1rem;
+  }
+
+  .site-header {
+    position: static;
+  }
+}
+
 @media (min-width: 1400px) {
   :root {
     --max-content-width: 1240px;

@@ -4,6 +4,7 @@ const routes = ['/', '/ai/', '/portfolio/', '/about/', '/case-studies/global-ag-
 
 const viewports = [
   { name: 'phone', width: 390, height: 844 },
+  { name: 'phone-landscape', width: 844, height: 390 },
   { name: 'tablet', width: 1024, height: 768 },
   { name: 'desktop', width: 1440, height: 900 },
 ]
@@ -32,13 +33,14 @@ for (const route of routes) {
           viewportWidth: document.documentElement.clientWidth,
           h1Overflow: h1.scrollWidth - h1.clientWidth,
           headerHeight: (document.querySelector('.site-header') as HTMLElement).offsetHeight,
+          headerSticky: getComputedStyle(document.querySelector('.site-header') as HTMLElement).position === 'sticky',
           anchorOffset: parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop),
         }
       })
       expect(metrics.docWidth).toBeLessThanOrEqual(metrics.viewportWidth)
       expect(metrics.h1Overflow).toBeLessThanOrEqual(0)
-      // Sticky header must not cover anchored sections.
-      expect(metrics.anchorOffset).toBeGreaterThanOrEqual(metrics.headerHeight)
+      // Sticky header must not cover anchored sections (landscape phones use a static header).
+      if (metrics.headerSticky) expect(metrics.anchorOffset).toBeGreaterThanOrEqual(metrics.headerHeight)
 
       // Every page carries the Person schema and an og:image.
       await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1)
@@ -47,6 +49,31 @@ for (const route of routes) {
       expect(consoleErrors).toEqual([])
     })
   }
+}
+
+// The film is 16:9 with small type, so on phones it must fit on one screen; landscape phones get a static header.
+for (const viewport of [viewports[0], viewports[1]]) {
+  test(`home film fits the screen at ${viewport.name}`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height })
+    await page.goto('/')
+    const film = await page.evaluate(() => {
+      const frame = (document.querySelector('.film__frame') as HTMLElement).getBoundingClientRect()
+      const video = document.querySelector('.film video') as HTMLVideoElement
+      return {
+        height: frame.height,
+        width: frame.width,
+        preload: video.getAttribute('preload'),
+        playsinline: video.hasAttribute('playsinline'),
+        headerPosition: getComputedStyle(document.querySelector('.site-header') as HTMLElement).position,
+      }
+    })
+    expect(film.height).toBeLessThanOrEqual(viewport.height)
+    expect(film.width).toBeGreaterThan(viewport.width * 0.7)
+    // metadata (not none): Chrome ignores clicks on the poster until metadata has loaded
+    expect(film.preload).toBe('metadata')
+    expect(film.playsinline).toBe(true)
+    if (viewport.height < 500) expect(film.headerPosition).toBe('static')
+  })
 }
 
 test('local images referenced by pages resolve', async ({ page, request }) => {
