@@ -76,6 +76,32 @@ for (const viewport of [viewports[0], viewports[1]]) {
   })
 }
 
+// The case-study film is square; it must fit one screen on phones too.
+for (const viewport of [viewports[0], viewports[1]]) {
+  test(`case-study film fits the screen at ${viewport.name}`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height })
+    await page.goto('/case-studies/global-ag-platform/')
+    const film = await page.evaluate(() => {
+      const frame = (document.querySelector('.case-film__frame') as HTMLElement).getBoundingClientRect()
+      const video = document.querySelector('.case-film video') as HTMLVideoElement
+      return {
+        width: frame.width,
+        height: frame.height,
+        preload: video.getAttribute('preload'),
+        playsinline: video.hasAttribute('playsinline'),
+        textItems: document.querySelectorAll('#case-film-text li').length,
+      }
+    })
+    expect(film.height).toBeLessThanOrEqual(viewport.height)
+    expect(Math.abs(film.width - film.height)).toBeLessThanOrEqual(2)
+    if (viewport.height > viewport.width) expect(film.width).toBeGreaterThan(viewport.width * 0.7)
+    expect(film.preload).toBe('metadata')
+    expect(film.playsinline).toBe(true)
+    // the film has no narration, so its text version must be on the page
+    expect(film.textItems).toBeGreaterThan(0)
+  })
+}
+
 test('local images referenced by pages resolve', async ({ page, request }) => {
   const seen = new Set<string>()
   for (const route of routes) {

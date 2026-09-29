@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { syngentaArchitectureAreas, technologyEvidence } from '../../data/portfolio'
+import caseFilm from '../../data/case-film.json'
 
 const outcomes = [
   'E-Luminate / GHX Fields: a few hundred advisors serving 10,000+ growers across the US and Canada.',
@@ -18,12 +19,42 @@ const roleSignals = [
   'Mentored and planned the handoff so Syngenta’s internal teams could own the platforms outright.',
 ]
 
-const timeline = [
-  ['2011', 'Work begins on E-Luminate, a regional sustainability and recommendation tool.'],
-  ['2017', 'The platform becomes central to North America Seeds digital recommendations; later rebranded GHX Fields.'],
-  ['2020s', 'Cropwise extends the work internationally. Stack modernizes to TypeScript/React, .NET Core, Node.js, and AWS.'],
-  ['2025', 'SOC 2 Type 2 passed, following the six-month migration of 20 systems to AWS.'],
-  ['2026', 'Root Cause AI ships; platforms transition to Syngenta’s internal teams.'],
+// The film's text version (it has no narration yet), in the film's order. Keep it in step with video/src/story-case.js.
+const filmText = [
+  {
+    label: '2011',
+    text: 'E‑Luminate starts as a sustainability app in crop protection, with a seed catalog.',
+    mine: 'I led the platform’s architecture and engineering org.',
+  },
+  {
+    label: '2017',
+    text: 'The seed catalog becomes North America’s seed recommendation and ordering platform, with Game Plan for whole-farm planning across brands.',
+  },
+  {
+    label: '2020',
+    text: 'We take it global as Cropwise Seed Selector: Brazil, Argentina, the UK, Germany, Hungary, Ukraine, and more. Cropwise Planting follows as a South America pilot.',
+    mine: 'I owned the finished product.',
+  },
+  {
+    label: 'Shared layer',
+    text: 'Every region structures its sales network differently. One sales-hierarchy model serves all of them, across every app.',
+    mine: 'I designed the abstraction.',
+  },
+  {
+    label: 'Field health',
+    text: 'Weather, disease models, satellite imagery, scouting, and field activity become health and yield potential for every field, delivered as PDF reports by email. E‑Luminate is now GHX Fields.',
+    mine: 'I designed it and wrote much of the code.',
+  },
+  {
+    label: '2026',
+    text: 'Root Cause puts AI into production: it reads 90,000 fields a week and flags risks and fixes to advisors, reps, and growers before anyone asks.',
+    mine: 'I led it into production.',
+  },
+  {
+    label: 'Foundation',
+    text: 'AWS with CDK, Fargate, and Lambda; Temporal, RabbitMQ, and Redis; Prometheus, Loki, Tempo, and Grafana. Twenty systems moved to AWS in six months.',
+    mine: 'I led the AWS migration and observability.',
+  },
 ]
 ---
 
@@ -59,6 +90,41 @@ const timeline = [
         </dl>
       </aside>
     </header>
+
+    <section class="section case-film" aria-labelledby="case-film-title">
+      <div class="section-heading">
+        <p class="eyebrow">Film · {Math.round(caseFilm.durationSec)} seconds</p>
+        <h2 id="case-film-title">The platform, assembled</h2>
+      </div>
+      <div class="case-film__grid">
+        <figure class="case-film__frame card">
+          <video
+            controls
+            preload="metadata"
+            playsinline
+            width="1080"
+            height="1080"
+            poster={caseFilm.poster}
+            aria-labelledby="case-film-title"
+            aria-describedby="case-film-text"
+          >
+            <source src={caseFilm.src} type="video/mp4" />
+            <a href={caseFilm.src}>Download the film (MP4, {caseFilm.sizeMB} MB)</a>
+          </video>
+        </figure>
+        <ol class="case-film__text" id="case-film-text">
+          {
+            filmText.map(item => (
+              <li>
+                <strong>{item.label}</strong>
+                <p>{item.text}</p>
+                {item.mine && <p class="case-film__mine">{item.mine}</p>}
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
 
     <section class="section">
       <div class="section-heading">
@@ -114,23 +180,6 @@ const timeline = [
       <ul class="outcome-list">
         {outcomes.map(outcome => <li>{outcome}</li>)}
       </ul>
-    </section>
-
-    <section class="section timeline-section">
-      <div class="section-heading">
-        <p class="eyebrow">Timeline</p>
-        <h2>Fifteen years in five steps</h2>
-      </div>
-      <div class="timeline">
-        {
-          timeline.map(([label, body]) => (
-            <article>
-              <strong>{label}</strong>
-              <p>{body}</p>
-            </article>
-          ))
-        }
-      </div>
     </section>
 
     <section class="section">
@@ -272,31 +321,60 @@ const timeline = [
     color: var(--muted);
   }
 
-  .timeline {
+  .case-film__grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    align-items: start;
+  }
+
+  .case-film__frame {
+    /* square film; fits on one screen below the sticky header (--anchor-offset is at least its height) */
+    width: 100%;
+    max-width: calc(100svh - var(--anchor-offset));
+    margin: 0 auto;
+    padding: 0;
     overflow: hidden;
-    background: var(--surface);
+
+    video {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1;
+      background: var(--bg);
+    }
   }
 
-  .timeline article {
-    padding: 1rem;
-    border-right: 1px solid var(--border);
+  .case-film__text {
+    display: grid;
+    gap: 0.9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .timeline article:last-child {
-    border-right: 0;
+  .case-film__text li {
+    border-left: 2px solid var(--border);
+    padding-left: 1rem;
   }
 
-  .timeline strong {
+  .case-film__text strong {
     color: var(--accent-warm);
   }
 
-  .timeline p {
-    margin: 0.45rem 0 0;
+  .case-film__text p {
+    margin: 0.3rem 0 0;
     color: var(--muted);
+  }
+
+  .case-film__text .case-film__mine {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .case-film__mine::before {
+    content: '✓ ' / '';
+    color: var(--accent-soft);
   }
 
   .tech-grid {
@@ -323,14 +401,9 @@ const timeline = [
       grid-column: 1 / -1;
     }
 
-    .timeline,
+    .case-film__grid,
     .outcome-list {
       grid-template-columns: 1fr;
-    }
-
-    .timeline article {
-      border-right: 0;
-      border-bottom: 1px solid var(--border);
     }
   }
 
