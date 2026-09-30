@@ -3,6 +3,7 @@ name: Salesforce Sync Platform
 key: salesforce-sync-platform
 roleKey: skyward-managing-director-president-cto
 startDate: 2019-01-01T00:00:00.000Z
+endDate: 2026-10-01T00:00:00.000Z
 skills:
   - Integration Architecture
   - Data Synchronization

@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { technologyEvidence } from '../../data/portfolio'
+import { skywardLibraries, technologyEvidence } from '../../data/portfolio'
 
 const companyEntries = (await getCollection('company')).sort(
   (a, b) => {
@@ -177,6 +177,7 @@ const projectLinks: Record<string, { href: string; label: string }> = {
 const portfolioSections = [
   ['#highlights', 'Highlights'],
   ['#timeline', 'Timeline'],
+  ['#open-source', 'Open source'],
   ['#technology', 'Technology'],
 ]
 
@@ -324,6 +325,29 @@ const highlights = [
         })
       }
     </div>
+
+    <section class="tech-section" id="open-source">
+      <div class="section-heading">
+        <p class="eyebrow">Open source</p>
+        <h2>Libraries I wrote at Skyward</h2>
+        <p>Published under the SkywardApps GitHub organization, MIT-licensed. I maintain them.</p>
+      </div>
+      <div class="tech-map">
+        {
+          skywardLibraries.map(lib => (
+            <article>
+              <h3>
+                <a href={lib.href} target="_blank" rel="noreferrer">
+                  {lib.name}
+                </a>
+              </h3>
+              <p class="tools">{lib.stack}</p>
+              <p>{lib.summary}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
 
     <section class="tech-section" id="technology">
       <div class="section-heading">

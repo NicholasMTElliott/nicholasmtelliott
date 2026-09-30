@@ -7,9 +7,9 @@ Engineering Leadership • Platform Strategy • Cloud Architecture
 
 ## About Me
 
-I’m a mission-driven technology leader with 15+ years of experience building, modernizing, and scaling mission-critical software platforms. I’ve led engineering organizations from early inception to 30+ employees, delivered long-lived enterprise systems used in twelve countries, and defined multi-year product and technology roadmaps aligned with business strategy.
+I’m a mission-driven technology leader with 15+ years of experience building, modernizing, and scaling mission-critical software platforms. I’ve led engineering organizations from early inception to 30 people, delivered long-lived enterprise systems used in twelve countries, and defined multi-year product and technology roadmaps aligned with business strategy.
 
-My background spans early-stage startups, enterprise product development at Microsoft, and building and leading a profitable software organization delivering complex platform systems in regulated and data-intensive domains.
+My background spans early-stage startups, enterprise product development at Microsoft, and founding Skyward App Company, which I ran profitably for sixteen years (2010–2026), delivering complex platform systems in regulated and data-intensive domains.
 
 More details:  
 👉 LinkedIn: https://www.linkedin.com/in/nicholasmtelliott
@@ -145,6 +145,26 @@ Observability & Reliability
 • Prometheus / Mimir  
 • Grafana  
 • Loki / Tempo  
+
+---
+
+## Open Source
+
+Libraries I wrote at Skyward App Company and maintain, published under [SkywardApps](https://github.com/SkywardApps) (MIT):
+
+- [popcorn](https://github.com/SkywardApps/popcorn): .NET REST middleware that lets API clients ask for exactly the fields they need. Since 2017; 100,000+ NuGet downloads. v8, in preview, is a source-generator rewrite that runs under Native AOT.
+- [pdf-render-service](https://github.com/SkywardApps/pdf-render-service): JSON in, PDF out. A layout engine and HTTP service built on react-pdf and Yoga.
+- [ts-united-types](https://github.com/SkywardApps/ts-united-types): unit-of-measure numbers checked by the TypeScript type system.
+- [ts-openapi-gen](https://github.com/SkywardApps/ts-openapi-gen): OpenAPI specs generated from TypeScript types and doc comments.
+- [check-release](https://github.com/SkywardApps/check-release): release notes between git tags, with Jira tickets and Slack-ready HTML.
+- [Skyward.Threading](https://github.com/SkywardApps/Skyward.Threading): in-process background task queues for ASP.NET.
+
+My own AI tooling:
+
+- [task-board](https://github.com/NicholasMTElliott/task-board): Kanban-style control surface for AI agent work.
+- [codex-task](https://github.com/NicholasMTElliott/codex-task): delegates coding-agent tasks to the Codex CLI and returns structured JSON.
+- [codex-image-gen](https://github.com/NicholasMTElliott/codex-image-gen): Node CLI wrapping Codex image generation.
+- [local-llm](https://github.com/NicholasMTElliott/local-llm): notes and experiments running models locally with vLLM and Ollama.
 
 ---
 

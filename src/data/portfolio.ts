@@ -80,9 +80,51 @@ export const openSourceRepos = [
     summary: 'Notes and experiments from running models locally with vLLM and Ollama.',
   },
   {
+    name: 'codex-task',
+    href: 'https://github.com/NicholasMTElliott/codex-task',
+    summary: 'Delegates coding-agent tasks to the Codex CLI and returns structured JSON.',
+  },
+]
+
+// Libraries Nicholas started and wrote most of (GitHub contributors); published under SkywardApps, MIT.
+// aspnet-configuration-* are a colleague's work and async-lru-cache was started by one: keep them out.
+export const skywardLibraries = [
+  {
     name: 'popcorn',
     href: 'https://github.com/SkywardApps/popcorn',
-    summary: 'REST middleware that lets API clients shape response payloads, cutting endpoint sprawl.',
+    stack: 'C# · ASP.NET Core · NuGet',
+    summary:
+      'REST middleware that lets API clients ask for exactly the fields they need, cutting endpoint sprawl. Since 2017; 100,000+ NuGet downloads.',
+  },
+  {
+    name: 'pdf-render-service',
+    href: 'https://github.com/SkywardApps/pdf-render-service',
+    stack: 'TypeScript · react-pdf · Yoga',
+    summary: 'JSON in, PDF out: a layout engine and HTTP service for documents whose content and structure change.',
+  },
+  {
+    name: 'ts-united-types',
+    href: 'https://github.com/SkywardApps/ts-united-types',
+    stack: 'TypeScript · npm',
+    summary: 'Unit-of-measure numbers checked by the type system: meters, acres, meters per second, with conversions.',
+  },
+  {
+    name: 'ts-openapi-gen',
+    href: 'https://github.com/SkywardApps/ts-openapi-gen',
+    stack: 'TypeScript · Express · TypeDoc',
+    summary: 'Generates OpenAPI specs from the TypeScript types and doc comments already in the code.',
+  },
+  {
+    name: 'check-release',
+    href: 'https://github.com/SkywardApps/check-release',
+    stack: 'C# · .NET 9 · LibGit2Sharp',
+    summary: 'Release notes between git tags: Jira tickets pulled from commits, HTML that unfurls in Slack.',
+  },
+  {
+    name: 'Skyward.Threading',
+    href: 'https://github.com/SkywardApps/Skyward.Threading',
+    stack: 'C# · ASP.NET · NuGet',
+    summary: 'In-process background task queues and periodic jobs for ASP.NET services.',
   },
 ]
 
