@@ -330,7 +330,7 @@ const highlights = [
       <div class="section-heading">
         <p class="eyebrow">Open source</p>
         <h2>Libraries I wrote at Skyward</h2>
-        <p>Published under the SkywardApps GitHub organization, MIT-licensed. I maintain them.</p>
+        <p>Published under the SkywardApps GitHub organization, MIT-licensed. I maintain the active ones.</p>
       </div>
       <div class="tech-map">
         {
@@ -340,6 +340,7 @@ const highlights = [
                 <a href={lib.href} target="_blank" rel="noreferrer">
                   {lib.name}
                 </a>
+                {lib.archived && <span class="status">Archived</span>}
               </h3>
               <p class="tools">{lib.stack}</p>
               <p>{lib.summary}</p>
@@ -729,6 +730,20 @@ const highlights = [
   .tech-map h3 {
     margin: 0 0 0.35rem;
     font-size: 1.02rem;
+  }
+
+  .status {
+    display: inline-block;
+    margin-left: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.05rem 0.5rem;
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    vertical-align: 0.15em;
   }
 
   .tools {

@@ -111,6 +111,7 @@ export const skywardLibraries = [
   {
     name: 'ts-openapi-gen',
     href: 'https://github.com/SkywardApps/ts-openapi-gen',
+    archived: true,
     stack: 'TypeScript · Express · TypeDoc',
     summary: 'Generates OpenAPI specs from the TypeScript types and doc comments already in the code.',
   },
@@ -123,6 +124,7 @@ export const skywardLibraries = [
   {
     name: 'Skyward.Threading',
     href: 'https://github.com/SkywardApps/Skyward.Threading',
+    archived: true,
     stack: 'C# · ASP.NET · NuGet',
     summary: 'In-process background task queues and periodic jobs for ASP.NET services.',
   },
